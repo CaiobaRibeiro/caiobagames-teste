@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- NOME DA ABA -->
+    <title>Início - Sala de Aula</title>
+
+    <!-- LOGO/ÍCONE DA ABA -->
+
+<link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="https://www.gstatic.com/classroom/ic_product_classroom_32.png?v=2"
+>
+
+<link
+    rel="shortcut icon"
+    type="image/png"
+    href="https://www.gstatic.com/classroom/ic_product_classroom_32.png?v=2"
+>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --background: #050506;
+            --card: #100b1c;
+            --card-hover: #171021;
+            --foreground: #f4f0f7;
+            --muted: #aaa0b3;
+            --primary: #a020f0;
+            --primary-light: #c45cff;
+            --border: rgba(160, 32, 240, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 50% -20%,
+                    rgba(160, 32, 240, 0.16),
+                    transparent 45%
+                ),
+                var(--background);
+
+            color: var(--foreground);
+
+            font-family: "Inter", sans-serif;
+        }
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: 0.12;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 50px 50px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 64px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 32px;
+
+            background:
+                rgba(5,5,8,0.94);
+
+            backdrop-filter: blur(14px);
+
+            border-bottom:
+                1px solid
+                rgba(160,32,240,0.2);
+
+            z-index: 100;
+        }
+
+        .logo {
+            color:
+                var(--primary-light);
+
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.12em;
+
+            text-shadow:
+                0 0 5px var(--primary),
+                0 0 10px var(--primary),
+                0 0 20px var(--primary-light);
+        }
+
+
+        /* =========================
+           CONTEÚDO
+        ========================= */
+
+        main {
+            width:
+                min(
+                    1152px,
+                    calc(100% - 32px)
+                );
+
+            margin:
+                0 auto;
+
+            padding:
+                96px 0 50px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .page-title {
+            margin:
+                0 0 28px;
+
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 28px;
+        }
+
+
+        /* =========================
+           ABA DE COMENTÁRIOS
+        ========================= */
+
+        .comments-tab {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin: 0 0 24px;
+
+            padding: 10px 16px;
+
+            width: fit-content;
+
+            text-decoration: none;
+
+            color: var(--primary-light);
+
+            background:
+                rgba(16,11,28,0.7);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .comments-tab:hover {
+            border-color:
+                rgba(196,92,255,0.7);
+
+            background:
+                rgba(160,32,240,0.15);
+        }
+
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .games-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, minmax(0, 1fr));
+
+            gap: 22px;
+
+            align-items: stretch;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .game-card {
+            cursor: pointer;
+
+            display: flex;
+
+            flex-direction: column;
+
+            width: 100%;
+
+            min-width: 0;
+
+            height: 100%;
+
+            overflow: hidden;
+
+            color:
+                var(--foreground);
+
+            text-decoration: none;
+
+            background:
+                rgba(16,11,28,0.9);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .game-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(196,92,255,0.7);
+
+            box-shadow:
+                0 0 20px
+                rgba(160,32,240,0.18);
+        }
+
+
+        /* =========================
+           CAPA
+        ========================= */
+
+        .game-cover {
+            width: 100%;
+
+            height: 180px;
+
+            flex-shrink: 0;
+
+            overflow: hidden;
+
+            background:
+                #0b080f;
+        }
+
+        .game-cover img {
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.3s ease;
+        }
+
+        .game-card:hover
+        .game-cover img {
+            transform:
+                scale(1.04);
+        }
+
+
+        /* =========================
+           INFORMAÇÕES
+        ========================= */
+
+        .game-info {
+            display: flex;
+
+            flex-direction: column;
+
+            flex: 1;
+
+            padding: 14px;
+        }
+
+        .game-name {
+            margin:
+                0 0 7px;
+
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 15px;
+
+            line-height: 1.25;
+
+            color: white;
+        }
+
+        .game-description {
+            margin: 0;
+
+            flex: 1;
+
+            color:
+                var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================
+           BOTÃO JOGAR
+        ========================= */
+
+        .play-button {
+            margin-top: 12px;
+
+            padding: 9px;
+
+            text-align: center;
+
+            border-radius: 6px;
+
+            background:
+                rgba(160,32,240,0.15);
+
+            border:
+                1px solid
+                rgba(160,32,240,0.4);
+
+            color:
+                var(--primary-light);
+
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .game-card:hover
+        .play-button {
+            background:
+                var(--primary);
+
+            color: white;
+        }
+
+
+        /* =========================
+           CRÉDITOS
+        ========================= */
+
+        .credits {
+            margin-top: 55px;
+
+            padding-top: 28px;
+
+            border-top:
+                1px solid
+                rgba(160,32,240,0.2);
+        }
+
+        .credits-title {
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 20px;
+        }
+
+        .credits-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(180px,1fr)
+                );
+
+            gap: 12px;
+        }
+
+        .credit {
+            padding: 14px;
+
+            background:
+                rgba(16,11,28,0.7);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+        }
+
+        .credit-game {
+            margin:
+                0 0 5px;
+
+            font-weight: 600;
+        }
+
+        .credit-author {
+            margin: 0;
+
+            color:
+                var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           PLAYER DO JOGO
+        ========================= */
+
+        #gameOverlay {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 999999;
+
+            background: #000;
+        }
+
+        #gameOverlay.active {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        #gameTopbar {
+            min-height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content:
+                space-between;
+
+            gap: 12px;
+
+            padding:
+                8px 14px;
+
+            background:
+                rgba(5,5,8,0.98);
+
+            border-bottom:
+                1px solid
+                rgba(160,32,240,0.5);
+
+            color: white;
+
+            flex-shrink: 0;
+        }
+
+        #gameTitle {
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            color:
+                var(--primary-light);
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        #gameButtons {
+            display: flex;
+
+            gap: 8px;
+
+            flex-shrink: 0;
+        }
+
+        #gameButtons button {
+            border:
+                1px solid
+                rgba(160,32,240,0.6);
+
+            border-radius: 6px;
+
+            padding:
+                8px 12px;
+
+            background:
+                #17101e;
+
+            color:
+                var(--primary-light);
+
+            cursor: pointer;
+
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            transition:
+                0.2s ease;
+        }
+
+        #gameButtons button:hover {
+            background:
+                var(--primary);
+
+            color: white;
+
+            border-color:
+                var(--primary-light);
+        }
+
+        #gameContainer {
+            position: relative;
+
+            flex: 1;
+
+            min-height: 0;
+
+            background: #000;
+        }
+
+        #gameFrame {
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            border: 0;
+
+            background: #000;
+        }
+
+
+
+        /* =========================
+           COMENTÁRIOS
+        ========================= */
+
+        .comments-section {
+            margin-top: 55px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(160,32,240,0.2);
+        }
+
+        .comments-title {
+            margin: 0 0 18px;
+            font-family: "Orbitron", sans-serif;
+            font-size: 20px;
+        }
+
+        .comments-form {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .comments-form input,
+        .comments-form textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            outline: none;
+            background: rgba(16,11,28,0.9);
+            color: white;
+            font-family: "Inter", sans-serif;
+        }
+
+        .comments-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .comments-form input:focus,
+        .comments-form textarea:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 12px rgba(160,32,240,0.12);
+        }
+
+        .comments-form button {
+            width: fit-content;
+            padding: 10px 16px;
+            border: 1px solid rgba(160,32,240,0.6);
+            border-radius: 7px;
+            background: rgba(160,32,240,0.15);
+            color: var(--primary-light);
+            cursor: pointer;
+            font-family: "Orbitron", sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .comments-form button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .comments-status {
+            min-height: 18px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .comments-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .comment {
+            padding: 14px;
+            background: rgba(16,11,28,0.7);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .comment-name {
+            margin: 0 0 6px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .comment-text {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .games-grid {
+                grid-template-columns:
+                    repeat(
+                        4,
+                        minmax(0,1fr)
+                    );
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .games-grid {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+
+                gap: 14px;
+            }
+
+            .game-cover {
+                height: 160px;
+            }
+
+            main {
+                width:
+                    calc(100% - 20px);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            header {
+                padding: 0 16px;
+            }
+
+            main {
+                padding-top: 88px;
+            }
+
+            .game-cover {
+                height: 145px;
+            }
+
+            .game-name {
+                font-size: 13px;
+            }
+
+            .game-description {
+                font-size: 11px;
+            }
+
+            #gameTopbar {
+                flex-wrap: wrap;
+            }
+
+            #gameButtons {
+                width: 100%;
+
+                justify-content:
+                    flex-end;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        CAIOBAGAMES
+    </div>
+
+</header>
+
+
+<main>
+
+    <h1 class="page-title">
+        Jogos
+    </h1>
+
+    <a class="comments-tab" href="#commentsSection">
+        Aba de comentarios
+    </a>
+
+
+    <section class="games-grid">
+
+
+        <!-- RAGDOLL ARCHERS -->
+
+        <div
+            class="game-card"
+            data-url="https://vietdp.com/games/t122024/ragdoll-archers/"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRurkHgxNxkfNwZgbiPR7ZBc0xEBc44lqyiR9hbEn-jQQoIH9lGbBF76GcM&s=10"
+                    alt="Ragdoll Archers"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Ragdoll Archers
+                </h2>
+
+                <p class="game-description">
+                    Enfrente inimigos usando seu arco e suas habilidades.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RAGDOLL HIT -->
+
+        <div
+            class="game-card"
+            data-url="https://ragdollhit2.io/ragdoll-hit.embed"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/3c892779be9dabb3589586c83ad3eeed/ragdoll-hit-logo.png"
+                    alt="Ragdoll Hit"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Ragdoll Hit
+                </h2>
+
+                <p class="game-description">
+                    Use a física dos bonecos para causar o máximo de impacto.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BITLIFE -->
+
+        <div
+            class="game-card"
+            data-url="https://elifesimulator.io/bitlife.embed"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://play-lh.googleusercontent.com/OVgQx7M6lk9VcFZKIY_80siUOESLsu5gtwAKrjIruM097U-at161KrQ6Svxw3uPhY4EfKTGNrlpsd12k4TV6HA"
+                    alt="BitLife"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    BitLife
+                </h2>
+
+                <p class="game-description">
+                    Simule uma vida inteira através das suas escolhas.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEVEL DEVIL -->
+
+        <div
+            class="game-card"
+            data-url="https://leveldevilfull.com/play/level-devil/"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/7e18b5cf7da58e6fc90144f747dcc949/level-devil-logo.png"
+                    alt="Level Devil"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Level Devil
+                </h2>
+
+                <p class="game-description">
+                    Plataforma com armadilhas inesperadas.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BASKETBALL RANDOM -->
+
+        <div
+            class="game-card"
+            data-url="https://basketball-random.io/basketball-random.embed"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&quality=100&metadata=none&width=1200"
+                    alt="Basketball Random"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Basketball Random
+                </h2>
+
+                <p class="game-description">
+                    Basquete maluco com física imprevisível.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SNOW RIDER -->
+
+        <div
+            class="game-card"
+            data-url="https://html5.gamedistribution.com/3b79a8537ebc414fb4f9672a9b8c68c8/?gd_sdk_referrer_url=https://gamedistribution.com/games/snow-rider-3d/"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZnTQARWPLkZwQ_ctZEkMvvtR03H7uXfTil20R0LzZIg&s=10"
+                    alt="Snow Rider"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Snow Rider
+                </h2>
+
+                <p class="game-description">
+                    Deslize pela neve e tente chegar o mais longe possível.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TENNIS MASTER -->
+
+        <div
+            class="game-card"
+            data-url="https://html5.gamedistribution.com/ab2f156d72894fd8a5dedb85b34a05e4/?gd_sdk_referrer_url=https://gamedistribution.com/games/tennis-masters-2026/"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://freetennis.org/images/tennis-game-card.png"
+                    alt="Tennis Master"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Tennis Master
+                </h2>
+
+                <p class="game-description">
+                    Entre em quadra e mostre suas habilidades no tênis.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- GEOGUESSER -->
+
+        <div
+            class="game-card"
+            data-url="https://www.worldguessr.com/"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://sm.ign.com/ign_br/cover/g/geoguessr/geoguessr_ukvg.jpg"
+                    alt="Geoguesser"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Geoguesser
+                </h2>
+
+                <p class="game-description">
+                    Explore o mundo e tente descobrir onde você está.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TREINO DE FALTA -->
+
+        <div
+            class="game-card"
+            data-url="https://play.famobi.com/wrapper/3d-free-kick/A1000-10"
+        >
+
+            <div class="game-cover">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKc-7oTm4F-3-RwE_O2mHXheTJ1mGcoo6adrjITsuVIg&s=10"
+                    alt="Treino de Falta"
+                >
+
+            </div>
+
+            <div class="game-info">
+
+                <h2 class="game-name">
+                    Treino de Falta
+                </h2>
+
+                <p class="game-description">
+                    Treine suas cobranças de falta e tente acertar o alvo.
+                </p>
+
+                <div class="play-button">
+                    JOGAR
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- CRÉDITOS -->
+
+    <section class="credits">
+
+        <h2 class="credits-title">
+            Créditos
+        </h2>
+
+        <div class="credits-grid">
+
+            <div class="credit">
+
+                <p class="credit-game">
+                    Ragdoll Archers
+                </p>
+
+                <p class="credit-author">
+                    Ericetto
+                </p>
+
+            </div>
+
+
+            <div class="credit">
+
+                <p class="credit-game">
+                    Ragdoll Hit
+                </p>
+
+                <p class="credit-author">
+                    Ericetto
+                </p>
+
+            </div>
+
+
+            <div class="credit">
+
+                <p class="credit-game">
+                    BitLife
+                </p>
+
+                <p class="credit-author">
+                    Candywriter
+                </p>
+
+            </div>
+
+
+            <div class="credit">
+
+                <p class="credit-game">
+                    Level Devil
+                </p>
+
+                <p class="credit-author">
+                    Unept
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         COMENTÁRIOS
+    ========================= -->
+
+    <section class="comments-section" id="commentsSection">
+
+        <h2 class="comments-title">
+            Comentários
+        </h2>
+
+        <form id="commentsForm" class="comments-form">
+
+            <input
+                id="commentName"
+                type="text"
+                maxlength="30"
+                placeholder="Seu nome"
+                required
+            >
+
+            <textarea
+                id="commentText"
+                maxlength="500"
+                placeholder="Escreva um comentário..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                ENVIAR COMENTÁRIO
+            </button>
+
+            <div
+                id="commentsStatus"
+                class="comments-status"
+            ></div>
+
+        </form>
+
+        <div
+            id="commentsList"
+            class="comments-list"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     PLAYER
+========================= -->
+
+<div id="gameOverlay">
+
+    <div id="gameTopbar">
+
+        <div id="gameTitle">
+            Jogo
+        </div>
+
+        <div id="gameButtons">
+
+            <button
+                type="button"
+                id="favoriteButton"
+            >
+                ☆ Favoritar
+            </button>
+
+            <button
+                type="button"
+                id="fullscreenButton"
+            >
+                ⛶ Tela cheia
+            </button>
+
+            <button
+                type="button"
+                id="closeGameButton"
+            >
+                ✕ Fechar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="gameContainer">
+
+        <iframe
+            id="gameFrame"
+            title="Jogo"
+            allow="fullscreen; autoplay; gamepad; pointer-lock"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</div>
+
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {
+    getAuth,
+    signInAnonymously
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDptzzLZYWBlTQ1eoIJIQClFc2PKiDNRh0",
+    authDomain: "caioba-games-comentarios.firebaseapp.com",
+    projectId: "caioba-games-comentarios",
+    storageBucket: "caioba-games-comentarios.firebasestorage.app",
+    messagingSenderId: "340825138509",
+    appId: "1:340825138509:web:2a8eb0c467897d64f2c304",
+    measurementId: "G-ST621MWSDD"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const commentsForm = document.getElementById("commentsForm");
+const commentName = document.getElementById("commentName");
+const commentText = document.getElementById("commentText");
+const commentsList = document.getElementById("commentsList");
+const commentsStatus = document.getElementById("commentsStatus");
+
+function renderComments(snapshot) {
+    commentsList.innerHTML = "";
+
+    snapshot.forEach(function (docSnapshot) {
+        const data = docSnapshot.data();
+
+        const article = document.createElement("article");
+        article.className = "comment";
+
+        const name = document.createElement("h3");
+        name.className = "comment-name";
+        name.textContent = data.name || "Anônimo";
+
+        const text = document.createElement("p");
+        text.className = "comment-text";
+        text.textContent = data.comment || "";
+
+        article.appendChild(name);
+        article.appendChild(text);
+        commentsList.appendChild(article);
+    });
+}
+
+async function startComments() {
+    try {
+        await signInAnonymously(auth);
+
+        const commentsQuery = query(
+            collection(db, "comments"),
+            orderBy("createdAt", "desc")
+        );
+
+        onSnapshot(
+            commentsQuery,
+            function (snapshot) {
+                renderComments(snapshot);
+            },
+            function (error) {
+                console.error("Erro ao carregar comentários:", error);
+                commentsStatus.textContent =
+                    "Não foi possível carregar os comentários.";
+            }
+        );
+
+        commentsForm.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+
+                const name = commentName.value.trim();
+                const comment = commentText.value.trim();
+
+                if (!name || !comment) {
+                    return;
+                }
+
+                commentsStatus.textContent = "Enviando...";
+
+                try {
+                    await addDoc(
+                        collection(db, "comments"),
+                        {
+                            name: name,
+                            comment: comment,
+                            createdAt: serverTimestamp()
+                        }
+                    );
+
+                    commentsForm.reset();
+                    commentsStatus.textContent =
+                        "Comentário enviado!";
+                } catch (error) {
+                    console.error("Erro ao enviar comentário:", error);
+                    commentsStatus.textContent =
+                        "Não foi possível enviar o comentário.";
+                }
+            }
+        );
+
+    } catch (error) {
+        console.error("Erro ao iniciar comentários:", error);
+        commentsStatus.textContent =
+            "Não foi possível conectar aos comentários.";
+    }
+}
+
+startComments();
+</script>
+
+<!-- Player -->
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const overlay =
+            document.getElementById(
+                "gameOverlay"
+            );
+
+        const frame =
+            document.getElementById(
+                "gameFrame"
+            );
+
+        const title =
+            document.getElementById(
+                "gameTitle"
+            );
+
+        const closeButton =
+            document.getElementById(
+                "closeGameButton"
+            );
+
+        const fullscreenButton =
+            document.getElementById(
+                "fullscreenButton"
+            );
+
+        const favoriteButton =
+            document.getElementById(
+                "favoriteButton"
+            );
+
+        let currentGame = null;
+
+
+        /* =========================
+           ABRIR JOGO
+        ========================= */
+
+        document
+            .querySelectorAll(".game-card")
+            .forEach(function (card) {
+
+                card.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+                        const url =
+                            card.getAttribute(
+                                "data-url"
+                            );
+
+                        if (!url) {
+                            return;
+                        }
+
+                        const nameElement =
+                            card.querySelector(
+                                ".game-name"
+                            );
+
+                        const name =
+                            nameElement
+                                ? nameElement
+                                    .textContent
+                                    .trim()
+                                : "Jogo";
+
+                        currentGame = {
+                            url: url,
+                            name: name
+                        };
+
+                        title.textContent =
+                            name;
+
+                        frame.src = url;
+
+                        overlay.classList.add(
+                            "active"
+                        );
+
+                        document.body.style.overflow =
+                            "hidden";
+
+                        updateFavorite();
+
+                    }
+                );
+
+            });
+
+
+        /* =========================
+           FECHAR
+        ========================= */
+
+        closeButton.addEventListener(
+            "click",
+            function () {
+
+                overlay.classList.remove(
+                    "active"
+                );
+
+                frame.src =
+                    "about:blank";
+
+                document.body.style.overflow =
+                    "";
+
+            }
+        );
+
+
+        /* =========================
+           TELA CHEIA
+        ========================= */
+
+        fullscreenButton.addEventListener(
+            "click",
+            async function () {
+
+                try {
+
+                    if (
+                        !document.fullscreenElement
+                    ) {
+
+                        await overlay.requestFullscreen();
+
+                    } else {
+
+                        await document.exitFullscreen();
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Erro na tela cheia:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           FAVORITOS
+        ========================= */
+
+        function updateFavorite() {
+
+            if (!currentGame) {
+                return;
+            }
+
+            const key =
+                "caiobagames-favorite-" +
+                currentGame.url;
+
+            const saved =
+                localStorage.getItem(key) ===
+                "true";
+
+            favoriteButton.textContent =
+                saved
+                    ? "★ Favoritado"
+                    : "☆ Favoritar";
+
+        }
+
+
+        favoriteButton.addEventListener(
+            "click",
+            function () {
+
+                if (!currentGame) {
+                    return;
+                }
+
+                const key =
+                    "caiobagames-favorite-" +
+                    currentGame.url;
+
+                const saved =
+                    localStorage.getItem(key) ===
+                    "true";
+
+                localStorage.setItem(
+                    key,
+                    String(!saved)
+                );
+
+                updateFavorite();
+
+            }
+        );
+
+
+        /* =========================
+           ESC
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    overlay.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    if (
+                        document.fullscreenElement
+                    ) {
+
+                        document.exitFullscreen();
+
+                    } else {
+
+                        closeButton.click();
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>
