@@ -3,299 +3,2063 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Início - Sala de Aula</title>
+
+  <title>CAIOBAGAMES</title>
+
   <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;600&display=swap');
+
+    :root {
+      --background: #050506;
+      --card: #100b1c;
+      --card-hover: #171021;
+      --foreground: #f4f0f7;
+      --muted: #aaa0b3;
+      --primary: #a020f0;
+      --primary-light: #c45cff;
+      --border: rgba(160, 32, 240, 0.25);
+    }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
       margin: 0;
-      padding: 0;
+      min-height: 100%;
     }
 
     body {
-      background-color: #0b0512;
-      background-image: radial-gradient(circle at top center, #1b0c2e 0%, #0b0512 80%);
-      color: #ffffff;
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      padding-bottom: 50px;
+      background:
+        radial-gradient(
+          circle at 50% -20%,
+          rgba(160, 32, 240, 0.16),
+          transparent 45%
+        ),
+        var(--background);
+
+      color: var(--foreground);
+      font-family: "Inter", sans-serif;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        );
+
+      background-size: 50px 50px;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
-      padding: 25px 40px;
-      border-bottom: 1px solid #1a0b2e;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 64px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 32px;
+
+      background: rgba(5,5,8,0.94);
+
+      backdrop-filter: blur(14px);
+
+      border-bottom:
+        1px solid
+        rgba(160,32,240,0.2);
+
+      z-index: 100;
     }
 
     .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
-      font-weight: 900;
-      color: #a855f7;
-      text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
-      letter-spacing: 1px;
+      color: var(--primary-light);
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 20px;
+      font-weight: 700;
+
+      letter-spacing: 0.12em;
+
+      text-shadow:
+        0 0 5px var(--primary),
+        0 0 10px var(--primary),
+        0 0 20px var(--primary-light);
     }
+
+    /* =========================
+       CONTEÚDO
+    ========================= */
 
     main {
-      max-width: 1200px;
+      width: min(1400px, calc(100% - 32px));
+
       margin: 0 auto;
-      padding: 30px 20px;
+
+      padding: 96px 0 50px;
+
+      position: relative;
+      z-index: 2;
     }
 
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #ffffff;
+    .page-title {
+      margin: 0 0 18px;
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 28px;
     }
 
-    .btn-comentarios {
-      background: rgba(30, 15, 50, 0.6);
-      border: 1px solid #4c1d95;
-      color: #c084fc;
-      padding: 8px 16px;
+    /* =========================
+       COMENTÁRIOS
+    ========================= */
+
+    .comments-tab {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 8px;
+
+      margin: 0 0 24px;
+
+      padding: 10px 16px;
+
+      width: fit-content;
+
+      text-decoration: none;
+
+      color: var(--primary-light);
+
+      background: rgba(16,11,28,0.7);
+
+      border:
+        1px solid
+        var(--border);
+
       border-radius: 8px;
-      font-size: 13px;
-      margin-bottom: 30px;
-      cursor: pointer;
-      display: inline-block;
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
     }
+
+    .comments-tab:hover {
+      border-color: rgba(196,92,255,0.7);
+
+      background: rgba(160,32,240,0.15);
+    }
+
+    /* =========================
+       GRID
+    ========================= */
 
     .games-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+
+      grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
       gap: 20px;
+
+      align-items: stretch;
     }
 
+    /* =========================
+       CARD
+    ========================= */
+
     .game-card {
-      background: #12091f;
-      border: 1px solid #23123d;
-      border-radius: 12px;
-      padding: 12px;
+      cursor: pointer;
+
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+
+      width: 100%;
+      min-width: 0;
+      height: 100%;
+
+      overflow: hidden;
+
+      color: var(--foreground);
+      text-decoration: none;
+
+      background: rgba(16,11,28,0.9);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 10px;
+
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .game-card:hover {
       transform: translateY(-4px);
-      border-color: #6b21a8;
+
+      border-color:
+        rgba(196,92,255,0.7);
+
+      box-shadow:
+        0 0 20px
+        rgba(160,32,240,0.18);
     }
 
-    .game-card img {
+    /* =========================
+       CAPA
+    ========================= */
+
+    .game-cover {
       width: 100%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 12px;
+
+      height: 155px;
+
+      flex-shrink: 0;
+
+      overflow: hidden;
+
+      background: #0b080f;
     }
 
-    .game-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #ffffff;
-    }
-
-    .game-desc {
-      font-size: 11px;
-      color: #9ca3af;
-      line-height: 1.3;
-      margin-bottom: 14px;
-      min-height: 28px;
-    }
-
-    .btn-jogar {
+    .game-cover img {
       width: 100%;
-      background: #3b0764;
-      border: 1px solid #6b21a8;
-      color: #e9d5ff;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 10px 0;
-      border-radius: 6px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
+      height: 100%;
+
       display: block;
-      transition: background 0.2s;
+
+      object-fit: cover;
+
+      transition:
+        transform 0.3s ease;
     }
 
-    .btn-jogar:hover {
-      background: #581c87;
-      color: #ffffff;
+    .game-card:hover .game-cover img {
+      transform: scale(1.04);
     }
+
+    /* =========================
+       INFORMAÇÕES
+    ========================= */
+
+    .game-info {
+      display: flex;
+      flex-direction: column;
+
+      flex: 1;
+
+      min-height: 150px;
+
+      padding: 13px;
+    }
+
+    .game-name {
+      margin: 0 0 7px;
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 14px;
+
+      line-height: 1.25;
+
+      color: white;
+    }
+
+    .game-description {
+      margin: 0;
+
+      flex: 1;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.4;
+    }
+
+    /* =========================
+       BOTÃO
+    ========================= */
+
+    .play-button {
+      margin-top: 11px;
+
+      padding: 8px;
+
+      text-align: center;
+
+      border-radius: 6px;
+
+      background:
+        rgba(160,32,240,0.15);
+
+      border:
+        1px solid
+        rgba(160,32,240,0.4);
+
+      color: var(--primary-light);
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .game-card:hover .play-button {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* =========================
+       CRÉDITOS
+    ========================= */
+
+    .credits {
+      margin-top: 55px;
+
+      padding-top: 28px;
+
+      border-top:
+        1px solid
+        rgba(160,32,240,0.2);
+    }
+
+    .credits-title {
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 20px;
+    }
+
+    .credits-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(180px,1fr)
+        );
+
+      gap: 12px;
+    }
+
+    .credit {
+      padding: 14px;
+
+      background:
+        rgba(16,11,28,0.7);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 8px;
+    }
+
+    .credit-game {
+      margin: 0 0 5px;
+
+      font-weight: 600;
+    }
+
+    .credit-author {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       COMENTÁRIOS
+    ========================= */
+
+    .comments-section {
+      margin-top: 55px;
+
+      padding-top: 28px;
+
+      border-top:
+        1px solid
+        rgba(160,32,240,0.2);
+    }
+
+    .comments-title {
+      margin: 0 0 18px;
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 20px;
+    }
+
+    .comments-form {
+      display: grid;
+      gap: 10px;
+
+      margin-bottom: 24px;
+    }
+
+    .comments-form input,
+    .comments-form textarea {
+      width: 100%;
+
+      padding: 11px 12px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 7px;
+
+      outline: none;
+
+      background:
+        rgba(16,11,28,0.9);
+
+      color: white;
+
+      font-family: "Inter", sans-serif;
+    }
+
+    .comments-form textarea {
+      min-height: 100px;
+
+      resize: vertical;
+    }
+
+    .comments-form input:focus,
+    .comments-form textarea:focus {
+      border-color:
+        var(--primary-light);
+
+      box-shadow:
+        0 0 12px
+        rgba(160,32,240,0.12);
+    }
+
+    .comments-form button {
+      width: fit-content;
+
+      padding: 10px 16px;
+
+      border:
+        1px solid
+        rgba(160,32,240,0.6);
+
+      border-radius: 7px;
+
+      background:
+        rgba(160,32,240,0.15);
+
+      color: var(--primary-light);
+
+      cursor: pointer;
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .comments-form button:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .comments-status {
+      min-height: 18px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .comments-list {
+      display: grid;
+
+      gap: 12px;
+    }
+
+    .comment {
+      padding: 14px;
+
+      background:
+        rgba(16,11,28,0.7);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 8px;
+    }
+
+    .comment-name {
+      margin: 0 0 6px;
+
+      font-weight: 700;
+
+      color: white;
+    }
+
+    .comment-text {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+      white-space: pre-wrap;
+
+      overflow-wrap: anywhere;
+    }
+
+    /* =========================
+       PLAYER
+    ========================= */
+
+    #gameOverlay {
+      display: none;
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 999999;
+
+      background: #000;
+    }
+
+    #gameOverlay.active {
+      display: flex;
+
+      flex-direction: column;
+    }
+
+    #gameTopbar {
+      min-height: 58px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding: 8px 14px;
+
+      background:
+        rgba(5,5,8,0.98);
+
+      border-bottom:
+        1px solid
+        rgba(160,32,240,0.5);
+
+      color: white;
+
+      flex-shrink: 0;
+    }
+
+    #gameTitle {
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      color: var(--primary-light);
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+    #gameButtons {
+      display: flex;
+
+      gap: 8px;
+
+      flex-shrink: 0;
+    }
+
+    #gameButtons button {
+      border:
+        1px solid
+        rgba(160,32,240,0.6);
+
+      border-radius: 6px;
+
+      padding: 8px 12px;
+
+      background: #17101e;
+
+      color: var(--primary-light);
+
+      cursor: pointer;
+
+      font-family: "Orbitron", sans-serif;
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+    #gameButtons button:hover {
+      background: var(--primary);
+
+      color: white;
+
+      border-color:
+        var(--primary-light);
+    }
+
+    #gameContainer {
+      position: relative;
+
+      flex: 1;
+
+      min-height: 0;
+
+      background: #000;
+    }
+
+    #gameFrame {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      border: 0;
+
+      background: #000;
+    }
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 1150px) {
+
+      .games-grid {
+        grid-template-columns:
+          repeat(4, minmax(0,1fr));
+      }
+
+    }
+
+    @media (max-width: 900px) {
+
+      .games-grid {
+        grid-template-columns:
+          repeat(3, minmax(0,1fr));
+      }
+
+    }
+
+    @media (max-width: 650px) {
+
+      .games-grid {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
+
+        gap: 14px;
+      }
+
+      .game-cover {
+        height: 145px;
+      }
+
+      main {
+        width: calc(100% - 20px);
+      }
+
+    }
+
+    @media (max-width: 430px) {
+
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .game-cover {
+        height: 190px;
+      }
+
+      header {
+        padding: 0 16px;
+      }
+
+      main {
+        padding-top: 88px;
+      }
+
+      #gameTopbar {
+        flex-wrap: wrap;
+      }
+
+      #gameButtons {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+    }
+
   </style>
+
 </head>
+
 <body>
 
-  <header>
-    <div class="logo">CAIOBAGAMES</div>
-  </header>
+<header>
 
-  <main>
-    <h1>Jogos</h1>
-    <div class="btn-comentarios">Aba de comentários</div>
+  <div class="logo">
+    CAIOBAGAMES
+  </div>
 
-    <div class="games-grid">
-      
-      <!-- JOGOS ANTIGOS -->
-      <div class="game-card">
-        <img src="URL_IMAGEM_RAGDOLL_ARCHERS" alt="Ragdoll Archers">
-        <div class="game-title">Ragdoll Archers</div>
-        <div class="game-desc">Enfrente inimigos usando seu arco e suas habilidades.</div>
-        <a href="LINK_RAGDOLL_ARCHERS" class="btn-jogar">JOGAR</a>
+</header>
+
+<main>
+
+  <h1 class="page-title">
+    Jogos
+  </h1>
+
+  <a
+    class="comments-tab"
+    href="#commentsSection"
+  >
+    💬 Aba de comentários
+  </a>
+
+
+  <!-- =========================
+       JOGOS
+  ========================= -->
+
+  <section class="games-grid">
+
+
+    <!-- JOGOS ANTIGOS -->
+
+    <div class="game-card" data-url="https://vietdp.com/games/t122024/ragdoll-archers/">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRurkHgxNxkfNwZgbiPR7ZBc0xEBc44lqyiR9hbEn-jQQoIH9lGbBF76GcM&s=10"
+          alt="Ragdoll Archers"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_RAGDOLL_HIT" alt="Ragdoll Hit">
-        <div class="game-title">Ragdoll Hit</div>
-        <div class="game-desc">Use a física dos bonecos para causar o máximo de impacto.</div>
-        <a href="LINK_RAGDOLL_HIT" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Ragdoll Archers</h2>
+        <p class="game-description">
+          Enfrente inimigos usando seu arco e suas habilidades.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://ragdollhit2.io/ragdoll-hit.embed">
+      <div class="game-cover">
+        <img
+          src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/3c892779be9dabb3589586c83ad3eeed/ragdoll-hit-logo.png"
+          alt="Ragdoll Hit"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_BITLIFE" alt="BitLife">
-        <div class="game-title">BitLife</div>
-        <div class="game-desc">Simule uma vida inteira através das suas escolhas.</div>
-        <a href="LINK_BITLIFE" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Ragdoll Hit</h2>
+        <p class="game-description">
+          Use a física dos bonecos para causar o máximo de impacto.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://elifesimulator.io/bitlife.embed">
+      <div class="game-cover">
+        <img
+          src="https://play-lh.googleusercontent.com/OVgQx7M6lk9VcFZKIY_80siUOESLsu5gtwAKrjIruM097U-at161KrQ6Svxw3uPhY4EfKTGNrlpsd12k4TV6HA"
+          alt="BitLife"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_LEVEL_DEVIL" alt="Level Devil">
-        <div class="game-title">Level Devil</div>
-        <div class="game-desc">Plataforma com armadilhas inesperadas.</div>
-        <a href="LINK_LEVEL_DEVIL" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">BitLife</h2>
+        <p class="game-description">
+          Simule uma vida inteira através das suas escolhas.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://leveldevilfull.com/play/level-devil/">
+      <div class="game-cover">
+        <img
+          src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/7e18b5cf7da58e6fc90144f747dcc949/level-devil-logo.png"
+          alt="Level Devil"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_BASKETBALL_RANDOM" alt="Basketball Random">
-        <div class="game-title">Basketball Random</div>
-        <div class="game-desc">Basquete maluco com física imprevisível.</div>
-        <a href="LINK_BASKETBALL_RANDOM" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Level Devil</h2>
+        <p class="game-description">
+          Plataforma com armadilhas inesperadas.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://basketball-random.io/basketball-random.embed">
+      <div class="game-cover">
+        <img
+          src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&quality=100&metadata=none&width=1200"
+          alt="Basketball Random"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_SNOW_RIDER" alt="Snow Rider">
-        <div class="game-title">Snow Rider</div>
-        <div class="game-desc">Deslize pela neve e tente chegar o mais longe possível.</div>
-        <a href="LINK_SNOW_RIDER" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Basketball Random</h2>
+        <p class="game-description">
+          Basquete maluco com física imprevisível.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://html5.gamedistribution.com/3b79a8537ebc414fb4f9672a9b8c68c8/?gd_sdk_referrer_url=https://gamedistribution.com/games/snow-rider-3d/">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZnTQARWPLkZwQ_ctZEkMvvtR03H7uXfTil20R0LzZIg&s=10"
+          alt="Snow Rider"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_TENNIS_MASTER" alt="Tennis Master">
-        <div class="game-title">Tennis Master</div>
-        <div class="game-desc">Entre em quadra e mostre suas habilidades no tênis.</div>
-        <a href="LINK_TENNIS_MASTER" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Snow Rider</h2>
+        <p class="game-description">
+          Deslize pela neve e tente chegar o mais longe possível.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://html5.gamedistribution.com/ab2f156d72894fd8a5dedb85b34a05e4/?gd_sdk_referrer_url=https://gamedistribution.com/games/tennis-masters-2026/">
+      <div class="game-cover">
+        <img
+          src="https://freetennis.org/images/tennis-game-card.png"
+          alt="Tennis Master"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_GEOGUESSR" alt="Geoguessr">
-        <div class="game-title">Geoguessr</div>
-        <div class="game-desc">Explore o mundo e tente descobrir onde você está.</div>
-        <a href="LINK_GEOGUESSR" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Tennis Master</h2>
+        <p class="game-description">
+          Entre em quadra e mostre suas habilidades no tênis.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://www.worldguessr.com/">
+      <div class="game-cover">
+        <img
+          src="https://sm.ign.com/ign_br/cover/g/geoguessr/geoguessr_ukvg.jpg"
+          alt="Geoguesser"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_TREINO_DE_FALTA" alt="Treino de Falta">
-        <div class="game-title">Treino de Falta</div>
-        <div class="game-desc">Treine suas cobranças de falta e tente acertar o alvo.</div>
-        <a href="LINK_TREINO_DE_FALTA" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Geoguesser</h2>
+        <p class="game-description">
+          Explore o mundo e tente descobrir onde você está.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://play.famobi.com/wrapper/3d-free-kick/A1000-10">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKc-7oTm4F-3-RwE_O2mHXheTJ1mGcoo6adrjITsuVIg&s=10"
+          alt="Treino de Falta"
+        >
       </div>
 
-      <!-- NOVOS JOGOS ADICIONADOS -->
-      <div class="game-card">
-        <img src="URL_IMAGEM_ESCAPE_ROAD" alt="Escape Road">
-        <div class="game-title">Escape Road</div>
-        <div class="game-desc">Acelere e fuja da polícia em uma perseguição frenética.</div>
-        <a href="LINK_ESCAPE_ROAD" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Treino de Falta</h2>
+        <p class="game-description">
+          Treine suas cobranças de falta e tente acertar o alvo.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <!-- =========================
+         NOVOS JOGOS AZGAMES
+    ========================= -->
+
+
+    <div class="game-card" data-url="https://azgames.io/escape-road.embed">
+      <div class="game-cover">
+        <img
+          src="https://imgs.crazygames.com/escape-road-asm_16x9/20250724105031/escape-road-asm_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop"
+          alt="Escape Road"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_WACKY_FLIP" alt="Wacky Flip">
-        <div class="game-title">Wacky Flip</div>
-        <div class="game-desc">Faça piruetas e acrobacias perfeitas no ar.</div>
-        <a href="LINK_WACKY_FLIP" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Escape Road</h2>
+        <p class="game-description">
+          Fuja pelas ruas e tente escapar enquanto enfrenta desafios.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/wacky-flip.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6UK2b3FgT3MbfXqSy1f8FGJB-d4CoBAsrk2BGT20wRw&s"
+          alt="Wacky Flip"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_BIKE_XTREME" alt="Bike Xtreme">
-        <div class="game-title">Bike Xtreme</div>
-        <div class="game-desc">Domine pistas radicais com sua bicicleta.</div>
-        <a href="LINK_BIKE_XTREME" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Wacky Flip</h2>
+        <p class="game-description">
+          Faça manobras e tente completar os movimentos mais malucos.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/bike-xtreme.embed">
+      <div class="game-cover">
+        <img
+          src="https://play-lh.googleusercontent.com/ZNlK83cKcUHOzgwcjDLYi8QIIbsEkdUmSMODovNPIxi_PiUKpgvFunmSPrc_8hyGPtahlIXbG7lREdJqlJ"
+          alt="Bike Xtreme"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_UNDEAD_CORRIDOR" alt="Undead Corridor">
-        <div class="game-title">Undead Corridor</div>
-        <div class="game-desc">Enfrente hordas de zumbis em corredores perigosos.</div>
-        <a href="LINK_UNDEAD_CORRIDOR" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Bike Xtreme</h2>
+        <p class="game-description">
+          Supere obstáculos e faça manobras radicais de moto.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/undead-corridor.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqg5Un2gXFBAMXE2S8IcC0phmkxDSq8eiTroTTkfCzZmQMhurOVh09kvzD&s=10"
+          alt="Undead Corridor"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_ORBIT_KICK" alt="Orbit Kick">
-        <div class="game-title">Orbit Kick</div>
-        <div class="game-desc">Chute a bola o mais longe possível pelo espaço.</div>
-        <a href="LINK_ORBIT_KICK" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Undead Corridor</h2>
+        <p class="game-description">
+          Enfrente desafios em um corredor cheio de perigos.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/orbit-kick.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaTwUODsENC_R5VSXAIOteHI-K0DIW87BxeoLe6AoqvcdvP8Mt_DfG_6DK&s=10"
+          alt="Orbit Kick"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_COWBOY_SAFARI" alt="Cowboy Safari">
-        <div class="game-title">Cowboy Safari</div>
-        <div class="game-desc">Capture animais selvagens usando seu laço.</div>
-        <a href="LINK_COWBOY_SAFARI" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Orbit Kick</h2>
+        <p class="game-description">
+          Acerte seus chutes e domine os desafios de futebol.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/cowboy-safari.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbXbkd7VXN5a2dF-Aj4cvLIYNnZ-vgUANhywWMa43Lafdjg5ppazjuNzy4&s=10"
+          alt="Cowboy Safari"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_FLIP_SPOT" alt="Flip Spot">
-        <div class="game-title">Flip Spot</div>
-        <div class="game-desc">Salte e aterre no local correto sem cair.</div>
-        <a href="LINK_FLIP_SPOT" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Cowboy Safari</h2>
+        <p class="game-description">
+          Explore um mundo de aventura em uma jornada no estilo cowboy.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/flip-spot.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJQxW7mERPlBtnL98zpqLamvjrk6ZmuPRtbNoSFbIaQ&s=10"
+          alt="Flip Spot"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_MOTO_X3M" alt="Moto X3M">
-        <div class="game-title">Moto X3M</div>
-        <div class="game-desc">Super e obstáculos em altíssima velocidade de moto.</div>
-        <a href="LINK_MOTO_X3M" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Flip Spot</h2>
+        <p class="game-description">
+          Faça flips e complete os desafios com precisão.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/moto-x3m.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ySfO2VfEstWERnPVtWxw7LDn-qICA3aU9WIOHw0SirAjTbpdiLmJlJJl&s=10"
+          alt="Moto X3M"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_DRIFT_RUSH" alt="Drift Rush">
-        <div class="game-title">Drift Rush</div>
-        <div class="game-desc">Faça curvas derrapando e vença as corridas.</div>
-        <a href="LINK_DRIFT_RUSH" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Moto X3M</h2>
+        <p class="game-description">
+          Passe por pistas cheias de obstáculos e faça acrobacias de moto.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/drift-rush.embed">
+      <div class="game-cover">
+        <img
+          src="https://wackysteps.io/data/image/Drift-Rush.png"
+          alt="Drift Rush"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_BASKETBALL_STARS" alt="Basketball Stars">
-        <div class="game-title">Basketball Stars</div>
-        <div class="game-desc">Mostre seu talento nas quadras 1v1 de basquete.</div>
-        <a href="LINK_BASKETBALL_STARS" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Drift Rush</h2>
+        <p class="game-description">
+          Faça drifts e tente dominar as pistas em alta velocidade.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/basketball-stars.embed">
+      <div class="game-cover">
+        <img
+          src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/9c5a5477b6fcc030def9eaeb017ac0e0/basketball-superstars-logo.png"
+          alt="Basketball Stars"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_DUDE_THEFT_AUTO" alt="Dude Theft Auto">
-        <div class="game-title">Dude Theft Auto</div>
-        <div class="game-desc">Explore uma cidade aberta cheia de caos e diversão.</div>
-        <a href="LINK_DUDE_THEFT_AUTO" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Basketball Stars</h2>
+        <p class="game-description">
+          Entre em quadra e mostre suas habilidades no basquete.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/dude-theft-auto.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzeLp6WCXNjSrdJeLzACRdpgodLs-MzPUda66H4jiiXg&s=10"
+          alt="Dude Theft Auto"
+        >
       </div>
 
-      <div class="game-card">
-        <img src="URL_IMAGEM_PAPER_IO" alt="Paper.io">
-        <div class="game-title">Paper.io</div>
-        <div class="game-desc">Conquiste o maior território possível sem ser cortado.</div>
-        <a href="LINK_PAPER_IO" class="btn-jogar">JOGAR</a>
+      <div class="game-info">
+        <h2 class="game-name">Dude Theft Auto</h2>
+        <p class="game-description">
+          Explore uma cidade aberta e participe de diferentes atividades.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/paper-io.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKHXyjvcTI5HjVyC43RuESaH00YqrIdFn3Xxk_3sdCxg&s"
+          alt="Paper.io"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Paper.io</h2>
+        <p class="game-description">
+          Conquiste território e tente dominar o mapa.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/ragdoll-hit-stickman.embed">
+      <div class="game-cover">
+        <img
+          src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/3c892779be9dabb3589586c83ad3eeed/ragdoll-hit-logo.png"
+          alt="Ragdoll Hit Stickman"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Ragdoll Hit Stickman</h2>
+        <p class="game-description">
+          Use a física do personagem para superar os desafios.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/1v1lol.embed">
+      <div class="game-cover">
+        <img
+          src="https://topgames.gg/data/image/game/1v1-lol.png"
+          alt="1v1.LOL"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">1v1.LOL</h2>
+        <p class="game-description">
+          Entre em partidas competitivas e teste suas habilidades.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/narrow-one.embed">
+      <div class="game-cover">
+        <img
+          src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/e9f87aed2de11520ecac587ffa98627d/narrow-one-logo.png"
+          alt="Narrow One"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Narrow One</h2>
+        <p class="game-description">
+          Partidas rápidas de arco e flecha em arenas multiplayer.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/krunker.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk7zhRekJ3JA5iGq1HS66l1Bx96MpDr9ZcjLrAQ9XzADS_c0zcS3Cifdg&s=10"
+          alt="Krunker"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Krunker</h2>
+        <p class="game-description">
+          Jogo de ação multiplayer com partidas rápidas.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://azgames.io/ragdoll-flip.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8Tga4CdMJjzVv39-KYXiyw40pPNhUDwZ1uXNz6Aim7w&s=10"
+          alt="Ragdoll Flip"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Ragdoll Flip</h2>
+        <p class="game-description">
+          Faça acrobacias e tente executar os melhores flips.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://rocketfortress.com/rocket-pult.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaDpNGaCB950Wh8gFXrpfgkmnJvEKWo9SvfChzryfAPKw6zZn54cPxeh4h&s=10"
+          alt="Rocket Pult"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Rocket Pult</h2>
+        <p class="game-description">
+          Lance objetos e tente alcançar as maiores distâncias.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://rocketfortress.com/gunspin.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3X823TmE8RyzMWcCzneMfXw5AGT9-mfzyqTXWntbvQ&s=10"
+          alt="GunSpin"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">GunSpin</h2>
+        <p class="game-description">
+          Use a física do jogo para avançar e superar os desafios.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://rocketfortress.com/zombie-strike.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0R_77nnbuwM4pPGar4DY31_r2TavY3J-JaFyP1KRhg&s"
+          alt="Zombie Strike"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Zombie Strike</h2>
+        <p class="game-description">
+          Enfrente desafios em um cenário de ação com zumbis.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://rocketfortress.com/counter-craft-sniper.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDvUh5mqMrRlofmGUsCKD3MPW6Yu4UDS91Vc8zILZvg&s"
+          alt="Counter Craft Sniper"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Counter Craft Sniper</h2>
+        <p class="game-description">
+          Jogo de ação em estilo bloco com desafios de precisão.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+    <div class="game-card" data-url="https://rocketfortress.com/aliens-hunter.embed">
+      <div class="game-cover">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXHt4Ycd6tt3-BRRUyTK7wu4rN7daKl9-8SYnV05vJVIaOwb6Ello3jtYB&s=10"
+          alt="Aliens Hunter"
+        >
+      </div>
+
+      <div class="game-info">
+        <h2 class="game-name">Aliens Hunter</h2>
+        <p class="game-description">
+          Enfrente criaturas alienígenas em diferentes desafios.
+        </p>
+        <div class="play-button">JOGAR</div>
+      </div>
+    </div>
+
+
+  </section>
+
+
+  <!-- =========================
+       CRÉDITOS
+  ========================= -->
+
+  <section class="credits">
+
+    <h2 class="credits-title">
+      Créditos
+    </h2>
+
+    <div class="credits-grid">
+
+      <div class="credit">
+        <p class="credit-game">Ragdoll Archers</p>
+        <p class="credit-author">Ericetto</p>
+      </div>
+
+      <div class="credit">
+        <p class="credit-game">Ragdoll Hit</p>
+        <p class="credit-author">Ericetto</p>
+      </div>
+
+      <div class="credit">
+        <p class="credit-game">BitLife</p>
+        <p class="credit-author">Candywriter</p>
+      </div>
+
+      <div class="credit">
+        <p class="credit-game">Level Devil</p>
+        <p class="credit-author">Unept</p>
       </div>
 
     </div>
-  </main>
+
+  </section>
+
+
+  <!-- =========================
+       COMENTÁRIOS
+  ========================= -->
+
+  <section
+    class="comments-section"
+    id="commentsSection"
+  >
+
+    <h2 class="comments-title">
+      Comentários
+    </h2>
+
+    <form
+      id="commentsForm"
+      class="comments-form"
+    >
+
+      <input
+        id="commentName"
+        type="text"
+        maxlength="30"
+        placeholder="Seu nome"
+        required
+      >
+
+      <textarea
+        id="commentText"
+        maxlength="500"
+        placeholder="Escreva um comentário..."
+        required
+      ></textarea>
+
+      <button type="submit">
+        ENVIAR COMENTÁRIO
+      </button>
+
+      <div
+        id="commentsStatus"
+        class="comments-status"
+      ></div>
+
+    </form>
+
+    <div
+      id="commentsList"
+      class="comments-list"
+    ></div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     PLAYER
+========================= -->
+
+<div id="gameOverlay">
+
+  <div id="gameTopbar">
+
+    <div id="gameTitle">
+      Jogo
+    </div>
+
+    <div id="gameButtons">
+
+      <button
+        type="button"
+        id="favoriteButton"
+      >
+        ☆ Favoritar
+      </button>
+
+      <button
+        type="button"
+        id="fullscreenButton"
+      >
+        ⛶ Tela cheia
+      </button>
+
+      <button
+        type="button"
+        id="closeGameButton"
+      >
+        ✕ Fechar
+      </button>
+
+    </div>
+
+  </div>
+
+  <div id="gameContainer">
+
+    <iframe
+      id="gameFrame"
+      title="Jogo"
+      allow="fullscreen; autoplay; gamepad; pointer-lock"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     FIREBASE / COMENTÁRIOS
+========================= -->
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInAnonymously
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyDptzzLZYWBlTQ1eoIJIQClFc2PKiDNRh0",
+
+  authDomain:
+    "caioba-games-comentarios.firebaseapp.com",
+
+  projectId:
+    "caioba-games-comentarios",
+
+  storageBucket:
+    "caioba-games-comentarios.firebasestorage.app",
+
+  messagingSenderId:
+    "340825138509",
+
+  appId:
+    "1:340825138509:web:2a8eb0c467897d64f2c304",
+
+  measurementId:
+    "G-ST621MWSDD"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+const commentsForm =
+  document.getElementById(
+    "commentsForm"
+  );
+
+const commentName =
+  document.getElementById(
+    "commentName"
+  );
+
+const commentText =
+  document.getElementById(
+    "commentText"
+  );
+
+const commentsList =
+  document.getElementById(
+    "commentsList"
+  );
+
+const commentsStatus =
+  document.getElementById(
+    "commentsStatus"
+  );
+
+
+function renderComments(snapshot) {
+
+  commentsList.innerHTML = "";
+
+  snapshot.forEach(function(docSnapshot) {
+
+    const data =
+      docSnapshot.data();
+
+    const article =
+      document.createElement(
+        "article"
+      );
+
+    article.className =
+      "comment";
+
+
+    const name =
+      document.createElement(
+        "h3"
+      );
+
+    name.className =
+      "comment-name";
+
+    name.textContent =
+      data.name || "Anônimo";
+
+
+    const text =
+      document.createElement(
+        "p"
+      );
+
+    text.className =
+      "comment-text";
+
+    text.textContent =
+      data.comment || "";
+
+
+    article.appendChild(name);
+
+    article.appendChild(text);
+
+    commentsList.appendChild(article);
+
+  });
+
+}
+
+
+async function startComments() {
+
+  try {
+
+    await signInAnonymously(auth);
+
+
+    const commentsQuery =
+      query(
+        collection(
+          db,
+          "comments"
+        ),
+        orderBy(
+          "createdAt",
+          "desc"
+        )
+      );
+
+
+    onSnapshot(
+      commentsQuery,
+
+      function(snapshot) {
+
+        renderComments(snapshot);
+
+      },
+
+      function(error) {
+
+        console.error(
+          "Erro ao carregar comentários:",
+          error
+        );
+
+        commentsStatus.textContent =
+          "Não foi possível carregar os comentários.";
+
+      }
+    );
+
+
+    commentsForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+          commentName.value.trim();
+
+        const comment =
+          commentText.value.trim();
+
+
+        if (!name || !comment) {
+          return;
+        }
+
+
+        commentsStatus.textContent =
+          "Enviando...";
+
+
+        try {
+
+          await addDoc(
+            collection(
+              db,
+              "comments"
+            ),
+            {
+              name: name,
+              comment: comment,
+              createdAt:
+                serverTimestamp()
+            }
+          );
+
+
+          commentsForm.reset();
+
+          commentsStatus.textContent =
+            "Comentário enviado!";
+
+        }
+
+        catch(error) {
+
+          console.error(
+            "Erro ao enviar comentário:",
+            error
+          );
+
+          commentsStatus.textContent =
+            "Não foi possível enviar o comentário.";
+
+        }
+
+      }
+    );
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "Erro ao iniciar comentários:",
+      error
+    );
+
+    commentsStatus.textContent =
+      "Não foi possível conectar aos comentários.";
+
+  }
+
+}
+
+
+startComments();
+
+</script>
+
+
+<!-- =========================
+     PLAYER / FAVORITOS
+========================= -->
+
+<script>
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+
+    const overlay =
+      document.getElementById(
+        "gameOverlay"
+      );
+
+
+    const frame =
+      document.getElementById(
+        "gameFrame"
+      );
+
+
+    const title =
+      document.getElementById(
+        "gameTitle"
+      );
+
+
+    const closeButton =
+      document.getElementById(
+        "closeGameButton"
+      );
+
+
+    const fullscreenButton =
+      document.getElementById(
+        "fullscreenButton"
+      );
+
+
+    const favoriteButton =
+      document.getElementById(
+        "favoriteButton"
+      );
+
+
+    let currentGame = null;
+
+
+    /* =========================
+       ABRIR JOGO
+    ========================= */
+
+    document
+      .querySelectorAll(
+        ".game-card"
+      )
+      .forEach(function(card) {
+
+
+        card.addEventListener(
+          "click",
+          function(event) {
+
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            const url =
+              card.getAttribute(
+                "data-url"
+              );
+
+
+            if (!url) {
+              return;
+            }
+
+
+            const nameElement =
+              card.querySelector(
+                ".game-name"
+              );
+
+
+            const name =
+              nameElement
+                ? nameElement
+                    .textContent
+                    .trim()
+                : "Jogo";
+
+
+            currentGame = {
+              url: url,
+              name: name
+            };
+
+
+            title.textContent =
+              name;
+
+
+            frame.src =
+              url;
+
+
+            overlay.classList.add(
+              "active"
+            );
+
+
+            document.body.style.overflow =
+              "hidden";
+
+
+            updateFavorite();
+
+          }
+        );
+
+      });
+
+
+    /* =========================
+       FECHAR
+    ========================= */
+
+    closeButton.addEventListener(
+      "click",
+      function() {
+
+
+        overlay.classList.remove(
+          "active"
+        );
+
+
+        frame.src =
+          "about:blank";
+
+
+        document.body.style.overflow =
+          "";
+
+      }
+    );
+
+
+    /* =========================
+       TELA CHEIA
+    ========================= */
+
+    fullscreenButton.addEventListener(
+      "click",
+      async function() {
+
+
+        try {
+
+
+          if (
+            !document.fullscreenElement
+          ) {
+
+            await overlay.requestFullscreen();
+
+          }
+
+          else {
+
+            await document.exitFullscreen();
+
+          }
+
+
+        }
+
+        catch(error) {
+
+          console.error(
+            "Erro na tela cheia:",
+            error
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       FAVORITOS
+    ========================= */
+
+    function updateFavorite() {
+
+
+      if (!currentGame) {
+        return;
+      }
+
+
+      const key =
+        "caiobagames-favorite-" +
+        currentGame.url;
+
+
+      const saved =
+        localStorage.getItem(
+          key
+        ) === "true";
+
+
+      favoriteButton.textContent =
+        saved
+          ? "★ Favoritado"
+          : "☆ Favoritar";
+
+    }
+
+
+    favoriteButton.addEventListener(
+      "click",
+      function() {
+
+
+        if (!currentGame) {
+          return;
+        }
+
+
+        const key =
+          "caiobagames-favorite-" +
+          currentGame.url;
+
+
+        const saved =
+          localStorage.getItem(
+            key
+          ) === "true";
+
+
+        localStorage.setItem(
+          key,
+          String(!saved)
+        );
+
+
+        updateFavorite();
+
+      }
+    );
+
+
+    /* =========================
+       ESC
+    ========================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+
+        if (
+          event.key === "Escape" &&
+          overlay.classList.contains(
+            "active"
+          )
+        ) {
+
+
+          if (
+            document.fullscreenElement
+          ) {
+
+            document.exitFullscreen();
+
+          }
+
+          else {
+
+            closeButton.click();
+
+          }
+
+        }
+
+      }
+    );
+
+  }
+);
+
+</script>
 
 </body>
 </html>
