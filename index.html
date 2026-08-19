@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes</title>
+  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #121214;
+      color: #e1e1e6;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #1a1a1e;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #29292e;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    header h1 {
+      font-size: 24px;
+      color: #00e676;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      width: 100%;
+      flex: 1;
+    }
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid #00e676;
+      padding-left: 10px;
+    }
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .game-card {
+      background-color: #202024;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid #29292e;
+      display: flex;
+      flex-direction: column;
+    }
+    .game-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 230, 118, 0.2);
+      border-color: #00e676;
+    }
+    .game-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      background-color: #121214;
+    }
+    .game-card h3 {
+      padding: 12px 15px;
+      font-size: 15px;
+      text-align: center;
+      color: #f0f0f5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Modal Player */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      z-index: 1000;
+      flex-direction: column;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-header {
+      background-color: #1a1a1e;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #29292e;
+    }
+    .modal-header h2 {
+      font-size: 18px;
+      color: #00e676;
+    }
+    .close-btn {
+      background: #e53935;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .close-btn:hover {
+      background: #c62828;
+    }
+    .iframe-container {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+    .iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Comments Section */
+    .comments-section {
+      background-color: #202024;
+      border-radius: 12px;
+      padding: 25px;
+      border: 1px solid #29292e;
+    }
+    .comment-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .comment-form input {
+      flex: 1;
+      background-color: #121214;
+      border: 1px solid #29292e;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+    .comment-form input:focus {
+      border-color: #00e676;
+    }
+    .comment-form button {
+      background-color: #00e676;
+      color: #121214;
+      font-weight: 700;
+      border: none;
+      padding: 0 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .comment-form button:hover {
+      opacity: 0.9;
+    }
+    .comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .comment-item {
+      background-color: #121214;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border-left: 3px solid #00e676;
+      font-size: 14px;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CAIOBAGAMES</h1>
+  </header>
+
+  <div class="container">
+    <h2 class="section-title">Jogos Disponíveis</h2>
+    <div class="games-grid">
+      <div class="game-card" data-game="https://azgames.io/escape-road.embed" data-title="Escape Road">
+        <img src="https://imgs.crazygames.com/escape-road-asm_16x9/20250724105031/escape-road-asm_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop" alt="Escape Road">
+        <h3>Escape Road</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/wacky-flip.embed" data-title="Wacky Flip">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6UK2b3FgT3MbfXqSy1f8FGJB-d4CoBAsrk2BGT20wRw&s" alt="Wacky Flip">
+        <h3>Wacky Flip</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/bike-xtreme.embed" data-title="Bike Xtreme">
+        <img src="https://play-lh.googleusercontent.com/ZNlK83c8zKcUHOzgwcjDLYi8QIIbsEkdUmSMODovNPIxi_PiUKpgvFunmSPrc_8hyGPtahlIXbG7lREdJqlJ" alt="Bike Xtreme">
+        <h3>Bike Xtreme</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/undead-corridor.embed" data-title="Undead Corridor">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqg5Un2gXFBAMXE2S8IcC0phmkxDSq8eiTroTTkfCzZmQMhurOVh09kvzD&s=10" alt="Undead Corridor">
+        <h3>Undead Corridor</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/orbit-kick.embed" data-title="Orbit Kick">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaTwUODsENC_R5VSXAIOteHI-K0DIW87BxeoLe6AoqvcdvP8Mt_DfG_6DK&s=10" alt="Orbit Kick">
+        <h3>Orbit Kick</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/cowboy-safari.embed" data-title="Cowboy Safari">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbXbkd7VXN5a2dF-Aj4cvLIYNnZ-vgUANhywWMa43Lafdjg5ppazjuNzy4&s=10" alt="Cowboy Safari">
+        <h3>Cowboy Safari</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/flip-spot.embed" data-title="Flip Spot">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJQxW7mERPlBtnL98zpqLamvjrk6ZmuPRtbNoSFbIaQ&s=10" alt="Flip Spot">
+        <h3>Flip Spot</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/moto-x3m.embed" data-title="Moto X3M">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ySfO2VfEstWERnPVtWxw7LDn-qICA3aU9WIOHw0SirAjTbpdiLmJlJJl&s=10" alt="Moto X3M">
+        <h3>Moto X3M</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/drift-rush.embed" data-title="Drift Rush">
+        <img src="https://wackysteps.io/data/image/Drift-Rush.png" alt="Drift Rush">
+        <h3>Drift Rush</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/basketball-stars.embed" data-title="Basketball Stars">
+        <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/9c5a5477b6fcc030def9eaeb017ac0e0/basketball-superstars-logo.png" alt="Basketball Stars">
+        <h3>Basketball Stars</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/dude-theft-auto.embed" data-title="Dude Theft Auto">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzeLp6WCXNjSrdJeLzACRdpgodLs-MzPUda66H4jiiXg&s=10" alt="Dude Theft Auto">
+        <h3>Dude Theft Auto</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/paper-io.embed" data-title="Paper.io">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKHXyjvcTI5HjVyC43RuESaH00YqrIdFn3Xxk_3sdCxg&s" alt="Paper.io">
+        <h3>Paper.io</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/ragdoll-hit-stickman.embed" data-title="Ragdoll Hit Stickman">
+        <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/3c892779be9dabb3589586c83ad3eeed/ragdoll-hit-logo.png" alt="Ragdoll Hit Stickman">
+        <h3>Ragdoll Hit Stickman</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/1v1lol.embed" data-title="1v1.LOL">
+        <img src="https://topgames.gg/data/image/game/1v1-lol.png" alt="1v1.LOL">
+        <h3>1v1.LOL</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/narrow-one.embed" data-title="Narrow One">
+        <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/e9f87aed2de11520ecac587ffa98627d/narrow-one-logo.png" alt="Narrow One">
+        <h3>Narrow One</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/krunker.embed" data-title="Krunker">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk7zhRekJ3JA5iGq1HS66l1Bx96MpDr9ZcjLrAQ9XzADS_c0zcS3Cifdg&s=10" alt="Krunker">
+        <h3>Krunker</h3>
+      </div>
+      <div class="game-card" data-game="https://azgames.io/ragdoll-flip.embed" data-title="Ragdoll Flip">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8Tga4CdMJjzVv39-KYXiyw40pPNhUDwZ1uXNz6Aim7w&s=10" alt="Ragdoll Flip">
+        <h3>Ragdoll Flip</h3>
+      </div>
+      <div class="game-card" data-game="https://rocketfortress.com/rocket-pult.embed" data-title="Rocket Pult">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaDpNGaCB950Wh8gFXrpfgkmnJvEKWo9SvfChzryfAPKw6zZn54cPxeh4h&s=10" alt="Rocket Pult">
+        <h3>Rocket Pult</h3>
+      </div>
+      <div class="game-card" data-game="https://rocketfortress.com/gunspin.embed" data-title="GunSpin">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3X823TmE8RyzMWcCzneMfXw5AGT9-mfzyqTXWntbvQ&s=10" alt="GunSpin">
+        <h3>GunSpin</h3>
+      </div>
+      <div class="game-card" data-game="https://rocketfortress.com/zombie-strike.embed" data-title="Zombie Strike">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0R_77nnbuwM4pPGar4DY31_r2TavY3J-JaFyP1KRhg&s" alt="Zombie Strike">
+        <h3>Zombie Strike</h3>
+      </div>
+      <div class="game-card" data-game="https://rocketfortress.com/counter-craft-sniper.embed" data-title="Counter Craft Sniper">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDvUh5mqMrRlofmGUsCKD3MPW6Yu4UDS91Vc8zILZvg&s" alt="Counter Craft Sniper">
+        <h3>Counter Craft Sniper</h3>
+      </div>
+      <div class="game-card" data-game="https://rocketfortress.com/aliens-hunter.embed" data-title="Aliens Hunter">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXHt4Ycd6tt3-BRRUyTK7wu4rN7daKl9-8SYnV05vJVIaOwb6Ello3jtYB&s=10" alt="Aliens Hunter">
+        <h3>Aliens Hunter</h3>
+      </div>
+    </div>
+
+    <h2 class="section-title">Comentários</h2>
+    <div class="comments-section">
+      <form class="comment-form" id="commentForm">
+        <input type="text" id="commentInput" placeholder="Escreva seu comentário..." required>
+        <button type="submit">Enviar</button>
+      </form>
+      <div class="comments-list" id="commentsList">
+        <!-- Comentários locais/dinâmicos -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Player Modal -->
+  <div class="modal" id="gameModal">
+    <div class="modal-header">
+      <h2 id="gameTitle">Jogo</h2>
+      <button class="close-btn" id="closeModal">Fechar</button>
+    </div>
+    <div class="iframe-container">
+      <iframe id="gameIframe" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Modal & Game Player Logic
+    const gameCards = document.querySelectorAll('.game-card');
+    const modal = document.getElementById('gameModal');
+    const gameIframe = document.getElementById('gameIframe');
+    const gameTitle = document.getElementById('gameTitle');
+    const closeModal = document.getElementById('closeModal');
+
+    gameCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const gameUrl = card.getAttribute('data-game');
+        const title = card.getAttribute('data-title');
+        
+        gameIframe.src = gameUrl;
+        gameTitle.textContent = title;
+        modal.classList.add('active');
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      gameIframe.src = '';
+    });
+
+    // Simple Local Comment System
+    const commentForm = document.getElementById('commentForm');
+    const commentInput = document.getElementById('commentInput');
+    const commentsList = document.getElementById('commentsList');
+
+    // Carregar comentários salvos no localStorage
+    const savedComments = JSON.parse(localStorage.getItem('caioba_comments') || '[]');
+    savedComments.forEach(text => addCommentToDOM(text));
+
+    commentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = commentInput.value.trim();
+      if (text) {
+        addCommentToDOM(text);
+        savedComments.push(text);
+        localStorage.setItem('caioba_comments', JSON.stringify(savedComments));
+        commentInput.value = '';
+      }
+    });
+
+    function addCommentToDOM(text) {
+      const div = document.createElement('div');
+      div.className = 'comment-item';
+      div.textContent = text;
+      commentsList.prepend(div);
+    }
+  </script>
+</body>
+</html>
