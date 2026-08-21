@@ -65,23 +65,18 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 .comment-name{font-weight:700;color:#fff;margin-bottom:6px}
 .comment-text{color:var(--muted);font-size:13px;line-height:1.5;white-space:pre-wrap}
 
-/* ===== OVERLAY DO JOGO ===== */
 #gameOverlay{display:none;position:fixed;inset:0;z-index:999999;background:#000;flex-direction:column}
 #gameOverlay.active{display:flex}
-
 #gameTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:rgba(5,5,8,.98);border-bottom:1px solid rgba(160,32,240,.5);flex-shrink:0;flex-wrap:wrap}
 #gameTitle{font-family:Orbitron,sans-serif;font-size:15px;font-weight:700;color:var(--primary-light)}
-
 #gameButtons{display:flex;gap:8px;flex-wrap:wrap}
 #gameButtons button{border:1px solid rgba(160,32,240,.6);border-radius:6px;padding:8px 12px;background:#17101e;color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700;transition:.2s}
 #gameButtons button:hover{background:var(--primary);color:#fff;border-color:var(--primary-light)}
 #gameButtons button.fav{color:#ffd700;border-color:#ffd700}
 #gameButtons button.fav:hover{background:#ffd700;color:#000}
-
 #gameContainer{flex:1;min-height:0;background:#000}
 #gameFrame{width:100%;height:100%;border:0;background:#000}
 
-/* ===== MODAL DE CONTA ===== */
 .account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:20px}
 .account-modal.active{display:flex}
 .account-box{width:min(420px,100%);padding:24px;background:#0d0912;border:1px solid rgba(160,32,240,.45);border-radius:12px;box-shadow:0 0 35px rgba(160,32,240,.18)}
@@ -140,7 +135,6 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 </section>
 </main>
 
-<!-- ===== MODAL DE CONTA ===== -->
 <div id="accountModal" class="account-modal">
 <div class="account-box">
 <h2 id="accountTitle">Entrar</h2>
@@ -166,7 +160,6 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 </div>
 </div>
 
-<!-- ===== OVERLAY DO JOGO ===== -->
 <div id="gameOverlay">
 <div id="gameTopbar">
 <div id="gameTitle">Jogo</div>
@@ -213,41 +206,30 @@ const games = [
 // ==================== RENDERIZAR JOGOS ====================
 const grid = document.getElementById('gamesGrid');
 
-games.forEach((g) => {
+games.forEach(function(g) {
   const card = document.createElement('div');
   card.className = 'game-card';
   card.dataset.name = g[0];
   card.dataset.url = g[1];
-  card.innerHTML = `
-    <div class="game-cover"><img src="${g[2]}" alt="${g[0]}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22314%22 height=%22314%22%3E%3Crect fill=%22%23100b1c%22 width=%22314%22 height=%22314%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23a020f0%22 font-size=%2240%22 font-family=%22sans-serif%22%3E🎮%3C/text%3E%3C/svg%3E'"></div>
-    <div class="game-info">
-      <h2 class="game-name">${g[0]}</h2>
-      <p class="game-desc">${g[3]}</p>
-      <div class="game-stats"><span>🏆 0 pts</span><span class="record">⭐ 0</span></div>
-      <div class="play-btn">JOGAR</div>
-    </div>
-    <div class="fav-indicator">☆</div>
-  `;
+  card.innerHTML = '<div class="game-cover"><img src="' + g[2] + '" alt="' + g[0] + '" loading="lazy" onerror="this.src=\'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22314%22 height=%22314%22%3E%3Crect fill=%22%23100b1c%22 width=%22314%22 height=%22314%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23a020f0%22 font-size=%2240%22 font-family=%22sans-serif%22%3E🎮%3C/text%3E%3C/svg%3E\'"></div><div class="game-info"><h2 class="game-name">' + g[0] + '</h2><p class="game-desc">' + g[3] + '</p><div class="game-stats"><span>🏆 0 pts</span><span class="record">⭐ 0</span></div><div class="play-btn">JOGAR</div></div><div class="fav-indicator">☆</div>';
   grid.appendChild(card);
 });
 
-console.log(`✅ ${games.length} jogos carregados!`);
+console.log('✅ ' + games.length + ' jogos carregados!');
 
 // ==================== ELEMENTOS DOM ====================
-const overlay = document.getElementById('gameOverlay');
-const gameFrame = document.getElementById('gameFrame');
-const gameTitle = document.getElementById('gameTitle');
-const favBtn = document.getElementById('favBtn');
-const closeBtn = document.getElementById('closeGameBtn');
-const fullscreenBtn = document.getElementById('fullscreenBtn');
+var overlay = document.getElementById('gameOverlay');
+var gameFrame = document.getElementById('gameFrame');
+var gameTitle = document.getElementById('gameTitle');
+var favBtn = document.getElementById('favBtn');
+var closeBtn = document.getElementById('closeGameBtn');
+var fullscreenBtn = document.getElementById('fullscreenBtn');
+var accountBtn = document.getElementById('accountBtn');
+var accountModal = document.getElementById('accountModal');
+var accountClose = document.getElementById('accountClose');
+var accountLoggedClose = document.getElementById('accountLoggedClose');
 
-// ===== ELEMENTOS DO MODAL DE CONTA =====
-const accountBtn = document.getElementById('accountBtn');
-const accountModal = document.getElementById('accountModal');
-const accountClose = document.getElementById('accountClose');
-const accountLoggedClose = document.getElementById('accountLoggedClose');
-
-let currentGameName = '';
+var currentGameName = '';
 
 // ==================== ABRIR JOGO ====================
 function openGame(name, url) {
@@ -255,8 +237,6 @@ function openGame(name, url) {
   gameTitle.textContent = name;
   gameFrame.src = url;
   overlay.classList.add('active');
-  
-  // Atualizar botão de favorito
   favBtn.textContent = '☆ Favoritar';
   favBtn.classList.remove('fav');
 }
@@ -268,63 +248,55 @@ function closeGame() {
 }
 
 // ==================== EVENTO DE CLIQUE NOS CARDS ====================
-document.querySelectorAll('.game-card').forEach(card => {
+document.querySelectorAll('.game-card').forEach(function(card) {
   card.addEventListener('click', function() {
-    const name = this.dataset.name;
-    const url = this.dataset.url;
+    var name = this.dataset.name;
+    var url = this.dataset.url;
     console.log('🎮 Abrindo:', name);
     openGame(name, url);
   });
 });
 
-// ==================== BOTÃO FECHAR DO JOGO ====================
+// ==================== BOTÃO FECHAR ====================
 closeBtn.addEventListener('click', closeGame);
 
-// ==================== TECLA ESC ====================
+// ==================== ESC ====================
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
-    if (overlay.classList.contains('active')) {
-      closeGame();
-    }
-    if (accountModal.classList.contains('active')) {
-      closeAccountModal();
-    }
+    if (overlay.classList.contains('active')) closeGame();
+    if (accountModal.classList.contains('active')) closeAccountModal();
   }
 });
 
 // ==================== TELA CHEIA ====================
 fullscreenBtn.addEventListener('click', function() {
-  const container = document.getElementById('gameContainer');
-  if (container.requestFullscreen) {
-    container.requestFullscreen();
-  } else if (container.webkitRequestFullscreen) {
-    container.webkitRequestFullscreen();
-  } else if (container.msRequestFullscreen) {
-    container.msRequestFullscreen();
-  }
+  var container = document.getElementById('gameContainer');
+  if (container.requestFullscreen) container.requestFullscreen();
+  else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+  else if (container.msRequestFullscreen) container.msRequestFullscreen();
 });
 
 // ==================== FAVORITAR ====================
 favBtn.addEventListener('click', function() {
-  if (this.textContent.includes('☆')) {
+  if (this.textContent.indexOf('☆') !== -1) {
     this.textContent = '★ Favoritado';
     this.classList.add('fav');
-    alert(`⭐ "${currentGameName}" favoritado!`);
+    alert('⭐ "' + currentGameName + '" favoritado!');
   } else {
     this.textContent = '☆ Favoritar';
     this.classList.remove('fav');
-    alert(`⭐ "${currentGameName}" removido dos favoritos!`);
+    alert('⭐ "' + currentGameName + '" removido dos favoritos!');
   }
 });
 
-// ==================== ABRIR MODAL DE CONTA ====================
+// ==================== ABRIR MODAL ====================
 accountBtn.addEventListener('click', function() {
-  console.log('🔑 Abrindo modal de conta');
+  console.log('🔑 Abrindo modal');
   accountModal.classList.add('active');
   document.getElementById('accountStatus').textContent = '';
 });
 
-// ==================== FECHAR MODAL DE CONTA ====================
+// ==================== FECHAR MODAL ====================
 function closeAccountModal() {
   accountModal.classList.remove('active');
 }
@@ -332,25 +304,20 @@ function closeAccountModal() {
 accountClose.addEventListener('click', closeAccountModal);
 accountLoggedClose.addEventListener('click', closeAccountModal);
 
-// ==================== CLICAR FORA DO MODAL FECHA ====================
 accountModal.addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeAccountModal();
-  }
+  if (e.target === this) closeAccountModal();
 });
 
-// ==================== LOGIN SIMULADO ====================
+// ==================== LOGIN ====================
 document.getElementById('accountForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const email = document.getElementById('accountEmail').value;
-  const password = document.getElementById('accountPassword').value;
-  const status = document.getElementById('accountStatus');
+  var email = document.getElementById('accountEmail').value;
+  var password = document.getElementById('accountPassword').value;
+  var status = document.getElementById('accountStatus');
   
   if (email && password.length >= 6) {
-    status.textContent = '✅ Login realizado com sucesso!';
+    status.textContent = '✅ Login realizado!';
     status.style.color = '#00ff88';
-    
-    // Mostrar tela de logado
     document.querySelector('.account-form').style.display = 'none';
     document.querySelector('.account-subtitle').style.display = 'none';
     document.getElementById('accountLogged').style.display = 'block';
@@ -359,16 +326,16 @@ document.getElementById('accountForm').addEventListener('submit', function(e) {
     accountBtn.textContent = email.split('@')[0];
     accountBtn.style.color = '#00ff88';
   } else {
-    status.textContent = '❌ Preencha email e senha (mínimo 6 caracteres)';
+    status.textContent = '❌ Preencha email e senha (mínimo 6)';
     status.style.color = '#ff4444';
   }
 });
 
-// ==================== BOTÃO CRIAR CONTA ====================
+// ==================== CRIAR CONTA ====================
 document.getElementById('accountToggle').addEventListener('click', function() {
-  const status = document.getElementById('accountStatus');
-  const submitBtn = document.getElementById('accountSubmit');
-  const title = document.getElementById('accountTitle');
+  var status = document.getElementById('accountStatus');
+  var submitBtn = document.getElementById('accountSubmit');
+  var title = document.getElementById('accountTitle');
   
   if (this.textContent === 'CRIAR CONTA') {
     this.textContent = 'VOLTAR PARA ENTRAR';
@@ -384,16 +351,15 @@ document.getElementById('accountToggle').addEventListener('click', function() {
   }
 });
 
-// ==================== BOTÃO ESQUECI A SENHA ====================
+// ==================== ESQUECI SENHA ====================
 document.getElementById('accountReset').addEventListener('click', function() {
-  const status = document.getElementById('accountStatus');
-  status.textContent = '📧 Enviamos um link de recuperação para seu e-mail.';
+  var status = document.getElementById('accountStatus');
+  status.textContent = '📧 Link de recuperação enviado!';
   status.style.color = '#ffd700';
 });
 
-// ==================== BOTÃO SAIR ====================
+// ==================== SAIR ====================
 document.getElementById('logoutBtn').addEventListener('click', function() {
-  // Resetar UI
   document.querySelector('.account-form').style.display = 'grid';
   document.querySelector('.account-subtitle').style.display = 'block';
   document.getElementById('accountLogged').style.display = 'none';
@@ -402,17 +368,23 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
   document.getElementById('accountToggle').textContent = 'CRIAR CONTA';
   document.getElementById('accountEmail').value = '';
   document.getElementById('accountPassword').value = '';
-  document.getElementById('accountStatus').textContent = '👋 Desconectado com sucesso!';
+  document.getElementById('accountStatus').textContent = '👋 Desconectado!';
   document.getElementById('accountStatus').style.color = '#ffd700';
   accountBtn.textContent = 'ENTRAR';
   accountBtn.style.color = 'var(--primary-light)';
-  
-  setTimeout(() => {
-    closeAccountModal();
-  }, 1500);
+  setTimeout(function() { closeAccountModal(); }, 1500);
 });
 
 // ==================== PESQUISA ====================
 document.getElementById('searchInput').addEventListener('input', function() {
-  const term = this.value.toLowerCase();
-  document.querySelectorAll
+  var term = this.value.toLowerCase();
+  document.querySelectorAll('.game-card').forEach(function(card) {
+    var name = card.dataset.name.toLowerCase();
+    card.classList.toggle('hidden', name.indexOf(term) === -1);
+  });
+});
+
+console.log('✅ Site pronto! Clique em "JOGAR" para abrir.');
+</script>
+</body>
+</html>
