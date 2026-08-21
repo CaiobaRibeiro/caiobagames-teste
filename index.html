@@ -1,102 +1,1830 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Início - Sala de Aula</title>
-<link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--background:#050506;--card:#100b1c;--foreground:#f4f0f7;--muted:#aaa0b3;--primary:#a020f0;--primary-light:#c45cff;--border:rgba(160,32,240,.25)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -20%,rgba(160,32,240,.16),transparent 45%),var(--background);color:var(--foreground);font-family:Inter,sans-serif}body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:50px 50px}
-header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 32px;background:rgba(5,5,8,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(160,32,240,.2);z-index:100}.logo{color:var(--primary-light);font-family:Orbitron,sans-serif;font-size:20px;font-weight:700;letter-spacing:.12em;text-shadow:0 0 5px var(--primary),0 0 10px var(--primary),0 0 20px var(--primary-light);white-space:nowrap}.header-actions{display:flex;align-items:center;gap:10px}.search-box{position:relative;display:flex;align-items:center}.search-icon{position:absolute;left:11px;color:var(--primary-light);pointer-events:none;font-size:18px}#searchInput{width:220px;height:38px;padding:0 12px 0 34px;border:1px solid var(--border);border-radius:8px;outline:0;background:rgba(16,11,28,.9);color:#fff;font-family:Inter,sans-serif}#searchInput:focus{border-color:var(--primary-light);box-shadow:0 0 12px rgba(160,32,240,.15)}
-main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;position:relative;z-index:2}.page-title{margin:0 0 20px;font-family:Orbitron,sans-serif;font-size:28px}.comments-tab{display:inline-flex;align-items:center;gap:8px;margin:0 0 24px;padding:10px 16px;width:fit-content;text-decoration:none;color:var(--primary-light);background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px;font-family:Orbitron,sans-serif;font-size:12px;font-weight:700}.comments-tab:hover{border-color:rgba(196,92,255,.7);background:rgba(160,32,240,.15)}
-.games-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;align-items:stretch}.game-card{cursor:pointer;display:flex;flex-direction:column;width:100%;min-width:0;height:100%;overflow:hidden;color:var(--foreground);text-decoration:none;background:rgba(16,11,28,.9);border:1px solid var(--border);border-radius:10px;transition:transform .2s,border-color .2s,box-shadow .2s}.game-card:hover{transform:translateY(-4px);border-color:rgba(196,92,255,.7);box-shadow:0 0 20px rgba(160,32,240,.18)}.game-card.hidden{display:none}.game-cover{width:100%;height:180px;flex-shrink:0;overflow:hidden;background:#0b080f}.game-cover img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .3s}.game-card:hover .game-cover img{transform:scale(1.04)}.game-info{display:flex;flex-direction:column;flex:1;padding:14px}.game-name{margin:0 0 7px;font-family:Orbitron,sans-serif;font-size:15px;line-height:1.25;color:#fff}.game-description{margin:0;flex:1;color:var(--muted);font-size:12px;line-height:1.4}.play-button{margin-top:12px;padding:9px;text-align:center;border-radius:6px;background:rgba(160,32,240,.15);border:1px solid rgba(160,32,240,.4);color:var(--primary-light);font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}.game-card:hover .play-button{background:var(--primary);color:#fff}.no-results{display:none;margin-top:20px;padding:18px;color:var(--muted);text-align:center;border:1px solid var(--border);border-radius:8px;background:rgba(16,11,28,.7)}
-.credits,.comments-section{margin-top:55px;padding-top:28px;border-top:1px solid rgba(160,32,240,.2)}.credits-title,.comments-title{margin:0 0 18px;font-family:Orbitron,sans-serif;font-size:20px}.credits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.credit{padding:14px;background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px}.credit-game{margin:0 0 5px;font-weight:600}.credit-author{margin:0;color:var(--muted);font-size:13px}
-.comments-form{display:grid;gap:10px;margin-bottom:24px}.comments-form input,.comments-form textarea{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:7px;outline:0;background:rgba(16,11,28,.9);color:#fff;font-family:Inter,sans-serif}.comments-form textarea{min-height:100px;resize:vertical}.comments-form input:focus,.comments-form textarea:focus{border-color:var(--primary-light);box-shadow:0 0 12px rgba(160,32,240,.12)}.comments-form button{width:fit-content;padding:10px 16px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}.comments-form button:hover{background:var(--primary);color:#fff}.comments-status{min-height:18px;color:var(--muted);font-size:12px}.comments-list{display:grid;gap:12px}.comment{padding:14px;background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px}.comment-name{margin:0 0 6px;font-weight:700;color:#fff}.comment-text{margin:0;color:var(--muted);font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-#gameOverlay{display:none;position:fixed;inset:0;z-index:999999;background:#000}#gameOverlay.active{display:flex;flex-direction:column}#gameTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:rgba(5,5,8,.98);border-bottom:1px solid rgba(160,32,240,.5);color:#fff;flex-shrink:0}#gameTitle{font-family:Orbitron,sans-serif;font-size:15px;font-weight:700;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#gameButtons{display:flex;gap:8px;flex-shrink:0}#gameButtons button{border:1px solid rgba(160,32,240,.6);border-radius:6px;padding:8px 12px;background:#17101e;color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}#gameButtons button:hover{background:var(--primary);color:#fff;border-color:var(--primary-light)}#gameContainer{position:relative;flex:1;min-height:0;background:#000}#gameFrame{width:100%;height:100%;display:block;border:0;background:#000}#gameFrame:fullscreen{width:100vw;height:100vh;background:#000}
-@media(max-width:1100px){.games-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:850px){.games-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#searchInput{width:170px}}@media(max-width:700px){header{padding:0 16px}.games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.game-cover{height:160px}main{width:calc(100% - 20px)}.logo{font-size:16px}#searchInput{width:150px}}@media(max-width:500px){main{padding-top:88px}.game-cover{height:145px}.game-name{font-size:13px}.game-description{font-size:11px}#gameTopbar{flex-wrap:wrap}#gameButtons{width:100%;justify-content:flex-end}#searchInput{width:min(160px,45vw)}}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Início - Sala de Aula</title>
 
-.account-button{height:38px;padding:0 13px;border:1px solid rgba(160,32,240,.6);border-radius:8px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;white-space:nowrap}.account-button:hover{background:var(--primary);color:#fff}.account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.78);align-items:center;justify-content:center;padding:20px}.account-modal.active{display:flex}.account-box{width:min(420px,100%);padding:24px;background:#0d0912;border:1px solid rgba(160,32,240,.45);border-radius:12px;box-shadow:0 0 35px rgba(160,32,240,.18)}.account-box h2{margin:0 0 6px;font-family:Orbitron,sans-serif;color:var(--primary-light);font-size:20px}.account-subtitle{margin:0 0 18px;color:var(--muted);font-size:12px}.account-form{display:grid;gap:10px}.account-form input{width:100%;padding:12px;border:1px solid var(--border);border-radius:7px;background:#100b1c;color:#fff;outline:0}.account-form input:focus{border-color:var(--primary-light)}.account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}.account-actions button{padding:10px 13px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700}.account-actions button:hover{background:var(--primary);color:#fff}.account-close{margin-left:auto}.account-status{min-height:18px;color:var(--muted);font-size:12px}.account-user{display:none;align-items:center;gap:8px;color:var(--muted);font-size:11px}.account-user strong{color:#fff}.progress-note{margin-top:14px;padding:10px;border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:11px;line-height:1.45}
-</style>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.gstatic.com/classroom/ic_product_classroom_32.png">
+  <link rel="shortcut icon" type="image/png" href="https://www.gstatic.com/classroom/ic_product_classroom_32.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #07060b;
+      --card: #100b1c;
+      --foreground: #f3eaff;
+      --primary: #a020f0;
+      --primary-light: #bf5fff;
+      --muted: #b58ad2;
+      --border: rgba(160, 32, 240, 0.32);
+      --scanline: rgba(160, 32, 240, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--foreground);
+      background-color: var(--background);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+
+      background-image:
+        linear-gradient(
+          0deg,
+          transparent 24%,
+          var(--scanline) 25%,
+          var(--scanline) 26%,
+          transparent 27%,
+          transparent 74%,
+          var(--scanline) 75%,
+          var(--scanline) 76%,
+          transparent 77%,
+          transparent
+        ),
+        linear-gradient(
+          90deg,
+          transparent 24%,
+          var(--scanline) 25%,
+          var(--scanline) 26%,
+          transparent 27%,
+          transparent 74%,
+          var(--scanline) 75%,
+          var(--scanline) 76%,
+          transparent 77%,
+          transparent
+        );
+
+      background-size: 50px 50px;
+    }
+
+    body::after {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      opacity: 0.25;
+      background:
+        linear-gradient(
+          rgba(18, 16, 16, 0) 50%,
+          rgba(0, 0, 0, 0.25) 50%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 0, 0, 0.06),
+          rgba(0, 255, 0, 0.02),
+          rgba(0, 0, 255, 0.06)
+        );
+      background-size: 100% 2px, 3px 100%;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      background: rgba(5, 5, 8, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(160, 32, 240, 0.2);
+    }
+
+    .logo {
+      color: var(--primary-light);
+      font-family: "Orbitron", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-shadow:
+        0 0 5px var(--primary),
+        0 0 10px var(--primary),
+        0 0 20px var(--primary-light);
+      transition: opacity 0.2s ease;
+    }
+
+    .logo:hover {
+      opacity: 0.75;
+    }
+
+    main {
+      width: min(1152px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 96px 0 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .game-card {
+      display: flex;
+      flex-direction: column;
+      height: 300px;
+      overflow: hidden;
+      color: var(--foreground);
+      text-decoration: none;
+      background: rgba(16, 11, 28, 0.82);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+      animation: appear 0.5s ease both;
+    }
+
+    .game-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .game-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .game-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .game-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .game-card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+
+    .game-card:nth-child(6) { animation-delay: 0.6s; }
+    .game-card:nth-child(7) { animation-delay: 0.7s; }
+    .game-card:nth-child(8) { animation-delay: 0.8s; }
+    .game-card:nth-child(9) { animation-delay: 0.9s; }
+    .game-card:nth-child(10) { animation-delay: 1.0s; }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(160, 32, 240, 0.75);
+      box-shadow: 0 0 20px rgba(160, 32, 240, 0.35);
+    }
+
+    .game-cover {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      flex: 0 0 150px;
+      overflow: hidden;
+      background: #0a0a0f;
+    }
+
+    .game-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(16, 11, 28, 1),
+        rgba(16, 11, 28, 0) 65%
+      );
+    }
+
+    .game-cover img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .game-card:hover .game-cover img {
+      transform: scale(1.03);
+    }
+
+    .game-info {
+      padding: 12px;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-name {
+      margin: 0 0 6px;
+      color: var(--foreground);
+      font-family: "Orbitron", sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    .game-card:hover .game-name {
+      color: var(--primary-light);
+      text-shadow:
+        0 0 5px var(--primary),
+        0 0 10px var(--primary);
+    }
+
+    .game-description {
+      min-height: 38px;
+      margin: 0;
+      flex: 1;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .play-button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      color: var(--primary-light);
+      background: rgba(160, 32, 240, 0.2);
+      border: 1px solid rgba(160, 32, 240, 0.45);
+      border-radius: 5px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-align: center;
+      transition:
+        background 0.25s ease,
+        color 0.25s ease;
+    }
+
+    .game-card:hover .play-button {
+      color: white;
+      background: var(--primary);
+    }
+
+    .credits {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(160, 32, 240, 0.2);
+    }
+
+    .credits-title {
+      margin: 0 0 32px;
+      color: var(--muted);
+      font-family: "Orbitron", sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .credits-grid {
+      width: min(768px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .credit {
+      padding: 16px 12px;
+      text-align: center;
+      background: rgba(16, 11, 28, 0.4);
+      border: 1px solid rgba(160, 32, 240, 0.1);
+      border-radius: 8px;
+      transition: border-color 0.25s ease;
+    }
+
+    .credit:hover {
+      border-color: rgba(160, 32, 240, 0.35);
+    }
+
+    .credit-game {
+      margin: 0 0 6px;
+      color: rgba(191, 95, 255, 0.85);
+      font-family: "Orbitron", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .credit-author {
+      margin: 0;
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 12px;
+    }
+@keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .games-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .credits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 0 16px;
+      }
+
+      main {
+        width: min(100% - 24px, 420px);
+        padding-top: 88px;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .credits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+    }
+  
+    .game-player-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      background: #050506;
+    }
+
+    .game-player-overlay.active {
+      display: flex;
+    }
+
+    .game-player-bar {
+      height: 60px;
+      flex: 0 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 16px;
+      background: rgba(5, 5, 8, 0.98);
+      border-bottom: 1px solid rgba(160, 32, 240, 0.45);
+    }
+
+    .game-player-title {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Orbitron", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+
+    .game-player-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .game-player-button {
+      border: 1px solid rgba(160, 32, 240, 0.55);
+      border-radius: 6px;
+      padding: 9px 12px;
+      background: rgba(160, 32, 240, 0.12);
+      color: var(--primary-light);
+      cursor: pointer;
+      font-family: "Orbitron", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .game-player-button:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .game-player-frame-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      background: #000;
+    }
+
+    #gameFrame {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+      background: #000;
+    }
+
+    .game-player-loading {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 560px) {
+      .game-player-bar {
+        height: 56px;
+        flex-basis: 56px;
+        padding: 0 10px;
+      }
+
+      .game-player-button {
+        padding: 8px 9px;
+        font-size: 10px;
+      }
+    }
+
+
+
+    /* =========================
+       CONTAS / LOGIN
+       ========================= */
+    .header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+    .account-button{height:38px;padding:0 14px;border:1px solid rgba(160,32,240,.65);border-radius:8px;background:rgba(160,32,240,.15);color:#d88cff;cursor:pointer;font-family:Inter,sans-serif;font-size:11px;font-weight:700;white-space:nowrap;transition:.2s}
+    .account-button:hover{background:#a020f0;color:#fff}
+    .account-modal{display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.82);align-items:center;justify-content:center;padding:18px}
+    .account-modal.active{display:flex}
+    .account-box{width:min(430px,100%);background:#0d0912;border:1px solid rgba(160,32,240,.5);border-radius:14px;padding:24px;box-shadow:0 0 40px rgba(160,32,240,.22)}
+    .account-box h2{margin:0 0 7px;color:#d88cff;font-size:21px}
+    .account-subtitle{margin:0 0 18px;color:#aaa0b3;font-size:12px;line-height:1.45}
+    .account-form{display:grid;gap:10px}
+    .account-form input{width:100%;padding:12px;border:1px solid rgba(160,32,240,.3);border-radius:8px;background:#100b1c;color:#fff;outline:0;font:inherit}
+    .account-form input:focus{border-color:#d88cff;box-shadow:0 0 12px rgba(160,32,240,.12)}
+    .account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:3px}
+    .account-actions button{padding:10px 13px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:#d88cff;cursor:pointer;font:700 10px Inter,sans-serif}
+    .account-actions button:hover{background:#a020f0;color:#fff}
+    .account-status{min-height:20px;margin-top:10px;color:#aaa0b3;font-size:12px;line-height:1.4}
+    .account-user-panel{display:none}
+    .account-user-panel strong{display:block;color:#fff;font-size:14px;margin-bottom:5px;overflow-wrap:anywhere}
+    .account-user-panel span{display:block;color:#aaa0b3;font-size:12px}
+    .account-close{margin-left:auto}
+    @media(max-width:650px){
+      header{gap:8px;padding-left:14px;padding-right:14px}
+      .header-actions{gap:6px}
+      .account-button{padding:0 10px;font-size:10px}
+    }
+    @media(max-width:420px){
+      .logo{font-size:15px}
+      .account-button{height:36px;padding:0 8px}
+    }
+
+  </style>
 </head>
-<body>
-<header><div class="logo">CAIOBAGAMES</div><div class="header-actions"><div class="search-box"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Pesquisar jogos..." autocomplete="off"></div><button id="accountButton" class="account-button" type="button">ENTRAR</button></div></header>
-<main>
-<h1 class="page-title">Jogos</h1>
-<a class="comments-tab" href="#commentsSection">Aba de comentarios</a>
-<section class="games-grid" id="gamesGrid"></section>
-<div id="noResults" class="no-results">Nenhum jogo encontrado.</div>
-<section class="credits"><h2 class="credits-title">Créditos</h2><div class="credits-grid"><div class="credit"><p class="credit-game">Jogos</p><p class="credit-author">CaiobaGames</p></div><div class="credit"><p class="credit-game">Jogos incorporados</p><p class="credit-author">Serviços e desenvolvedores originais</p></div></div></section>
-<section class="comments-section" id="commentsSection"><h2 class="comments-title">Comentários</h2><form id="commentsForm" class="comments-form"><input id="commentName" type="text" maxlength="30" placeholder="Seu nome" required><textarea id="commentText" maxlength="500" placeholder="Escreva um comentário..." required></textarea><button type="submit">ENVIAR COMENTÁRIO</button><div id="commentsStatus" class="comments-status"></div></form><div id="commentsList" class="comments-list"></div></section>
-</main>
 
-<div id="accountModal" class="account-modal"><div class="account-box"><h2 id="accountTitle">Entrar</h2><p class="account-subtitle">Entre ou crie sua conta para salvar seu progresso na nuvem.</p><form id="accountForm" class="account-form"><input id="accountEmail" type="email" autocomplete="email" placeholder="E-mail" required><input id="accountPassword" type="password" autocomplete="current-password" placeholder="Senha (mínimo de 6 caracteres)" minlength="6" required><div class="account-actions"><button type="submit" id="accountSubmit">ENTRAR</button><button type="button" id="accountToggle">CRIAR CONTA</button><button type="button" id="accountReset">ESQUECI A SENHA</button><button type="button" id="accountClose" class="account-close">FECHAR</button></div><div id="accountStatus" class="account-status"></div></form><div id="accountLogged" style="display:none"><p class="account-subtitle">Conectado como <strong id="accountEmailLabel"></strong></p><div class="account-actions"><button type="button" id="logoutButton">SAIR</button><button type="button" id="accountLoggedClose">FECHAR</button></div><div class="progress-note">A conta já está preparada para identificar o usuário pelo UID e salvar progresso no Firestore. O progresso dos jogos em si será ligado na próxima etapa.</div></div></div></div>
-<div id="gameOverlay"><div id="gameTopbar"><div id="gameTitle">Jogo</div><div id="gameButtons"><button type="button" id="favoriteButton">☆ Favoritar</button><button type="button" id="fullscreenButton">⛶ Tela cheia</button><button type="button" id="closeGameButton">✕ Fechar</button></div></div><div id="gameContainer"><iframe id="gameFrame" title="Jogo" allow="fullscreen; autoplay; gamepad; pointer-lock" allowfullscreen></iframe></div></div>
-<script>
-const games=[
-['Escape Road','https://azgames.io/escape-road.embed','https://imgs.crazygames.com/escape-road-asm_16x9/20250724105031/escape-road-asm_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop','Fuja pela cidade, desvie dos obstáculos e tente chegar o mais longe possível.'],
-['Wacky Flip','https://azgames.io/wacky-flip.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6UK2b3FgT3MbfXqSy1f8FGJB-d4CoBAsrk2BGT20wRw&s','Faça acrobacias e tente acertar os movimentos no momento certo.'],
-['Bike Xtreme','https://azgames.io/bike-xtreme.embed','https://play-lh.googleusercontent.com/ZNlK83c8zKcUHOzgwcjDLYi8QIIbsEkdUmSMODovNPIxi_PiUKpgvFunmSPrc_8hyGPtahlIXbG7lREdJqlJ','Supere pistas radicais usando sua moto e mantenha o equilíbrio.'],
-['Undead Corridor','https://azgames.io/undead-corridor.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqg5Un2gXFBAMXE2S8IcC0phmkxDSq8eiTroTTkfCzZmQMhurOVh09kvzD&s=10','Atravesse corredores cheios de desafios e tente sobreviver às fases.'],
-['Orbit Kick','https://azgames.io/orbit-kick.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaTwUODsENC_R5VSXAIOteHI-K0DIW87BxeoLe6AoqvcdvP8Mt_DfG_6DK&s=10','Chute a bola e tente marcar gols usando ângulos e força.'],
-['Cowboy Safari','https://azgames.io/cowboy-safari.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbXbkd7VXN5a2dF-Aj4cvLIYNnZ-vgUANhywWMa43Lafdjg5ppazjuNzy4&s=10','Explore uma aventura no estilo faroeste e supere os desafios do caminho.'],
-['Flip Spot','https://azgames.io/flip-spot.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJQxW7mERPlBtnL98zpqLamvjrk6ZmuPRtbNoSFbIaQ&s=10','Realize flips e tente completar os movimentos sem perder o controle.'],
-['Moto X3M','https://azgames.io/moto-x3m.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ySfO2VfEstWERnPVtWxw7LDn-qICA3aU9WIOHw0SirAjTbpdiLmJlJJl&s=10','Passe por pistas cheias de obstáculos, saltos e desafios radicais.'],
-['Drift Rush','https://azgames.io/drift-rush.embed','https://wackysteps.io/data/image/Drift-Rush.png','Faça curvas em alta velocidade e domine os drifts na pista.'],
-['Basketball Stars','https://azgames.io/basketball-stars.embed','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/9c5a5477b6fcc030def9eaeb017ac0e0/basketball-superstars-logo.png','Entre em quadra e tente marcar mais pontos que seus adversários.'],
-['Dude Theft Auto','https://azgames.io/dude-theft-auto.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzeLp6WCXNjSrdJeLzACRdpgodLs-MzPUda66H4jiiXg&s=10','Explore um mundo aberto em uma aventura cheia de situações malucas.'],
-['Paper.io','https://azgames.io/paper-io.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKHXyjvcTI5HjVyC43RuESaH00YqrIdFn3Xxk_3sdCxg&s','Conquiste território, aumente sua área e evite deixar seu rastro exposto.'],
-['Ragdoll Hit Stickman','https://azgames.io/ragdoll-hit-stickman.embed','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/3c892779be9dabb3589586c83ad3eeed/ragdoll-hit-logo.png','Use a física dos bonecos para superar os desafios das fases.'],
-['1v1.LOL','https://azgames.io/1v1lol.embed','https://topgames.gg/data/image/game/1v1-lol.png','Desafie outros jogadores em partidas rápidas e competitivas.'],
-['Narrow One','https://azgames.io/narrow-one.embed','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/e9f87aed2de11520ecac587ffa98627d/narrow-one-logo.png','Partidas rápidas de equipes com estratégia e precisão.'],
-['Krunker','https://azgames.io/krunker.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk7zhRekJ3JA5iGq1HS66l1Bx96MpDr9ZcjLrAQ9XzADS_c0zcS3Cifdg&s=10','Partidas online rápidas em mapas variados e competitivos.'],
-['Ragdoll Flip','https://azgames.io/ragdoll-flip.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8Tga4CdMJjzVv39-KYXiyw40pPNhUDwZ1uXNz6Aim7w&s=10','Faça o boneco girar e tente aterrissar corretamente.'],
-['Rocket Pult','https://rocketfortress.com/rocket-pult.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaDpNGaCB950Wh8gFXrpfgkmnJvEKWo9SvfChzryfAPKw6zZn54cPxeh4h&s=10','Use lançamentos e física para alcançar a maior distância possível.'],
-['GunSpin','https://rocketfortress.com/gunspin.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3X823TmE8RyzMWcCzneMfXw5AGT9-mfzyqTXWntbvQ&s=10','Use a física do jogo para tentar alcançar grandes distâncias.'],
-['Zombie Strike','https://rocketfortress.com/zombie-strike.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0R_77nnbuwM4pPGar4DY31_r2TavY3J-JaFyP1KRhg&s','Enfrente desafios em um cenário de ação com zumbis.'],
-['Counter Craft Sniper','https://rocketfortress.com/counter-craft-sniper.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDvUh5mqMrRlofmGUsCKD3MPW6Yu4UDS91Vc8zILZvg&s','Complete desafios de precisão em mapas inspirados em blocos.'],
-['Aliens Hunter','https://rocketfortress.com/aliens-hunter.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXHt4Ycd6tt3-BRRUyTK7wu4rN7daKl9-8SYnV05vJVIaOwb6Ello3jtYB&s=10','Explore fases de ficção científica e enfrente desafios alienígenas.']
-];
-const grid=document.getElementById('gamesGrid');
-games.forEach(g=>{const c=document.createElement('div');c.className='game-card';c.dataset.name=g[0];c.dataset.url=g[1];c.innerHTML=`<div class="game-cover"><img src="${g[2]}" alt="${g[0]}"></div><div class="game-info"><h2 class="game-name">${g[0]}</h2><p class="game-description">${g[3]}</p><div class="play-button">JOGAR</div></div>`;grid.appendChild(c)});
-</script>
-<script type="module">
-import{initializeApp}from'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
-import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,signOut,onAuthStateChanged,signInAnonymously}from'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
-import{getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,doc,setDoc,getDoc}from'https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js';
-const firebaseConfig={apiKey:'AIzaSyDptzzLZYWBlTQ1eoIJIQClFc2PKiDNRh0',authDomain:'caioba-games-comentarios.firebaseapp.com',projectId:'caioba-games-comentarios',storageBucket:'caioba-games-comentarios.firebasestorage.app',messagingSenderId:'340825138509',appId:'1:340825138509:web:2a8eb0c467897d64f2c304',measurementId:'G-ST621MWSDD'};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
-const form=document.getElementById('commentsForm'),nameInput=document.getElementById('commentName'),textInput=document.getElementById('commentText'),list=document.getElementById('commentsList'),status=document.getElementById('commentsStatus');
-function render(s){list.innerHTML='';s.forEach(d=>{const x=d.data(),a=document.createElement('article'),n=document.createElement('h3'),p=document.createElement('p');a.className='comment';n.className='comment-name';p.className='comment-text';n.textContent=x.name||'Anônimo';p.textContent=x.comment||'';a.append(n,p);list.appendChild(a)})}
-async function startComments(){try{const q=query(collection(db,'comments'),orderBy('createdAt','desc'));onSnapshot(q,render,e=>{console.error(e);status.textContent='Não foi possível carregar os comentários.'});form.addEventListener('submit',async e=>{e.preventDefault();const name=nameInput.value.trim(),comment=textInput.value.trim();if(!name||!comment)return;status.textContent='Enviando...';try{await addDoc(collection(db,'comments'),{name,comment,createdAt:serverTimestamp()});form.reset();status.textContent='Comentário enviado!'}catch(err){console.error(err);status.textContent='Não foi possível enviar o comentário.'}})}catch(e){console.error(e);status.textContent='Não foi possível conectar aos comentários.'}}
-const accountButton=document.getElementById('accountButton'),accountModal=document.getElementById('accountModal'),accountForm=document.getElementById('accountForm'),accountEmail=document.getElementById('accountEmail'),accountPassword=document.getElementById('accountPassword'),accountStatus=document.getElementById('accountStatus'),accountTitle=document.getElementById('accountTitle'),accountSubmit=document.getElementById('accountSubmit'),accountToggle=document.getElementById('accountToggle'),accountReset=document.getElementById('accountReset'),accountClose=document.getElementById('accountClose'),accountLogged=document.getElementById('accountLogged'),accountEmailLabel=document.getElementById('accountEmailLabel'),logoutButton=document.getElementById('logoutButton'),accountLoggedClose=document.getElementById('accountLoggedClose');
-let signupMode=false;
-function openAccount(){const user=auth.currentUser,accountUser=user&&!user.isAnonymous;accountModal.classList.add('active');accountStatus.textContent='';accountForm.style.display=accountUser?'none':'grid';accountLogged.style.display=accountUser?'block':'none';if(accountUser)accountEmailLabel.textContent=user.email||'Usuário';updateAccountUI(accountUser?user:null)}
-function closeAccount(){accountModal.classList.remove('active')}
-function updateAccountUI(user){if(user){accountButton.textContent='CONTA';accountEmailLabel.textContent=user.email||'Usuário'}else{accountButton.textContent='ENTRAR'}}
-accountButton.onclick=openAccount;accountClose.onclick=closeAccount;accountLoggedClose.onclick=closeAccount;accountModal.addEventListener('click',e=>{if(e.target===accountModal)closeAccount()});
-accountToggle.onclick=()=>{signupMode=!signupMode;accountTitle.textContent=signupMode?'Criar conta':'Entrar';accountSubmit.textContent=signupMode?'CRIAR CONTA':'ENTRAR';accountToggle.textContent=signupMode?'JÁ TENHO CONTA':'CRIAR CONTA';accountStatus.textContent=''};
-accountForm.addEventListener('submit',async e=>{e.preventDefault();const email=accountEmail.value.trim(),password=accountPassword.value;if(!email||password.length<6)return;accountStatus.textContent=signupMode?'Criando conta...':'Entrando...';try{if(signupMode){await createUserWithEmailAndPassword(auth,email,password);accountStatus.textContent='Conta criada!'}else{await signInWithEmailAndPassword(auth,email,password);accountStatus.textContent='Login realizado!'}accountForm.reset();setTimeout(closeAccount,500)}catch(err){console.error(err);const map={'auth/email-already-in-use':'Este e-mail já está cadastrado.','auth/invalid-credential':'E-mail ou senha incorretos.','auth/invalid-email':'Digite um e-mail válido.','auth/weak-password':'A senha precisa ter pelo menos 6 caracteres.','auth/too-many-requests':'Muitas tentativas. Tente novamente mais tarde.'};accountStatus.textContent=map[err.code]||'Não foi possível concluir a operação.'}});
-accountReset.onclick=async()=>{const email=accountEmail.value.trim();if(!email){accountStatus.textContent='Digite seu e-mail primeiro.';return}try{await sendPasswordResetEmail(auth,email);accountStatus.textContent='E-mail de redefinição enviado!'}catch(err){console.error(err);accountStatus.textContent='Não foi possível enviar o e-mail de redefinição.'}};
-logoutButton.onclick=async()=>{await signOut(auth);await signInAnonymously(auth);closeAccount()};
-onAuthStateChanged(auth,user=>{const realUser=user&&!user.isAnonymous;updateAccountUI(realUser?user:null);if(realUser)prepareUserProgress(user.uid)});
-async function prepareUserProgress(uid){const ref=doc(db,'users',uid);const snap=await getDoc(ref).catch(()=>null);if(!snap||!snap.exists())await setDoc(ref,{createdAt:serverTimestamp()},{merge:true}).catch(console.error)}
-window.CaiobaProgress={async save(gameId,data){const user=auth.currentUser;if(!user||user.isAnonymous)throw new Error('LOGIN_REQUIRED');await setDoc(doc(db,'users',user.uid,'progress',gameId),{data,updatedAt:serverTimestamp()},{merge:true})},async load(gameId){const user=auth.currentUser;if(!user||user.isAnonymous)throw new Error('LOGIN_REQUIRED');const snap=await getDoc(doc(db,'users',user.uid,'progress',gameId));return snap.exists()?(snap.data().data??null):null}};
-async function ensureCommentAuth(){if(!auth.currentUser)await signInAnonymously(auth)}
-ensureCommentAuth();
-startComments();
-</script>
-<script>
-document.addEventListener('DOMContentLoaded',()=>{const overlay=document.getElementById('gameOverlay'),frame=document.getElementById('gameFrame'),title=document.getElementById('gameTitle'),close=document.getElementById('closeGameButton'),full=document.getElementById('fullscreenButton'),fav=document.getElementById('favoriteButton'),search=document.getElementById('searchInput'),none=document.getElementById('noResults');let current=null;const cards=()=>[...document.querySelectorAll('.game-card')];
-function open(card){current={url:card.dataset.url,name:card.dataset.name};title.textContent=current.name;frame.src=current.url;overlay.classList.add('active');document.body.style.overflow='hidden';updateFav()}
-function closeGame(){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});overlay.classList.remove('active');frame.src='about:blank';document.body.style.overflow=''}
-function updateFav(){if(!current)return;const s=localStorage.getItem('caiobagames-favorite-'+current.url)==='true';fav.textContent=s?'★ Favoritado':'☆ Favoritar'}
-function toggleFull(){if(document.fullscreenElement){document.exitFullscreen();return}if(frame.requestFullscreen)frame.requestFullscreen().catch(()=>overlay.requestFullscreen().catch(()=>{}));else overlay.requestFullscreen().catch(()=>{})}
-new MutationObserver(()=>cards().forEach(c=>c.onclick=()=>open(c))).observe(document.getElementById('gamesGrid'),{childList:true});cards().forEach(c=>c.onclick=()=>open(c));close.onclick=closeGame;full.onclick=toggleFull;fav.onclick=()=>{if(!current)return;const k='caiobagames-favorite-'+current.url,s=localStorage.getItem(k)==='true';localStorage.setItem(k,String(!s));updateFav()};document.addEventListener('fullscreenchange',()=>full.textContent=document.fullscreenElement?'⛶ Sair da tela cheia':'⛶ Tela cheia');search.addEventListener('input',()=>{const t=search.value.trim().toLowerCase();let n=0;cards().forEach(c=>{const ok=!t||(c.dataset.name||'').toLowerCase().includes(t);c.classList.toggle('hidden',!ok);if(ok)n++});none.style.display=n?'none':'block'});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('active')&&!document.fullscreenElement)closeGame()})});
-</script>
+<body>
+  <header>
+    <a class="logo" href="#">CAIOBA GAMES</a>
+    <div class="header-actions">
+      <button id="accountButton" class="account-button" type="button">ENTRAR</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="games-grid">
+      <a
+        class="game-card"
+        href="https://vietdp.com/games/t122024/ragdoll-archers/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRurkHgxNxkfNwZgbiPR7ZBc0xEBc44lqyiR9hbEn-jQQoIH9lGbBF76GcM&s=10"
+            alt="Ragdoll Archers"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">RAGDOLL ARCHERS</h2>
+          <p class="game-description">
+            Atire flechas com física realista e derrube seus oponentes ragdoll!
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://ragdollhit2.io/ragdoll-hit.embed"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/3c892779be9dabb3589586c83ad3eeed/ragdoll-hit-logo.png"
+            alt="Ragdoll Hit 2"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">RAGDOLL HIT 2</h2>
+          <p class="game-description">
+            A sequência mais brutal com mais fases e mais física de caos.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://elifesimulator.io/bitlife.embed"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://play-lh.googleusercontent.com/OVgQx7M6lk9VcFZKIY_80siUOESLsu5gtwAKrjIruM097U-at161KrQ6Svxw3uPhY4EfKTGNrlpsd12k4TV6HA"
+            alt="BitLife"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">BITLIFE</h2>
+          <p class="game-description">
+            Simule uma vida inteira. Suas escolhas definem quem você será.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://leveldevilfull.com/play/level-devil/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/7e18b5cf7da58e6fc90144f747dcc949/level-devil-logo.png"
+            alt="Level Devil"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">LEVEL DEVIL</h2>
+          <p class="game-description">
+            Plataformer que não segue as regras. O chão pode te trair.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://basketball-random.io/basketball-random.embed"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://imgs.crazygames.com/basket-random_1x1/20240617090207/basket-random_1x1-cover?format=auto&quality=100&metadata=none&width=1200"
+            alt="Basketball Random"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">BASKETBALL RANDOM</h2>
+          <p class="game-description">
+            Basquete maluco com física imprevisível e cenários cheios de surpresas!
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://html5.gamedistribution.com/3b79a8537ebc414fb4f9672a9b8c68c8/?gd_sdk_referrer_url=https://gamedistribution.com/games/snow-rider-3d/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZnTQARWPLkZwQ_ctZEkMvvtR03H7uXfTil20R0LzZIg&s=10"
+            alt="Snow Rider"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">SNOW RIDER</h2>
+          <p class="game-description">
+            Deslize pela neve e tente chegar o mais longe possível!
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://html5.gamedistribution.com/ab2f156d72894fd8a5dedb85b34a05e4/?gd_sdk_referrer_url=https://gamedistribution.com/games/tennis-masters-2026/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://freetennis.org/images/tennis-game-card.png"
+            alt="Tennis Master"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">TENNIS MASTER</h2>
+          <p class="game-description">
+            Entre em quadra e mostre suas habilidades no tênis!
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://html5.gamedistribution.com/fef00656129743768437b7589b7c48b1/?gd_sdk_referrer_url=https://gamedistribution.com/games/worldguessr/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://sm.ign.com/ign_br/cover/g/geoguessr/geoguessr_ukvg.jpg"
+            alt="Geoguesser"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">GEOGUESSER</h2>
+          <p class="game-description">
+            Explore o mundo e tente descobrir onde você está!
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://play.famobi.com/wrapper/3d-free-kick/A1000-10"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="game-cover">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKc-7oTm4F-3-RwE_O2mHXheTJ1mGcoo6adrjITsuVIg&s=10"
+            alt="Treino de Falta"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">TREINO DE FALTA</h2>
+          <p class="game-description">
+            Treine suas cobranças de falta e tente acertar o alvo!
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2026/galatrix/marble-run/game.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/1354/responsive/marble-run-xs.webp"
+            alt="Marble Run"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">MARBLE RUN</h2>
+          <p class="game-description">
+            Jogue Marble Run diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2021/unity/stack-fire-ball/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/184/responsive/Stack-Fire-Ball-Game-xs.jpg"
+            alt="Stack Fire Ball"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">STACK FIRE BALL</h2>
+          <p class="game-description">
+            Jogue Stack Fire Ball diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2024/unity3/stickman-gta-city/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/900/responsive/stickman-gta-city-free-xs.jpg"
+            alt="Stickman GTA City"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">STICKMAN GTA CITY</h2>
+          <p class="game-description">
+            Jogue Stickman GTA City diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2023/unity2/real-flight-simulator/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/342/responsive/Real-Flight-Simulator-2-xs.jpg"
+            alt="Real Flight Simulator"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">REAL FLIGHT SIMULATOR</h2>
+          <p class="game-description">
+            Jogue Real Flight Simulator diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2024/unity/drift-king/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/729/responsive/Drift-King-xs.jpg"
+            alt="Drift King"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">DRIFT KING</h2>
+          <p class="game-description">
+            Jogue Drift King diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2023/unity2/cs-online/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/434/responsive/CS-Online-xs.jpg"
+            alt="CS Online"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">CS ONLINE</h2>
+          <p class="game-description">
+            Jogue CS Online diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2024/construct/219/stickman-parkour/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/871/responsive/stickman-parkour-OG-xs.jpg"
+            alt="Stickman Parkour"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">STICKMAN PARKOUR</h2>
+          <p class="game-description">
+            Supere obstáculos, colete chaves e avance pelos níveis.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2025/unity4/dublix/game-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/1126/responsive/dublix-xs.webp"
+            alt="Dublix"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">DUBLIX</h2>
+          <p class="game-description">
+            Jogue Dublix diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2026/more/snaker-io/game.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/1261/responsive/snaker-io-xs.webp"
+            alt="Snaker io"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">SNAKER IO</h2>
+          <p class="game-description">
+            Jogue Snaker io diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2025/html/cube-worlds/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/986/responsive/Cube-Worlds-xs.jpg"
+            alt="Cube Worlds"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">CUBE WORLDS</h2>
+          <p class="game-description">
+            Jogue Cube Worlds diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2025/unity4/cubecraft-survival/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/1113/responsive/cubecraft-survival-xs.webp"
+            alt="CubeCraft Survival"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">CUBECRAFT SURVIVAL</h2>
+          <p class="game-description">
+            Jogue CubeCraft Survival diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2023/unity/drift-hunters-pro/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/397/responsive/Drift-Hunters-Pro-xs.jpg"
+            alt="Drift Hunters Pro"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">DRIFT HUNTERS PRO</h2>
+          <p class="game-description">
+            Jogue Drift Hunters Pro diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2022/unity/edys-car-simulator/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/238/responsive/Edys-Car-Simulator-Online-xs.jpg"
+            alt="Edys Car Simulator"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">EDYS CAR SIMULATOR</h2>
+          <p class="game-description">
+            Jogue Edys Car Simulator diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2023/unity/madalin-stunt-cars-pro/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/401/responsive/Madalin-Stunt-Cars-Pro-Game-xs.jpg"
+            alt="Madalin Stunt Cars Pro"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">MADALIN STUNT CARS PRO</h2>
+          <p class="game-description">
+            Jogue Madalin Stunt Cars Pro diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2025/unity/checkout-frenzy/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/974/responsive/checkout-frenzy-cashier-game-xs.jpg"
+            alt="Checkout Frenzy"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">CHECKOUT FRENZY</h2>
+          <p class="game-description">
+            Jogue Checkout Frenzy diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2024/unity3/warstrike/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/870/responsive/WarStrike-Online-xs.jpg"
+            alt="WarStrike"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">WARSTRIKE</h2>
+          <p class="game-description">
+            Jogue WarStrike diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2024/code/2/drunken-duel/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/698/responsive/Drunken-Duel-xs.jpg"
+            alt="Drunken Duel"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">DRUNKEN DUEL</h2>
+          <p class="game-description">
+            Jogue Drunken Duel diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2022/unity4/solitaire-adventure/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/519/responsive/Solitaire-Adventure-Tripeaks-xs.jpg"
+            alt="Solitaire Adventure"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">SOLITAIRE ADVENTURE</h2>
+          <p class="game-description">
+            Jogue Solitaire Adventure diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2023/unity2/guerrillas-io/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/423/responsive/Guerillas-io-xs.jpg"
+            alt="Guerrillas io"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">GUERRILLAS IO</h2>
+          <p class="game-description">
+            Jogue Guerrillas io diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2021/unity2/wasteland-shooters/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/218/responsive/Wasteland-Shooters-xs.jpg"
+            alt="Wasteland Shooters"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">WASTELAND SHOOTERS</h2>
+          <p class="game-description">
+            Jogue Wasteland Shooters diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2023/unity/crazy-strike-force/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/366/responsive/Crazy-Strike-Force-xs.jpg"
+            alt="Crazy Strike Force"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">CRAZY STRIKE FORCE</h2>
+          <p class="game-description">
+            Jogue Crazy Strike Force diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2024/unity2/fps-strike/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/902/responsive/fps-strike-online-xs.jpg"
+            alt="FPS Strike"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">FPS STRIKE</h2>
+          <p class="game-description">
+            Jogue FPS Strike diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2021/unity3/stickman-destruction/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/233/responsive/Stickman-Destruction-xs.jpg"
+            alt="Stickman Destruction"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">STICKMAN DESTRUCTION</h2>
+          <p class="game-description">
+            Jogue Stickman Destruction diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2024/unity/burnout-city/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/861/responsive/burnoutcity-xs.jpg"
+            alt="Burnout City"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">BURNOUT CITY</h2>
+          <p class="game-description">
+            Jogue Burnout City diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2023/construct/198/car-football/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/405/responsive/Car-Football-xs.jpg"
+            alt="Car Football"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">CAR FOOTBALL</h2>
+          <p class="game-description">
+            Jogue Car Football diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2021/unity3/armedforces-io/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/234/responsive/Armed-Forces-io-xs.jpg"
+            alt="ArmedForces.io"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">ARMEDFORCES.IO</h2>
+          <p class="game-description">
+            Jogue ArmedForces.io diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2021/unity3/legendary-sniper/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/596/responsive/Legendary-Sniper-xs.jpg"
+            alt="Legendary Sniper"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">LEGENDARY SNIPER</h2>
+          <p class="game-description">
+            Jogue Legendary Sniper diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://cloud.onlinegames.io/games/2021/unity/motorbike-stunt-simulator/index-og.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/1045/responsive/motorbike_stunt_simulator_game-2-xs.webp"
+            alt="Motorbike Stunt Simulator"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">MOTORBIKE STUNT SIMULATOR</h2>
+          <p class="game-description">
+            Jogue Motorbike Stunt Simulator diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2021/3/police-chase-drifter/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/155/responsive/Police-Chase-Drifter-Online-xs.jpg"
+            alt="Police Chase Drifter"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">POLICE CHASE DRIFTER</h2>
+          <p class="game-description">
+            Jogue Police Chase Drifter diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2024/unity/highway-racer-pro/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/822/responsive/Highway-Racer-Pro-xs.jpg"
+            alt="Highway Racer Pro"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">HIGHWAY RACER PRO</h2>
+          <p class="game-description">
+            Jogue Highway Racer Pro diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2021/unity3/mob-city/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/418/responsive/Mob-City-xs.jpg"
+            alt="Mob City"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">MOB CITY</h2>
+          <p class="game-description">
+            Jogue Mob City diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2023/construct/235/trains-io/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/470/responsive/Trains-io-Game-xs.jpg"
+            alt="Trains io"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">TRAINS IO</h2>
+          <p class="game-description">
+            Jogue Trains io diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2022/unity3/fort-drifter/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://www.onlinegames.io/media/posts/592/responsive/Fort-Drifter-xs.jpg"
+            alt="Fort Drifter"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">FORT DRIFTER</h2>
+          <p class="game-description">
+            Jogue Fort Drifter diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+
+      <a
+        class="game-card"
+        href="https://www.onlinegames.io/games/2022/unity3/basketball-io/index.html"
+      >
+        <div class="game-cover">
+          <img
+            src="https://cdn-bgp.bluestacks.com/BGP/us/gametiles_com.miniclip.basketballstars.jpg"
+            alt="Basketball IO"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">BASKETBALL IO</h2>
+          <p class="game-description">
+            Jogue Basketball IO diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+      <a
+        class="game-card"
+        href="https://gamedistribution.com"
+      >
+        <div class="game-cover">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFIyD5Xl-ok8OYwQBqVZp2V5MlM8miUKXoDXdjTgZQOw&amp;s=10"
+            alt="Paper.Io"
+          />
+        </div>
+
+        <div class="game-info">
+          <h2 class="game-name">PAPER.IO</h2>
+          <p class="game-description">
+            Jogue Paper.Io diretamente no navegador.
+          </p>
+          <div class="play-button">JOGAR</div>
+        </div>
+      </a>
+
+    </section>
+
+    <section class="credits">
+      <h2 class="credits-title">Créditos</h2>
+
+      <div class="credits-grid">
+        <div class="credit">
+          <p class="credit-game">Ragdoll Archers</p>
+          <p class="credit-author">Ericetto</p>
+        </div>
+
+        <div class="credit">
+          <p class="credit-game">Ragdoll Hit</p>
+          <p class="credit-author">Ericetto</p>
+        </div>
+
+        <div class="credit">
+          <p class="credit-game">BitLife</p>
+          <p class="credit-author">Candywriter, LLC</p>
+        </div>
+
+        <div class="credit">
+          <p class="credit-game">Level Devil</p>
+          <p class="credit-author">Adam Corey</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================
+       MODAL DE CONTAS
+       ========================= -->
+  <div id="accountModal" class="account-modal" aria-hidden="true">
+    <div class="account-box" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+      <div id="accountLoginPanel">
+        <h2 id="accountTitle">Entrar</h2>
+        <p class="account-subtitle">Entre ou crie sua conta para que seus dados possam ser vinculados ao seu usuário e, futuramente, ao progresso dos jogos.</p>
+        <form id="accountForm" class="account-form">
+          <input id="accountEmail" type="email" placeholder="E-mail" autocomplete="email" required>
+          <input id="accountPassword" type="password" placeholder="Senha (mínimo 6 caracteres)" autocomplete="current-password" minlength="6" required>
+          <div class="account-actions">
+            <button id="accountSubmit" type="submit">ENTRAR</button>
+            <button id="accountToggle" type="button">CRIAR CONTA</button>
+            <button id="accountReset" type="button">ESQUECI A SENHA</button>
+            <button id="accountClose" class="account-close" type="button">FECHAR</button>
+          </div>
+          <div id="accountStatus" class="account-status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div id="accountUserPanel" class="account-user-panel">
+        <h2>Minha conta</h2>
+        <p class="account-subtitle">Conta conectada com sucesso.</p>
+        <strong id="accountEmailLabel"></strong>
+        <span>Seu UID fica vinculado ao Firebase e permite usar a mesma conta em outros dispositivos.</span>
+        <div class="account-actions" style="margin-top:18px">
+          <button id="logoutButton" type="button">SAIR</button>
+          <button id="accountLoggedClose" class="account-close" type="button">FECHAR</button>
+        </div>
+        <div id="accountLoggedStatus" class="account-status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="gamePlayer" class="game-player-overlay" aria-hidden="true">
+    <div class="game-player-bar">
+      <div id="gamePlayerTitle" class="game-player-title">JOGO</div>
+      <div class="game-player-actions">
+        <button id="favoriteGameButton" class="game-player-button" type="button">☆ Favoritar</button>
+        <button id="fullscreenGameButton" class="game-player-button" type="button">⛶ Tela cheia</button>
+        <button id="closeGameButton" class="game-player-button" type="button">✕ Fechar</button>
+      </div>
+    </div>
+    <div id="gameFrameWrap" class="game-player-frame-wrap">
+      <div id="gamePlayerLoading" class="game-player-loading">CARREGANDO JOGO...</div>
+      <iframe id="gameFrame" allow="fullscreen; autoplay; gamepad; pointer-lock" allowfullscreen></iframe>
+    </div>
+  </section>
+
+
+  <script type="module">
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDptzzLZYWBlTQ1eoIJIQClFc2PKiDNRh0",
+      authDomain: "caioba-games-comentarios.firebaseapp.com",
+      projectId: "caioba-games-comentarios",
+      storageBucket: "caioba-games-comentarios.firebasestorage.app",
+      messagingSenderId: "340825138509",
+      appId: "1:340825138509:web:2a8eb0c467897d64f2c304",
+      measurementId: "G-ST621MWSDD"
+    };
+
+    const firebaseApp = initializeApp(firebaseConfig);
+    const auth = getAuth(firebaseApp);
+    const db = getFirestore(firebaseApp);
+
+    const accountButton = document.getElementById("accountButton");
+    const accountModal = document.getElementById("accountModal");
+    const accountLoginPanel = document.getElementById("accountLoginPanel");
+    const accountUserPanel = document.getElementById("accountUserPanel");
+    const accountForm = document.getElementById("accountForm");
+    const accountEmail = document.getElementById("accountEmail");
+    const accountPassword = document.getElementById("accountPassword");
+    const accountTitle = document.getElementById("accountTitle");
+    const accountSubmit = document.getElementById("accountSubmit");
+    const accountToggle = document.getElementById("accountToggle");
+    const accountReset = document.getElementById("accountReset");
+    const accountClose = document.getElementById("accountClose");
+    const accountLoggedClose = document.getElementById("accountLoggedClose");
+    const accountEmailLabel = document.getElementById("accountEmailLabel");
+    const accountStatus = document.getElementById("accountStatus");
+    const accountLoggedStatus = document.getElementById("accountLoggedStatus");
+    const logoutButton = document.getElementById("logoutButton");
+
+    let signupMode = false;
+
+    function openAccount() {
+      accountModal.classList.add("active");
+      accountModal.setAttribute("aria-hidden", "false");
+      updateAccountPanels(auth.currentUser);
+    }
+
+    function closeAccount() {
+      accountModal.classList.remove("active");
+      accountModal.setAttribute("aria-hidden", "true");
+      accountStatus.textContent = "";
+      accountLoggedStatus.textContent = "";
+    }
+
+    function updateAccountPanels(user) {
+      const logged = !!user;
+      accountButton.textContent = logged ? "CONTA" : "ENTRAR";
+      accountLoginPanel.style.display = logged ? "none" : "block";
+      accountUserPanel.style.display = logged ? "block" : "none";
+      if (logged) {
+        accountEmailLabel.textContent = user.email || "Usuário";
+      }
+    }
+
+    function firebaseMessage(error) {
+      const map = {
+        "auth/email-already-in-use": "Este e-mail já está cadastrado.",
+        "auth/invalid-credential": "E-mail ou senha incorretos.",
+        "auth/invalid-email": "Digite um e-mail válido.",
+        "auth/weak-password": "A senha precisa ter pelo menos 6 caracteres.",
+        "auth/too-many-requests": "Muitas tentativas. Tente novamente mais tarde.",
+        "auth/network-request-failed": "Falha de conexão. Verifique a internet."
+      };
+      return map[error.code] || "Não foi possível concluir a operação.";
+    }
+
+    async function ensureUserDocument(user) {
+      if (!user) return;
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        await setDoc(ref, {
+          email: user.email || "",
+          createdAt: serverTimestamp()
+        });
+      } else {
+        await setDoc(ref, {
+          email: user.email || "",
+          lastLoginAt: serverTimestamp()
+        }, { merge: true });
+      }
+    }
+
+    accountButton.addEventListener("click", openAccount);
+    accountClose.addEventListener("click", closeAccount);
+    accountLoggedClose.addEventListener("click", closeAccount);
+    accountModal.addEventListener("click", (event) => {
+      if (event.target === accountModal) closeAccount();
+    });
+
+    accountToggle.addEventListener("click", () => {
+      signupMode = !signupMode;
+      accountTitle.textContent = signupMode ? "Criar conta" : "Entrar";
+      accountSubmit.textContent = signupMode ? "CRIAR CONTA" : "ENTRAR";
+      accountToggle.textContent = signupMode ? "JÁ TENHO CONTA" : "CRIAR CONTA";
+      accountPassword.autocomplete = signupMode ? "new-password" : "current-password";
+      accountStatus.textContent = "";
+    });
+
+    accountForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = accountEmail.value.trim();
+      const password = accountPassword.value;
+
+      if (!email || password.length < 6) {
+        accountStatus.textContent = "Digite um e-mail válido e uma senha com pelo menos 6 caracteres.";
+        return;
+      }
+
+      accountSubmit.disabled = true;
+      accountStatus.textContent = signupMode ? "Criando conta..." : "Entrando...";
+
+      try {
+        let credential;
+        if (signupMode) {
+          credential = await createUserWithEmailAndPassword(auth, email, password);
+        } else {
+          credential = await signInWithEmailAndPassword(auth, email, password);
+        }
+
+        await ensureUserDocument(credential.user);
+        accountStatus.textContent = signupMode ? "Conta criada com sucesso!" : "Login realizado!";
+        accountForm.reset();
+        setTimeout(closeAccount, 700);
+      } catch (error) {
+        console.error("Erro de autenticação:", error);
+        accountStatus.textContent = firebaseMessage(error);
+      } finally {
+        accountSubmit.disabled = false;
+      }
+    });
+
+    accountReset.addEventListener("click", async () => {
+      const email = accountEmail.value.trim();
+      if (!email) {
+        accountStatus.textContent = "Digite seu e-mail primeiro.";
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        accountStatus.textContent = "E-mail de redefinição enviado!";
+      } catch (error) {
+        console.error("Erro ao redefinir senha:", error);
+        accountStatus.textContent = firebaseMessage(error);
+      }
+    });
+
+    logoutButton.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        accountLoggedStatus.textContent = "Você saiu da conta.";
+        setTimeout(closeAccount, 400);
+      } catch (error) {
+        console.error("Erro ao sair:", error);
+        accountLoggedStatus.textContent = "Não foi possível sair da conta.";
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      updateAccountPanels(user);
+      if (user) {
+        try {
+          await ensureUserDocument(user);
+        } catch (error) {
+          console.error("Não foi possível preparar o documento do usuário:", error);
+        }
+      }
+    });
+
+    // API preparada para o salvamento de progresso.
+    // O jogo precisa enviar/receber os dados para que o progresso real seja salvo.
+    window.CaiobaProgress = {
+      async save(gameId, data) {
+        const user = auth.currentUser;
+        if (!user) throw new Error("LOGIN_REQUIRED");
+        await setDoc(
+          doc(db, "users", user.uid, "progress", gameId),
+          { data, updatedAt: serverTimestamp() },
+          { merge: true }
+        );
+      },
+      async load(gameId) {
+        const user = auth.currentUser;
+        if (!user) throw new Error("LOGIN_REQUIRED");
+        const snap = await getDoc(doc(db, "users", user.uid, "progress", gameId));
+        return snap.exists() ? (snap.data().data ?? null) : null;
+      }
+    };
+  </script>
+
+  <script>
+    const gamePlayer = document.getElementById("gamePlayer");
+    const gameFrame = document.getElementById("gameFrame");
+    const gameFrameWrap = document.getElementById("gameFrameWrap");
+    const gamePlayerTitle = document.getElementById("gamePlayerTitle");
+    const gamePlayerLoading = document.getElementById("gamePlayerLoading");
+    const favoriteGameButton = document.getElementById("favoriteGameButton");
+    const fullscreenGameButton = document.getElementById("fullscreenGameButton");
+    const closeGameButton = document.getElementById("closeGameButton");
+
+    let currentGameUrl = "";
+    let currentGameTitle = "Jogo";
+
+    document.querySelectorAll(".game-card").forEach((card) => {
+      card.addEventListener("click", (event) => {
+        openGame(event, card.href);
+      });
+    });
+
+    function openGame(event, url) {
+      event.preventDefault();
+      currentGameUrl = url;
+
+      const card = event.currentTarget;
+      const title = card.querySelector(".game-name");
+      currentGameTitle = title ? title.textContent.trim() : "Jogo";
+
+      gamePlayerTitle.textContent = currentGameTitle;
+      gamePlayerLoading.style.display = "grid";
+      gameFrame.src = url;
+      gamePlayer.classList.add("active");
+      gamePlayer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      updateFavoriteButton();
+
+      history.pushState({ game: true }, "", "#game");
+    }
+
+    function closeGame(updateHistory = true) {
+      gamePlayer.classList.remove("active");
+      gamePlayer.setAttribute("aria-hidden", "true");
+      gameFrame.src = "about:blank";
+      document.body.style.overflow = "";
+
+      if (updateHistory && location.hash === "#game") {
+        history.back();
+      }
+    }
+
+    function favoriteKey() {
+      return "caiobagames-favorite:" + currentGameUrl;
+    }
+
+    function updateFavoriteButton() {
+      const favorite = localStorage.getItem(favoriteKey()) === "true";
+      favoriteGameButton.textContent = favorite ? "★ Favoritado" : "☆ Favoritar";
+    }
+
+    favoriteGameButton.addEventListener("click", () => {
+      const favorite = localStorage.getItem(favoriteKey()) === "true";
+      localStorage.setItem(favoriteKey(), String(!favorite));
+      updateFavoriteButton();
+    });
+
+    fullscreenGameButton.addEventListener("click", async () => {
+      try {
+        if (!document.fullscreenElement) {
+          const target = gameFrameWrap || gameFrame;
+
+          if (target.requestFullscreen) {
+            await target.requestFullscreen();
+          } else if (target.webkitRequestFullscreen) {
+            target.webkitRequestFullscreen();
+          }
+        } else if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      } catch (error) {
+        console.warn("Tela cheia não disponível:", error);
+      }
+    });
+
+    document.addEventListener("fullscreenchange", () => {
+      fullscreenGameButton.textContent =
+        document.fullscreenElement
+          ? "⛶ Sair da tela cheia"
+          : "⛶ Tela cheia";
+    });
+
+    closeGameButton.addEventListener("click", () => closeGame());
+
+    gameFrame.addEventListener("load", () => {
+      gamePlayerLoading.style.display = "none";
+    });
+
+    window.addEventListener("popstate", () => {
+      if (location.hash !== "#game" && gamePlayer.classList.contains("active")) {
+        closeGame(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && gamePlayer.classList.contains("active")) {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          closeGame();
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
