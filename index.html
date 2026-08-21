@@ -18,12 +18,12 @@ header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:
 #searchInput:focus{border-color:var(--primary-light)}
 .search-box{position:relative}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--primary-light)}
-.account-btn{height:38px;padding:0 16px;border:1px solid var(--border);border-radius:8px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;white-space:nowrap}
+.account-btn{height:38px;padding:0 16px;border:1px solid var(--border);border-radius:8px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;white-space:nowrap;transition:.2s}
 .account-btn:hover{background:var(--primary);color:#fff}
 
 main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 .page-title{font-family:Orbitron,sans-serif;font-size:28px;margin-bottom:20px}
-.comments-tab{display:inline-block;padding:10px 16px;margin-bottom:24px;border:1px solid var(--border);border-radius:8px;color:var(--primary-light);text-decoration:none;font-family:Orbitron,sans-serif;font-size:12px;font-weight:700;background:rgba(16,11,28,.7)}
+.comments-tab{display:inline-block;padding:10px 16px;margin-bottom:24px;border:1px solid var(--border);border-radius:8px;color:var(--primary-light);text-decoration:none;font-family:Orbitron,sans-serif;font-size:12px;font-weight:700;background:rgba(16,11,28,.7);cursor:pointer;transition:.2s}
 .comments-tab:hover{border-color:var(--primary-light);background:rgba(160,32,240,.15)}
 
 .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px}
@@ -57,7 +57,7 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 .comments-form input,.comments-form textarea{padding:11px 12px;border:1px solid var(--border);border-radius:7px;background:rgba(16,11,28,.9);color:#fff;font-family:Inter,sans-serif;outline:none;width:100%}
 .comments-form textarea{min-height:100px;resize:vertical}
 .comments-form input:focus,.comments-form textarea:focus{border-color:var(--primary-light)}
-.comments-form button{width:fit-content;padding:10px 16px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}
+.comments-form button{width:fit-content;padding:10px 16px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700;transition:.2s}
 .comments-form button:hover{background:var(--primary);color:#fff}
 .comments-status{min-height:18px;color:var(--muted);font-size:12px}
 .comments-list{display:grid;gap:12px}
@@ -82,19 +82,19 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 #gameFrame{width:100%;height:100%;border:0;background:#000}
 
 /* ===== MODAL DE CONTA ===== */
-.account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.78);align-items:center;justify-content:center;padding:20px}
+.account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:20px}
 .account-modal.active{display:flex}
 .account-box{width:min(420px,100%);padding:24px;background:#0d0912;border:1px solid rgba(160,32,240,.45);border-radius:12px;box-shadow:0 0 35px rgba(160,32,240,.18)}
 .account-box h2{font-family:Orbitron,sans-serif;color:var(--primary-light);font-size:20px;margin-bottom:6px}
 .account-subtitle{color:var(--muted);font-size:12px;margin-bottom:18px}
 .account-form{display:grid;gap:10px}
-.account-form input{padding:12px;border:1px solid var(--border);border-radius:7px;background:#100b1c;color:#fff;outline:none;width:100%}
+.account-form input{padding:12px;border:1px solid var(--border);border-radius:7px;background:#100b1c;color:#fff;outline:none;width:100%;font-family:Inter,sans-serif}
 .account-form input:focus{border-color:var(--primary-light)}
 .account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.account-actions button{padding:10px 13px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700}
+.account-actions button{padding:10px 13px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;transition:.2s}
 .account-actions button:hover{background:var(--primary);color:#fff}
 .account-close{margin-left:auto}
-.account-status{min-height:18px;color:var(--muted);font-size:12px}
+.account-status{min-height:18px;color:var(--muted);font-size:12px;margin-top:8px}
 
 @media(max-width:700px){header{padding:0 16px}.games-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}#searchInput{width:150px}.game-cover{height:140px}#gameTopbar{flex-direction:column;align-items:stretch}}
 @media(max-width:500px){main{padding-top:88px}.game-cover{height:120px}.game-name{font-size:13px}}
@@ -241,6 +241,12 @@ const favBtn = document.getElementById('favBtn');
 const closeBtn = document.getElementById('closeGameBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 
+// ===== ELEMENTOS DO MODAL DE CONTA =====
+const accountBtn = document.getElementById('accountBtn');
+const accountModal = document.getElementById('accountModal');
+const accountClose = document.getElementById('accountClose');
+const accountLoggedClose = document.getElementById('accountLoggedClose');
+
 let currentGameName = '';
 
 // ==================== ABRIR JOGO ====================
@@ -271,12 +277,19 @@ document.querySelectorAll('.game-card').forEach(card => {
   });
 });
 
-// ==================== BOTÃO FECHAR ====================
+// ==================== BOTÃO FECHAR DO JOGO ====================
 closeBtn.addEventListener('click', closeGame);
 
 // ==================== TECLA ESC ====================
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeGame();
+  if (e.key === 'Escape') {
+    if (overlay.classList.contains('active')) {
+      closeGame();
+    }
+    if (accountModal.classList.contains('active')) {
+      closeAccountModal();
+    }
+  }
 });
 
 // ==================== TELA CHEIA ====================
@@ -304,16 +317,102 @@ favBtn.addEventListener('click', function() {
   }
 });
 
+// ==================== ABRIR MODAL DE CONTA ====================
+accountBtn.addEventListener('click', function() {
+  console.log('🔑 Abrindo modal de conta');
+  accountModal.classList.add('active');
+  document.getElementById('accountStatus').textContent = '';
+});
+
+// ==================== FECHAR MODAL DE CONTA ====================
+function closeAccountModal() {
+  accountModal.classList.remove('active');
+}
+
+accountClose.addEventListener('click', closeAccountModal);
+accountLoggedClose.addEventListener('click', closeAccountModal);
+
+// ==================== CLICAR FORA DO MODAL FECHA ====================
+accountModal.addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeAccountModal();
+  }
+});
+
+// ==================== LOGIN SIMULADO ====================
+document.getElementById('accountForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('accountEmail').value;
+  const password = document.getElementById('accountPassword').value;
+  const status = document.getElementById('accountStatus');
+  
+  if (email && password.length >= 6) {
+    status.textContent = '✅ Login realizado com sucesso!';
+    status.style.color = '#00ff88';
+    
+    // Mostrar tela de logado
+    document.querySelector('.account-form').style.display = 'none';
+    document.querySelector('.account-subtitle').style.display = 'none';
+    document.getElementById('accountLogged').style.display = 'block';
+    document.getElementById('accountEmailLabel').textContent = email;
+    document.getElementById('accountTitle').textContent = '✅ Conectado';
+    accountBtn.textContent = email.split('@')[0];
+    accountBtn.style.color = '#00ff88';
+  } else {
+    status.textContent = '❌ Preencha email e senha (mínimo 6 caracteres)';
+    status.style.color = '#ff4444';
+  }
+});
+
+// ==================== BOTÃO CRIAR CONTA ====================
+document.getElementById('accountToggle').addEventListener('click', function() {
+  const status = document.getElementById('accountStatus');
+  const submitBtn = document.getElementById('accountSubmit');
+  const title = document.getElementById('accountTitle');
+  
+  if (this.textContent === 'CRIAR CONTA') {
+    this.textContent = 'VOLTAR PARA ENTRAR';
+    submitBtn.textContent = 'CRIAR CONTA';
+    title.textContent = 'Criar Conta';
+    status.textContent = 'Preencha os dados para criar sua conta.';
+    status.style.color = 'var(--muted)';
+  } else {
+    this.textContent = 'CRIAR CONTA';
+    submitBtn.textContent = 'ENTRAR';
+    title.textContent = 'Entrar';
+    status.textContent = '';
+  }
+});
+
+// ==================== BOTÃO ESQUECI A SENHA ====================
+document.getElementById('accountReset').addEventListener('click', function() {
+  const status = document.getElementById('accountStatus');
+  status.textContent = '📧 Enviamos um link de recuperação para seu e-mail.';
+  status.style.color = '#ffd700';
+});
+
+// ==================== BOTÃO SAIR ====================
+document.getElementById('logoutBtn').addEventListener('click', function() {
+  // Resetar UI
+  document.querySelector('.account-form').style.display = 'grid';
+  document.querySelector('.account-subtitle').style.display = 'block';
+  document.getElementById('accountLogged').style.display = 'none';
+  document.getElementById('accountTitle').textContent = 'Entrar';
+  document.getElementById('accountSubmit').textContent = 'ENTRAR';
+  document.getElementById('accountToggle').textContent = 'CRIAR CONTA';
+  document.getElementById('accountEmail').value = '';
+  document.getElementById('accountPassword').value = '';
+  document.getElementById('accountStatus').textContent = '👋 Desconectado com sucesso!';
+  document.getElementById('accountStatus').style.color = '#ffd700';
+  accountBtn.textContent = 'ENTRAR';
+  accountBtn.style.color = 'var(--primary-light)';
+  
+  setTimeout(() => {
+    closeAccountModal();
+  }, 1500);
+});
+
 // ==================== PESQUISA ====================
 document.getElementById('searchInput').addEventListener('input', function() {
   const term = this.value.toLowerCase();
-  document.querySelectorAll('.game-card').forEach(card => {
-    const name = card.dataset.name.toLowerCase();
-    card.classList.toggle('hidden', !name.includes(term));
-  });
-});
-
-console.log('✅ Site pronto! Clique em "JOGAR" para abrir um jogo.');
-</script>
-</body>
-</html>
+  document.querySelectorAll
