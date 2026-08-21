@@ -378,15 +378,25 @@ document.getElementById('resetProgressBtn').addEventListener('click', function()
   }
 });
 
-// ==================== SAIR ====================
+// ==================== SAIR (CORRIGIDO DEFINITIVAMENTE) ====================
 document.getElementById('logoutBtn').addEventListener('click', function() {
   console.log('🔓 Saindo...');
-  if (window.auth) {
-    signOut(window.auth).catch(function(e) {
-      console.log('⚠️ Erro no signOut:', e);
-    });
-  }
+  
+  // 1. Reseta o estado local IMEDIATAMENTE
   window.currentUser = null;
+  
+  // 2. Tenta desconectar do Firebase se o auth estiver disponível
+  if (window.auth) {
+    signOut(window.auth)
+      .then(function() {
+        console.log('✅ Desconectado do Firebase');
+      })
+      .catch(function(e) {
+        console.log('⚠️ Erro no signOut (ignorado):', e.message);
+      });
+  }
+  
+  // 3. Reseta toda a interface
   document.getElementById('accountBtn').textContent = 'ENTRAR';
   document.getElementById('accountBtn').classList.remove('logged');
   document.querySelector('.account-form').style.display = 'grid';
@@ -398,14 +408,162 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
   document.getElementById('accountPassword').value = '';
   document.getElementById('accountStatus').textContent = '👋 Desconectado!';
   document.getElementById('accountStatus').style.color = '#ffd700';
+  
+  // 4. Fecha o modal
+  accountModal.classList.remove('active');
+  
+  // 5. Recarrega a página para garantir que tudo seja resetado
   setTimeout(function() {
-    accountModal.classList.remove('active');
     location.reload();
-  }, 1500);
+  }, 500);
 });
 </script>
 
 <script type="importmap">
 {
   "imports": {
-    "firebase/app": "https://www
+    "firebase/app": "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js",
+    "firebase/auth": "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js",
+    "firebase/firestore": "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
+  }
+}
+</script>
+
+<script type="module">
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDptzzLZYWBlTQ1eoIJIQClFc2PKiDNRh0',
+  authDomain: 'caioba-games-comentarios.firebaseapp.com',
+  projectId: 'caioba-games-comentarios',
+  storageBucket: 'caioba-games-comentarios.firebasestorage.app',
+  messagingSenderId: '340825138509',
+  appId: '1:340825138509:web:2a8eb0c467897d64f2c304'
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// EXPORTA PARA O ESCOPO GLOBAL (para ser usado pelo script normal)
+window.auth = auth;
+window.db = db;
+
+// ==================== AUTH STATE ====================
+onAuthStateChanged(auth, function(user) {
+  if (user) {
+    window.currentUser = user;
+    document.getElementById('accountBtn').textContent = user.email.split('@')[0];
+    document.getElementById('accountBtn').classList.add('logged');
+    document.getElementById('accountLogged').style.display = 'block';
+    document.getElementById('accountEmailLabel').textContent = user.email;
+    document.querySelector('.account-form').style.display = 'none';
+    document.getElementById('accountTitle').textContent = '✅ Conectado';
+    document.getElementById('accountStatus').textContent = '✅ Logado com sucesso!';
+    document.getElementById('accountStatus').style.color = '#00ff88';
+  } else {
+    window.currentUser = null;
+    document.getElementById('accountBtn').textContent = 'ENTRAR';
+    document.getElementById('accountBtn').classList.remove('logged');
+    document.querySelector('.account-form').style.display = 'grid';
+    document.getElementById('accountLogged').style.display = 'none';
+    document.getElementById('accountTitle').textContent = 'Entrar';
+    document.getElementById('accountStatus').textContent = '';
+  }
+});
+
+// ==================== LOGIN ====================
+document.getElementById('accountForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('accountEmail').value;
+  const password = document.getElementById('accountPassword').value;
+  const status = document.getElementById('accountStatus');
+  const submitBtn = document.getElementById('accountSubmit');
+  
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'CARREGANDO...';
+  status.textContent = '⏳ Aguarde...';
+  
+  const isCreating = document.getElementById('accountToggle').textContent === 'VOLTAR';
+  
+  if (isCreating) {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(function() {
+        status.textContent = '✅ Conta criada com sucesso!';
+        status.style.color = '#00ff88';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'CRIAR CONTA';
+        setTimeout(function() { accountModal.classList.remove('active'); }, 1500);
+      })
+      .catch(function(error) {
+        status.textContent = '❌ ' + error.message;
+        status.style.color = '#ff4444';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'CRIAR CONTA';
+      });
+  } else {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(function() {
+        status.textContent = '✅ Login realizado!';
+        status.style.color = '#00ff88';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'ENTRAR';
+        setTimeout(function() { accountModal.classList.remove('active'); }, 1500);
+      })
+      .catch(function(error) {
+        status.textContent = '❌ ' + error.message;
+        status.style.color = '#ff4444';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'ENTRAR';
+      });
+  }
+});
+
+// ==================== CRIAR CONTA ====================
+document.getElementById('accountToggle').addEventListener('click', function() {
+  const submit = document.getElementById('accountSubmit');
+  const title = document.getElementById('accountTitle');
+  const status = document.getElementById('accountStatus');
+  
+  if (this.textContent === 'CRIAR CONTA') {
+    this.textContent = 'VOLTAR';
+    submit.textContent = 'CRIAR CONTA';
+    title.textContent = 'Criar Conta';
+    status.textContent = 'Preencha os dados para criar sua conta.';
+    status.style.color = '#aaa0b3';
+  } else {
+    this.textContent = 'CRIAR CONTA';
+    submit.textContent = 'ENTRAR';
+    title.textContent = 'Entrar';
+    status.textContent = '';
+  }
+});
+
+// ==================== ESQUECI SENHA ====================
+document.getElementById('accountReset').addEventListener('click', function() {
+  const email = document.getElementById('accountEmail').value;
+  const status = document.getElementById('accountStatus');
+  
+  if (!email) {
+    status.textContent = '❌ Digite seu e-mail primeiro!';
+    status.style.color = '#ff4444';
+    return;
+  }
+  
+  sendPasswordResetEmail(auth, email)
+    .then(function() {
+      status.textContent = '📧 Link de recuperação enviado para ' + email;
+      status.style.color = '#ffd700';
+    })
+    .catch(function(error) {
+      status.textContent = '❌ ' + error.message;
+      status.style.color = '#ff4444';
+    });
+});
+
+console.log('✅ Firebase conectado!');
+</script>
+</body>
+</html>
