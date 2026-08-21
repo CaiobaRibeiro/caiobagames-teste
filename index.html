@@ -274,23 +274,56 @@ document.getElementById('commentsTab').addEventListener('click', function() {
   document.getElementById('commentsSection').scrollIntoView({ behavior: 'smooth' });
 });
 
-// ==================== SALVAR PROGRESSO ====================
-document.getElementById('saveProgressBtn').addEventListener('click', function() {
-  const currentScore = document.getElementById('currentScore');
-  const highScore = document.getElementById('highScore');
-  const totalPlays = document.getElementById('totalPlays');
-  
-  const score = parseInt(currentScore.textContent) || 0;
-  const newScore = score + Math.floor(Math.random() * 100) + 10;
-  currentScore.textContent = newScore;
-  
-  if (newScore > parseInt(highScore.textContent)) {
-    highScore.textContent = newScore;
-    alert('🏆 Novo recorde! ' + newScore + ' pontos!');
+// ==================== SALVAR PROGRESSO (FIREBASE) ====================
+document.getElementById('saveProgressBtn').addEventListener('click', async function() {
+  // Verifica se o usuário está logado
+  if (!currentUser) {
+    alert('⚠️ Faça login para salvar seu progresso na nuvem!');
+    return;
   }
+
+  // Pega os valores da tela
+  const currentScoreEl = document.getElementById('currentScore');
+  const highScoreEl = document.getElementById('highScore');
+  const totalPlaysEl = document.getElementById('totalPlays');
   
-  totalPlays.textContent = parseInt(totalPlays.textContent) + 1;
-  alert('💾 Progresso salvo!');
+  const currentScore = parseInt(currentScoreEl.textContent) || 0;
+  const highScore = parseInt(highScoreEl.textContent) || 0;
+  const totalPlays = parseInt(totalPlaysEl.textContent) || 0;
+  
+  // Se não tem pontuação, avisa
+  if (currentScore === 0) {
+    alert('⚠️ Jogue primeiro para salvar uma pontuação!');
+    return;
+  }
+
+  // Prepara os dados
+  const newHighScore = Math.max(currentScore, highScore);
+  const data = {
+    melhorPontuacao: newHighScore,
+    ultimaPontuacao: currentScore,
+    totalJogadas: totalPlays + 1,
+    updatedAt: new Date().toISOString()
+  };
+
+  try {
+    // SALVA NO FIRESTORE (users/{uid}/progress/{gameName})
+    const ref = doc(db, 'users', currentUser.uid, 'progress', currentGameName);
+    await setDoc(ref, data, { merge: true });
+    
+    // Atualiza a tela
+    highScoreEl.textContent = newHighScore;
+    totalPlaysEl.textContent = totalPlays + 1;
+    
+    if (currentScore > highScore) {
+      alert('🏆 NOVO RECORDE! ' + currentScore + ' pontos! (Salvo na nuvem)');
+    } else {
+      alert('💾 Progresso salvo na nuvem!');
+    }
+  } catch (error) {
+    console.error('Erro ao salvar:', error);
+    alert('❌ Erro ao salvar. Tente novamente.');
+  }
 });
 
 // ==================== RESETAR PROGRESSO ====================
@@ -379,3 +412,232 @@ onAuthStateChanged(auth, function(user) {
 });
 
 // ====================
+// ==================== LOGIN ====================
+document.getElementById('accountForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('accountEmail').value;
+  const password = document.getElementById('accountPassword').value;
+  const status = document.getElementById('accountStatus');
+  const submitBtn = document.getElementById('accountSubmit');
+  
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'CARREGANDO...';
+  status.textContent = '⏳ Aguarde...';
+  
+  const isCreating = document.getElementById('accountToggle').textContent === 'VOLTAR';
+  
+  if (isCreating) {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(function(userCredential) {
+        status.textContent = '✅ Conta criada com sucesso!';
+        status.style.color = '#00ff88';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'CRIAR CONTA';
+        setTimeout(function() {
+          accountModal.classList.remove('active');
+        }, 1500);
+      })
+      .catch(function(error) {
+        status.textContent = '❌ ' + error.message;
+        status.style.color = '#ff4444';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'CRIAR CONTA';
+      });
+  } else {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(function(userCredential) {
+        status.textContent = '✅ Login realizado!';
+        status.style.color = '#00ff88';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'ENTRAR';
+        setTimeout(function() {
+          accountModal.classList.remove('active');
+        }, 1500);
+      })
+      .catch(function(error) {
+        status.textContent = '❌ ' + error.message;
+        status.style.color = '#ff4444';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'ENTRAR';
+      });
+  }
+});
+
+// ==================== CRIAR CONTA ====================
+document.getElementById('accountToggle').addEventListener('click', function() {
+  const submit = document.getElementById('accountSubmit');
+  const title = document.getElementById('accountTitle');
+  const status = document.getElementById('accountStatus');
+  
+  if (this.textContent === 'CRIAR CONTA') {
+    this.textContent = 'VOLTAR';
+    submit.textContent = 'CRIAR CONTA';
+    title.textContent = 'Criar Conta';
+    status.textContent = 'Preencha os dados para criar sua conta.';
+    status.style.color = '#aaa0b3';
+  } else {
+    this.textContent = 'CRIAR CONTA';
+    submit.textContent = 'ENTRAR';
+    title.textContent = 'Entrar';
+    status.textContent = '';
+  }
+});
+
+// ==================== SAIR ====================
+document.getElementById('logoutBtn').addEventListener('click', function() {
+  signOut(auth).then(function() {
+    document.getElementById('accountStatus').textContent = '👋 Desconectado!';
+    document.getElementById('accountStatus').style.color = '#ffd700';
+    setTimeout(function() {
+      accountModal.classList.remove('active');
+    }, 1000);
+  }).catch(function(error) {
+    alert('Erro ao sair: ' + error.message);
+  });
+});
+
+// ==================== ESQUECI SENHA ====================
+document.getElementById('accountReset').addEventListener('click', function() {
+  const email = document.getElementById('accountEmail').value;
+  const status = document.getElementById('accountStatus');
+  
+  if (!email) {
+    status.textContent = '❌ Digite seu e-mail primeiro!';
+    status.style.color = '#ff4444';
+    return;
+  }
+  
+  sendPasswordResetEmail(auth, email)
+    .then(function() {
+      status.textContent = '📧 Link de recuperação enviado para ' + email;
+      status.style.color = '#ffd700';
+    })
+    .catch(function(error) {
+      status.textContent = '❌ ' + error.message;
+      status.style.color = '#ff4444';
+    });
+});
+
+// ==================== TORNAR VARIÁVEIS GLOBAIS ====================
+window.currentUser = currentUser;
+window.currentGameName = '';
+window.db = db;
+
+// ==================== CARREGAR PROGRESSO AO ABRIR JOGO ====================
+// Sobrescrever a função de abrir jogo para carregar progresso
+document.querySelectorAll('.game-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    const name = this.dataset.name;
+    const url = this.dataset.url;
+    window.currentGameName = name;
+    document.getElementById('gameTitle').textContent = name;
+    document.getElementById('gameFrame').src = url;
+    document.getElementById('gameOverlay').classList.add('active');
+    document.getElementById('gameProgressBar').style.display = 'flex';
+    
+    // Carregar progresso salvo
+    loadSavedProgress(name);
+  });
+});
+
+// ==================== FUNÇÃO PARA CARREGAR PROGRESSO ====================
+async function loadSavedProgress(gameName) {
+  if (!currentUser) {
+    // Se não está logado, tenta carregar do localStorage
+    const localData = localStorage.getItem('progress_' + gameName);
+    if (localData) {
+      try {
+        const data = JSON.parse(localData);
+        document.getElementById('currentScore').textContent = data.ultimaPontuacao || 0;
+        document.getElementById('highScore').textContent = data.melhorPontuacao || 0;
+        document.getElementById('totalPlays').textContent = data.totalJogadas || 0;
+      } catch(e) {}
+    }
+    return;
+  }
+
+  try {
+    // Carrega do Firebase (users/{uid}/progress/{gameName})
+    const ref = doc(db, 'users', currentUser.uid, 'progress', gameName);
+    const docSnap = await getDoc(ref);
+    
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      document.getElementById('currentScore').textContent = data.ultimaPontuacao || 0;
+      document.getElementById('highScore').textContent = data.melhorPontuacao || 0;
+      document.getElementById('totalPlays').textContent = data.totalJogadas || 0;
+    } else {
+      // Se não tem no Firebase, tenta localStorage
+      const localData = localStorage.getItem('progress_' + gameName);
+      if (localData) {
+        try {
+          const data = JSON.parse(localData);
+          document.getElementById('currentScore').textContent = data.ultimaPontuacao || 0;
+          document.getElementById('highScore').textContent = data.melhorPontuacao || 0;
+          document.getElementById('totalPlays').textContent = data.totalJogadas || 0;
+        } catch(e) {}
+      }
+    }
+  } catch (error) {
+    console.error('Erro ao carregar progresso:', error);
+  }
+}
+
+// ==================== ATUALIZAR SALVAR PROGRESSO ====================
+// Substituir a função de salvar para incluir localStorage
+const saveBtn = document.getElementById('saveProgressBtn');
+saveBtn.addEventListener('click', async function() {
+  const currentScoreEl = document.getElementById('currentScore');
+  const highScoreEl = document.getElementById('highScore');
+  const totalPlaysEl = document.getElementById('totalPlays');
+  
+  const currentScore = parseInt(currentScoreEl.textContent) || 0;
+  const highScore = parseInt(highScoreEl.textContent) || 0;
+  const totalPlays = parseInt(totalPlaysEl.textContent) || 0;
+  
+  if (currentScore === 0) {
+    alert('⚠️ Jogue primeiro para salvar uma pontuação!');
+    return;
+  }
+
+  const newHighScore = Math.max(currentScore, highScore);
+  const data = {
+    melhorPontuacao: newHighScore,
+    ultimaPontuacao: currentScore,
+    totalJogadas: totalPlays + 1,
+    updatedAt: new Date().toISOString()
+  };
+
+  // Salva localmente sempre
+  localStorage.setItem('progress_' + window.currentGameName, JSON.stringify(data));
+  
+  // Salva no Firebase se logado
+  if (currentUser) {
+    try {
+      const ref = doc(db, 'users', currentUser.uid, 'progress', window.currentGameName);
+      await setDoc(ref, data, { merge: true });
+      highScoreEl.textContent = newHighScore;
+      totalPlaysEl.textContent = totalPlays + 1;
+      
+      if (currentScore > highScore) {
+        alert('🏆 NOVO RECORDE! ' + currentScore + ' pontos! (Salvo na nuvem ✅)');
+      } else {
+        alert('💾 Progresso salvo na nuvem! ✅');
+      }
+    } catch (error) {
+      console.error('Erro ao salvar:', error);
+      highScoreEl.textContent = newHighScore;
+      totalPlaysEl.textContent = totalPlays + 1;
+      alert('💾 Progresso salvo localmente! (Erro ao salvar na nuvem)');
+    }
+  } else {
+    highScoreEl.textContent = newHighScore;
+    totalPlaysEl.textContent = totalPlays + 1;
+    alert('💾 Progresso salvo localmente! (Faça login para salvar na nuvem)');
+  }
+});
+
+console.log('✅ Firebase conectado!');
+</script>
+</body>
+</html>
