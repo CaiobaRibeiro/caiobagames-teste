@@ -65,26 +65,23 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 .comment-name{font-weight:700;color:#fff;margin-bottom:6px}
 .comment-text{color:var(--muted);font-size:13px;line-height:1.5;white-space:pre-wrap}
 
+/* ===== OVERLAY DO JOGO ===== */
 #gameOverlay{display:none;position:fixed;inset:0;z-index:999999;background:#000;flex-direction:column}
 #gameOverlay.active{display:flex}
+
 #gameTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:rgba(5,5,8,.98);border-bottom:1px solid rgba(160,32,240,.5);flex-shrink:0;flex-wrap:wrap}
 #gameTitle{font-family:Orbitron,sans-serif;font-size:15px;font-weight:700;color:var(--primary-light)}
-#gameButtons{display:flex;gap:8px;flex-wrap:wrap}
-#gameButtons button{border:1px solid rgba(160,32,240,.6);border-radius:6px;padding:8px 12px;background:#17101e;color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}
-#gameButtons button:hover{background:var(--primary);color:#fff}
-#gameButtons button.fav{color:#ffd700;border-color:#ffd700}
 
-#gameProgressBar{display:none;padding:10px 14px;background:rgba(16,11,28,.95);border-top:1px solid var(--border);flex-wrap:wrap;gap:12px;align-items:center;flex-shrink:0}
-.progress-item{display:flex;align-items:center;gap:6px}
-.progress-label{color:var(--muted);font-size:11px}
-.progress-value{color:#fff;font-weight:700;font-size:16px}
-.progress-value.record{color:#ffd700}
-.progress-actions{display:flex;gap:6px;margin-left:auto}
-.progress-actions button{padding:5px 12px;border:1px solid var(--border);border-radius:5px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-size:10px;font-weight:700}
-.progress-actions button:hover{background:var(--primary);color:#fff}
+#gameButtons{display:flex;gap:8px;flex-wrap:wrap}
+#gameButtons button{border:1px solid rgba(160,32,240,.6);border-radius:6px;padding:8px 12px;background:#17101e;color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700;transition:.2s}
+#gameButtons button:hover{background:var(--primary);color:#fff;border-color:var(--primary-light)}
+#gameButtons button.fav{color:#ffd700;border-color:#ffd700}
+#gameButtons button.fav:hover{background:#ffd700;color:#000}
+
 #gameContainer{flex:1;min-height:0;background:#000}
 #gameFrame{width:100%;height:100%;border:0;background:#000}
 
+/* ===== MODAL DE CONTA ===== */
 .account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.78);align-items:center;justify-content:center;padding:20px}
 .account-modal.active{display:flex}
 .account-box{width:min(420px,100%);padding:24px;background:#0d0912;border:1px solid rgba(160,32,240,.45);border-radius:12px;box-shadow:0 0 35px rgba(160,32,240,.18)}
@@ -98,9 +95,8 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 .account-actions button:hover{background:var(--primary);color:#fff}
 .account-close{margin-left:auto}
 .account-status{min-height:18px;color:var(--muted);font-size:12px}
-.progress-note{margin-top:14px;padding:10px;border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:11px;line-height:1.45}
 
-@media(max-width:700px){header{padding:0 16px}.games-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}#searchInput{width:150px}.game-cover{height:140px}}
+@media(max-width:700px){header{padding:0 16px}.games-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}#searchInput{width:150px}.game-cover{height:140px}#gameTopbar{flex-direction:column;align-items:stretch}}
 @media(max-width:500px){main{padding-top:88px}.game-cover{height:120px}.game-name{font-size:13px}}
 </style>
 </head>
@@ -144,6 +140,7 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 </section>
 </main>
 
+<!-- ===== MODAL DE CONTA ===== -->
 <div id="accountModal" class="account-modal">
 <div class="account-box">
 <h2 id="accountTitle">Entrar</h2>
@@ -165,11 +162,11 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 <button type="button" id="logoutBtn">SAIR</button>
 <button type="button" id="accountLoggedClose">FECHAR</button>
 </div>
-<div class="progress-note">✅ Seus favoritos e progresso são salvos na nuvem e sincronizados entre dispositivos!</div>
 </div>
 </div>
 </div>
 
+<!-- ===== OVERLAY DO JOGO ===== -->
 <div id="gameOverlay">
 <div id="gameTopbar">
 <div id="gameTitle">Jogo</div>
@@ -179,16 +176,9 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 <button type="button" id="closeGameBtn">✕ Fechar</button>
 </div>
 </div>
-<div id="gameProgressBar">
-<div class="progress-item"><span class="progress-label">🏆 Pontuação:</span><span class="progress-value" id="currentScore">0</span></div>
-<div class="progress-item"><span class="progress-label">⭐ Recorde:</span><span class="progress-value record" id="highScore">0</span></div>
-<div class="progress-item"><span class="progress-label">📊 Jogadas:</span><span class="progress-value" id="totalPlays">0</span></div>
-<div class="progress-actions">
-<button type="button" id="saveProgressBtn">💾 Salvar</button>
-<button type="button" id="resetProgressBtn">🔄 Resetar</button>
+<div id="gameContainer">
+<iframe id="gameFrame" allow="fullscreen; autoplay; gamepad; pointer-lock" allowfullscreen></iframe>
 </div>
-</div>
-<div id="gameContainer"><iframe id="gameFrame" allow="fullscreen; autoplay; gamepad; pointer-lock" allowfullscreen></iframe></div>
 </div>
 
 <script>
@@ -222,7 +212,8 @@ const games = [
 
 // ==================== RENDERIZAR JOGOS ====================
 const grid = document.getElementById('gamesGrid');
-games.forEach(g => {
+
+games.forEach((g) => {
   const card = document.createElement('div');
   card.className = 'game-card';
   card.dataset.name = g[0];
@@ -239,32 +230,8 @@ games.forEach(g => {
   `;
   grid.appendChild(card);
 });
+
 console.log(`✅ ${games.length} jogos carregados!`);
-</script>
-
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
-import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyDptzzLZYWBlTQ1eoIJIQClFc2PKiDNRh0',
-  authDomain: 'caioba-games-comentarios.firebaseapp.com',
-  projectId: 'caioba-games-comentarios',
-  storageBucket: 'caioba-games-comentarios.firebasestorage.app',
-  messagingSenderId: '340825138509',
-  appId: '1:340825138509:web:2a8eb0c467897d64f2c304'
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// ==================== VARIÁVEIS GLOBAIS ====================
-let currentUser = null;
-let favorites = new Set();
-let currentGame = '';
-let currentProgress = null;
 
 // ==================== ELEMENTOS DOM ====================
 const overlay = document.getElementById('gameOverlay');
@@ -273,92 +240,80 @@ const gameTitle = document.getElementById('gameTitle');
 const favBtn = document.getElementById('favBtn');
 const closeBtn = document.getElementById('closeGameBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
-const saveBtn = document.getElementById('saveProgressBtn');
-const resetBtn = document.getElementById('resetProgressBtn');
-const currentScoreEl = document.getElementById('currentScore');
-const highScoreEl = document.getElementById('highScore');
-const totalPlaysEl = document.getElementById('totalPlays');
-const progressBar = document.getElementById('gameProgressBar');
 
-// ==================== FUNÇÕES DE FAVORITOS ====================
-function loadFavoritesLocal() {
-  try { return new Set(JSON.parse(localStorage.getItem('favorites') || '[]')); } catch(e) { return new Set(); }
-}
-function saveFavoritesLocal(favs) { localStorage.setItem('favorites', JSON.stringify(Array.from(favs))); }
-
-async function loadFavoritesFromFirestore(uid) {
-  try { const d = await getDoc(doc(db, 'users', uid)); return d.exists() && d.data().favorites ? new Set(d.data().favorites) : null; } catch(e) { return null; }
-}
-async function saveFavoritesToFirestore(uid, favs) {
-  await setDoc(doc(db, 'users', uid), { favorites: Array.from(favs), updatedAt: serverTimestamp() }, { merge: true });
-}
-
-// ==================== FUNÇÕES DE PROGRESSO ====================
-function loadProgressLocal(game) {
-  try { return JSON.parse(localStorage.getItem('progress_' + game)); } catch(e) { return null; }
-}
-function saveProgressLocal(game, data) {
-  localStorage.setItem('progress_' + game, JSON.stringify(data));
-}
-
-async function loadProgressFromFirestore(uid, game) {
-  try { const d = await getDoc(doc(db, 'users', uid)); if(d.exists() && d.data().gameProgress) return d.data().gameProgress[game] || null; } catch(e) {}
-  return null;
-}
-async function saveProgressToFirestore(uid, game, data) {
-  const ref = doc(db, 'users', uid);
-  const docSnap = await getDoc(ref);
-  let progress = docSnap.exists() ? docSnap.data().gameProgress || {} : {};
-  progress[game] = { ...progress[game], ...data, updatedAt: new Date().toISOString() };
-  await setDoc(ref, { gameProgress: progress, updatedAt: serverTimestamp() }, { merge: true });
-}
-
-async function syncProgress(game, data) {
-  saveProgressLocal(game, data);
-  if (currentUser) await saveProgressToFirestore(currentUser.uid, game, data);
-  updateProgressUI(data);
-}
-
-// ==================== UI DE PROGRESSO ====================
-function updateProgressUI(data) {
-  if (data) {
-    currentScoreEl.textContent = data.pontuacao || 0;
-    highScoreEl.textContent = data.melhorPontuacao || 0;
-    totalPlaysEl.textContent = data.totalJogadas || 0;
-  }
-}
-
-function resetProgressUI() {
-  currentScoreEl.textContent = '0';
-  highScoreEl.textContent = '0';
-  totalPlaysEl.textContent = '0';
-}
+let currentGameName = '';
 
 // ==================== ABRIR JOGO ====================
-async function openGame(gameName, gameUrl) {
-  currentGame = gameName;
-  gameTitle.textContent = gameName;
-  gameFrame.src = gameUrl;
+function openGame(name, url) {
+  currentGameName = name;
+  gameTitle.textContent = name;
+  gameFrame.src = url;
   overlay.classList.add('active');
-  progressBar.style.display = 'flex';
-
-  // Carregar progresso
-  let progress = null;
-  if (currentUser) {
-    progress = await loadProgressFromFirestore(currentUser.uid, gameName);
-  }
-  if (!progress) progress = loadProgressLocal(gameName);
-  currentProgress = progress;
-  updateProgressUI(progress);
-
-  // Atualizar favorito
-  updateFavBtn();
+  
+  // Atualizar botão de favorito
+  favBtn.textContent = '☆ Favoritar';
+  favBtn.classList.remove('fav');
 }
 
-// ==================== FAVORITOS UI ====================
-function updateFavBtn() {
-  if (favorites.has(currentGame)) {
-    favBtn.textContent = '★ Favoritado';
-    favBtn.classList.add('fav');
+// ==================== FECHAR JOGO ====================
+function closeGame() {
+  overlay.classList.remove('active');
+  gameFrame.src = '';
+}
+
+// ==================== EVENTO DE CLIQUE NOS CARDS ====================
+document.querySelectorAll('.game-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const name = this.dataset.name;
+    const url = this.dataset.url;
+    console.log('🎮 Abrindo:', name);
+    openGame(name, url);
+  });
+});
+
+// ==================== BOTÃO FECHAR ====================
+closeBtn.addEventListener('click', closeGame);
+
+// ==================== TECLA ESC ====================
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeGame();
+});
+
+// ==================== TELA CHEIA ====================
+fullscreenBtn.addEventListener('click', function() {
+  const container = document.getElementById('gameContainer');
+  if (container.requestFullscreen) {
+    container.requestFullscreen();
+  } else if (container.webkitRequestFullscreen) {
+    container.webkitRequestFullscreen();
+  } else if (container.msRequestFullscreen) {
+    container.msRequestFullscreen();
+  }
+});
+
+// ==================== FAVORITAR ====================
+favBtn.addEventListener('click', function() {
+  if (this.textContent.includes('☆')) {
+    this.textContent = '★ Favoritado';
+    this.classList.add('fav');
+    alert(`⭐ "${currentGameName}" favoritado!`);
   } else {
-    favBtn.textContent = '☆ F
+    this.textContent = '☆ Favoritar';
+    this.classList.remove('fav');
+    alert(`⭐ "${currentGameName}" removido dos favoritos!`);
+  }
+});
+
+// ==================== PESQUISA ====================
+document.getElementById('searchInput').addEventListener('input', function() {
+  const term = this.value.toLowerCase();
+  document.querySelectorAll('.game-card').forEach(card => {
+    const name = card.dataset.name.toLowerCase();
+    card.classList.toggle('hidden', !name.includes(term));
+  });
+});
+
+console.log('✅ Site pronto! Clique em "JOGAR" para abrir um jogo.');
+</script>
+</body>
+</html>
