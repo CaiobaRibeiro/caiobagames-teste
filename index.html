@@ -4,116 +4,84 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Início - Sala de Aula</title>
-<link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#050506;--card:#100b1c;--text:#f4f0f7;--muted:#aaa0b3;--primary:#a020f0;--primary-light:#c45cff;--border:rgba(160,32,240,.25)}
-body{background:radial-gradient(circle at 50% -20%,rgba(160,32,240,.16),transparent 70%),var(--bg);color:var(--text);font-family:Inter,sans-serif;min-height:100vh}
-header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(5,5,8,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(160,32,240,.2);z-index:100}
-.logo{color:var(--primary-light);font-family:Orbitron,sans-serif;font-size:20px;font-weight:700;letter-spacing:.12em;text-shadow:0 0 10px rgba(160,32,240,.3)}
-.header-actions{display:flex;gap:10px;align-items:center}
-#searchInput{width:220px;height:38px;padding:0 12px 0 34px;border:1px solid var(--border);border-radius:8px;background:rgba(16,11,28,.9);color:#fff;outline:none}
-#searchInput:focus{border-color:var(--primary-light)}
-.search-box{position:relative}
-.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--primary-light)}
-.account-btn{height:38px;padding:0 16px;border:1px solid var(--border);border-radius:8px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;white-space:nowrap;transition:.2s}
-.account-btn:hover{background:var(--primary);color:#fff}
-
+body{background:#050506;color:#fff;font-family:Inter,sans-serif}
+header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(5,5,8,.94);border-bottom:1px solid rgba(160,32,240,.2);z-index:100}
+.logo{color:#c45cff;font-family:Orbitron,sans-serif;font-size:20px}
+.header-actions{display:flex;gap:10px}
+#searchInput{height:38px;padding:0 12px;border:1px solid rgba(160,32,240,.25);border-radius:8px;background:rgba(16,11,28,.9);color:#fff;outline:none}
+.account-btn{height:38px;padding:0 16px;border:1px solid rgba(160,32,240,.25);border-radius:8px;background:rgba(160,32,240,.15);color:#c45cff;cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px}
+.account-btn:hover{background:#a020f0;color:#fff}
 main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 .page-title{font-family:Orbitron,sans-serif;font-size:28px;margin-bottom:20px}
-.comments-tab{display:inline-block;padding:10px 16px;margin-bottom:24px;border:1px solid var(--border);border-radius:8px;color:var(--primary-light);text-decoration:none;font-family:Orbitron,sans-serif;font-size:12px;font-weight:700;background:rgba(16,11,28,.7);cursor:pointer;transition:.2s}
-.comments-tab:hover{border-color:var(--primary-light);background:rgba(160,32,240,.15)}
-
+.comments-tab{display:inline-block;padding:10px 16px;margin-bottom:24px;border:1px solid rgba(160,32,240,.25);border-radius:8px;color:#c45cff;cursor:pointer;font-family:Orbitron,sans-serif;font-size:12px;background:rgba(16,11,28,.7)}
+.comments-tab:hover{background:rgba(160,32,240,.15)}
 .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px}
-.game-card{cursor:pointer;background:rgba(16,11,28,.9);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative}
-.game-card:hover{transform:translateY(-4px);border-color:var(--primary-light);box-shadow:0 0 20px rgba(160,32,240,.18)}
-.game-card.hidden{display:none}
+.game-card{cursor:pointer;background:rgba(16,11,28,.9);border:1px solid rgba(160,32,240,.25);border-radius:10px;overflow:hidden;transition:transform .2s;position:relative}
+.game-card:hover{transform:translateY(-4px);border-color:#c45cff}
 .game-cover{height:180px;overflow:hidden;background:#0b080f}
-.game-cover img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.game-card:hover .game-cover img{transform:scale(1.04)}
+.game-cover img{width:100%;height:100%;object-fit:cover}
 .game-info{padding:14px}
 .game-name{font-family:Orbitron,sans-serif;font-size:15px;color:#fff;margin-bottom:6px}
-.game-desc{color:var(--muted);font-size:12px;line-height:1.4;margin-bottom:8px}
-.game-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.game-stats span{background:rgba(160,32,240,.1);padding:2px 8px;border-radius:4px;font-size:10px;color:var(--muted)}
-.game-stats .record{color:#ffd700}
-.play-btn{padding:9px;text-align:center;border-radius:6px;background:rgba(160,32,240,.15);border:1px solid rgba(160,32,240,.4);color:var(--primary-light);font-family:Orbitron,sans-serif;font-size:11px;font-weight:700;transition:.2s}
-.game-card:hover .play-btn{background:var(--primary);color:#fff}
-.fav-indicator{position:absolute;top:8px;right:8px;font-size:20px;background:rgba(0,0,0,.7);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:5}
-.fav-indicator.fav{color:#ffd700}
-.fav-indicator:not(.fav){color:var(--muted)}
-.no-results{display:none;margin-top:20px;padding:18px;color:var(--muted);text-align:center;border:1px solid var(--border);border-radius:8px;background:rgba(16,11,28,.7)}
-
+.game-desc{color:#aaa0b3;font-size:12px}
+.play-btn{margin-top:12px;padding:9px;text-align:center;border-radius:6px;background:rgba(160,32,240,.15);border:1px solid rgba(160,32,240,.4);color:#c45cff;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}
+.game-card:hover .play-btn{background:#a020f0;color:#fff}
+#gameOverlay{display:none;position:fixed;inset:0;z-index:999999;background:#000;flex-direction:column}
+#gameOverlay.active{display:flex}
+#gameTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:rgba(5,5,8,.98);border-bottom:1px solid rgba(160,32,240,.5);flex-wrap:wrap}
+#gameTitle{font-family:Orbitron,sans-serif;font-size:15px;color:#c45cff}
+#gameButtons{display:flex;gap:8px;flex-wrap:wrap}
+#gameButtons button{border:1px solid rgba(160,32,240,.6);border-radius:6px;padding:8px 12px;background:#17101e;color:#c45cff;cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px}
+#gameButtons button:hover{background:#a020f0;color:#fff}
+#gameContainer{flex:1;background:#000}
+#gameFrame{width:100%;height:100%;border:0;background:#000}
+.account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:20px}
+.account-modal.active{display:flex}
+.account-box{width:min(420px,100%);padding:24px;background:#0d0912;border:1px solid rgba(160,32,240,.45);border-radius:12px}
+.account-box h2{font-family:Orbitron,sans-serif;color:#c45cff;font-size:20px}
+.account-subtitle{color:#aaa0b3;font-size:12px;margin-bottom:18px}
+.account-form{display:grid;gap:10px}
+.account-form input{padding:12px;border:1px solid rgba(160,32,240,.25);border-radius:7px;background:#100b1c;color:#fff;outline:none;width:100%}
+.account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.account-actions button{padding:10px 13px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:#c45cff;cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px}
+.account-actions button:hover{background:#a020f0;color:#fff}
+.account-close{margin-left:auto}
+.account-status{color:#aaa0b3;font-size:12px;margin-top:8px;min-height:18px}
 .credits,.comments-section{margin-top:55px;padding-top:28px;border-top:1px solid rgba(160,32,240,.2)}
 .credits-title,.comments-title{font-family:Orbitron,sans-serif;font-size:20px;margin-bottom:18px}
 .credits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.credit{padding:14px;background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px}
+.credit{padding:14px;background:rgba(16,11,28,.7);border:1px solid rgba(160,32,240,.25);border-radius:8px}
 .credit-game{font-weight:600;margin-bottom:5px}
-.credit-author{color:var(--muted);font-size:13px}
-
+.credit-author{color:#aaa0b3;font-size:13px}
 .comments-form{display:grid;gap:10px;margin-bottom:24px}
-.comments-form input,.comments-form textarea{padding:11px 12px;border:1px solid var(--border);border-radius:7px;background:rgba(16,11,28,.9);color:#fff;font-family:Inter,sans-serif;outline:none;width:100%}
+.comments-form input,.comments-form textarea{padding:11px 12px;border:1px solid rgba(160,32,240,.25);border-radius:7px;background:rgba(16,11,28,.9);color:#fff;outline:none;width:100%;font-family:Inter,sans-serif}
 .comments-form textarea{min-height:100px;resize:vertical}
-.comments-form input:focus,.comments-form textarea:focus{border-color:var(--primary-light)}
-.comments-form button{width:fit-content;padding:10px 16px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700;transition:.2s}
-.comments-form button:hover{background:var(--primary);color:#fff}
-.comments-status{min-height:18px;color:var(--muted);font-size:12px}
+.comments-form button{width:fit-content;padding:10px 16px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:#c45cff;cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px}
+.comments-form button:hover{background:#a020f0;color:#fff}
+.comments-status{color:#aaa0b3;font-size:12px;min-height:18px}
 .comments-list{display:grid;gap:12px}
-.comment{padding:14px;background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px}
+.comment{padding:14px;background:rgba(16,11,28,.7);border:1px solid rgba(160,32,240,.25);border-radius:8px}
 .comment-name{font-weight:700;color:#fff;margin-bottom:6px}
-.comment-text{color:var(--muted);font-size:13px;line-height:1.5;white-space:pre-wrap}
-
-#gameOverlay{display:none;position:fixed;inset:0;z-index:999999;background:#000;flex-direction:column}
-#gameOverlay.active{display:flex}
-#gameTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:rgba(5,5,8,.98);border-bottom:1px solid rgba(160,32,240,.5);flex-shrink:0;flex-wrap:wrap}
-#gameTitle{font-family:Orbitron,sans-serif;font-size:15px;font-weight:700;color:var(--primary-light)}
-#gameButtons{display:flex;gap:8px;flex-wrap:wrap}
-#gameButtons button{border:1px solid rgba(160,32,240,.6);border-radius:6px;padding:8px 12px;background:#17101e;color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:11px;font-weight:700;transition:.2s}
-#gameButtons button:hover{background:var(--primary);color:#fff;border-color:var(--primary-light)}
-#gameButtons button.fav{color:#ffd700;border-color:#ffd700}
-#gameButtons button.fav:hover{background:#ffd700;color:#000}
-#gameContainer{flex:1;min-height:0;background:#000}
-#gameFrame{width:100%;height:100%;border:0;background:#000}
-
-.account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:20px}
-.account-modal.active{display:flex}
-.account-box{width:min(420px,100%);padding:24px;background:#0d0912;border:1px solid rgba(160,32,240,.45);border-radius:12px;box-shadow:0 0 35px rgba(160,32,240,.18)}
-.account-box h2{font-family:Orbitron,sans-serif;color:var(--primary-light);font-size:20px;margin-bottom:6px}
-.account-subtitle{color:var(--muted);font-size:12px;margin-bottom:18px}
-.account-form{display:grid;gap:10px}
-.account-form input{padding:12px;border:1px solid var(--border);border-radius:7px;background:#100b1c;color:#fff;outline:none;width:100%;font-family:Inter,sans-serif}
-.account-form input:focus{border-color:var(--primary-light)}
-.account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.account-actions button{padding:10px 13px;border:1px solid rgba(160,32,240,.6);border-radius:7px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;transition:.2s}
-.account-actions button:hover{background:var(--primary);color:#fff}
-.account-close{margin-left:auto}
-.account-status{min-height:18px;color:var(--muted);font-size:12px;margin-top:8px}
-
-@media(max-width:700px){header{padding:0 16px}.games-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}#searchInput{width:150px}.game-cover{height:140px}#gameTopbar{flex-direction:column;align-items:stretch}}
-@media(max-width:500px){main{padding-top:88px}.game-cover{height:120px}.game-name{font-size:13px}}
+.comment-text{color:#aaa0b3;font-size:13px;line-height:1.5}
+@media(max-width:700px){header{padding:0 16px}.games-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 </style>
 </head>
-
 <body>
 
 <header>
 <div class="logo">CAIOBAGAMES</div>
 <div class="header-actions">
-<div class="search-box">
-<span class="search-icon">⌕</span>
-<input id="searchInput" type="search" placeholder="Pesquisar jogos..." autocomplete="off">
-</div>
+<input id="searchInput" type="search" placeholder="Pesquisar jogos...">
 <button id="accountBtn" class="account-btn">ENTRAR</button>
 </div>
 </header>
 
 <main>
 <h1 class="page-title">Jogos</h1>
-<a class="comments-tab" href="#commentsSection">⬇ Aba de comentários</a>
+<div class="comments-tab" id="commentsTab">⬇ Aba de comentários</div>
 <section class="games-grid" id="gamesGrid"></section>
-<div id="noResults" class="no-results">Nenhum jogo encontrado.</div>
 
 <section class="credits">
 <h2 class="credits-title">Créditos</h2>
@@ -164,9 +132,9 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 <div id="gameTopbar">
 <div id="gameTitle">Jogo</div>
 <div id="gameButtons">
-<button type="button" id="favBtn">☆ Favoritar</button>
-<button type="button" id="fullscreenBtn">⛶ Tela cheia</button>
-<button type="button" id="closeGameBtn">✕ Fechar</button>
+<button id="favBtn">☆ Favoritar</button>
+<button id="fullscreenBtn">⛶ Tela cheia</button>
+<button id="closeGameBtn">✕ Fechar</button>
 </div>
 </div>
 <div id="gameContainer">
@@ -175,7 +143,7 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px}
 </div>
 
 <script>
-// ==================== LISTA DE JOGOS ====================
+// ==================== JOGOS ====================
 const games = [
   ['Rooftop Snipers 2','https://ducky443747.github.io/rooftopsnipers2/','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/895b299e7e49558ca383b23648314860/rooftop-snipers-2-logo.png','Tente vencer o seu oponete com precisão.'],
   ['Rooftop Snipers','https://unblokedgames.github.io/projects/rooftop-snipers/index.html','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/c127771edb0e821e4109b7058ae3f094/rooftop-snipers-logo.jpeg','Tente vencer o seu oponete com precisão.'],
@@ -205,123 +173,112 @@ const games = [
 
 // ==================== RENDERIZAR JOGOS ====================
 const grid = document.getElementById('gamesGrid');
-
 games.forEach(function(g) {
   const card = document.createElement('div');
   card.className = 'game-card';
   card.dataset.name = g[0];
   card.dataset.url = g[1];
-  card.innerHTML = '<div class="game-cover"><img src="' + g[2] + '" alt="' + g[0] + '" loading="lazy" onerror="this.src=\'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22314%22 height=%22314%22%3E%3Crect fill=%22%23100b1c%22 width=%22314%22 height=%22314%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23a020f0%22 font-size=%2240%22 font-family=%22sans-serif%22%3E🎮%3C/text%3E%3C/svg%3E\'"></div><div class="game-info"><h2 class="game-name">' + g[0] + '</h2><p class="game-desc">' + g[3] + '</p><div class="game-stats"><span>🏆 0 pts</span><span class="record">⭐ 0</span></div><div class="play-btn">JOGAR</div></div><div class="fav-indicator">☆</div>';
+  card.innerHTML = '<div class="game-cover"><img src="' + g[2] + '" alt="' + g[0] + '" loading="lazy" onerror="this.src=\'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22314%22 height=%22314%22%3E%3Crect fill=%22%23100b1c%22 width=%22314%22 height=%22314%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23a020f0%22 font-size=%2240%22 font-family=%22sans-serif%22%3E🎮%3C/text%3E%3C/svg%3E\'"></div><div class="game-info"><h2 class="game-name">' + g[0] + '</h2><p class="game-desc">' + g[3] + '</p><div class="play-btn">JOGAR</div></div>';
   grid.appendChild(card);
 });
-
 console.log('✅ ' + games.length + ' jogos carregados!');
 
-// ==================== ELEMENTOS DOM ====================
-var overlay = document.getElementById('gameOverlay');
-var gameFrame = document.getElementById('gameFrame');
-var gameTitle = document.getElementById('gameTitle');
-var favBtn = document.getElementById('favBtn');
-var closeBtn = document.getElementById('closeGameBtn');
-var fullscreenBtn = document.getElementById('fullscreenBtn');
-var accountBtn = document.getElementById('accountBtn');
-var accountModal = document.getElementById('accountModal');
-var accountClose = document.getElementById('accountClose');
-var accountLoggedClose = document.getElementById('accountLoggedClose');
-
-var currentGameName = '';
-
-// ==================== ABRIR JOGO ====================
-function openGame(name, url) {
-  currentGameName = name;
-  gameTitle.textContent = name;
-  gameFrame.src = url;
-  overlay.classList.add('active');
-  favBtn.textContent = '☆ Favoritar';
-  favBtn.classList.remove('fav');
-}
-
-// ==================== FECHAR JOGO ====================
-function closeGame() {
-  overlay.classList.remove('active');
-  gameFrame.src = '';
-}
-
-// ==================== EVENTO DE CLIQUE NOS CARDS ====================
+// ==================== CLIQUE NOS JOGOS ====================
 document.querySelectorAll('.game-card').forEach(function(card) {
   card.addEventListener('click', function() {
-    var name = this.dataset.name;
-    var url = this.dataset.url;
+    const name = this.dataset.name;
+    const url = this.dataset.url;
     console.log('🎮 Abrindo:', name);
-    openGame(name, url);
+    document.getElementById('gameTitle').textContent = name;
+    document.getElementById('gameFrame').src = url;
+    document.getElementById('gameOverlay').classList.add('active');
   });
 });
 
-// ==================== BOTÃO FECHAR ====================
-closeBtn.addEventListener('click', closeGame);
-
-// ==================== ESC ====================
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    if (overlay.classList.contains('active')) closeGame();
-    if (accountModal.classList.contains('active')) closeAccountModal();
-  }
+// ==================== FECHAR JOGO ====================
+document.getElementById('closeGameBtn').addEventListener('click', function() {
+  document.getElementById('gameOverlay').classList.remove('active');
+  document.getElementById('gameFrame').src = '';
 });
 
 // ==================== TELA CHEIA ====================
-fullscreenBtn.addEventListener('click', function() {
-  var container = document.getElementById('gameContainer');
+document.getElementById('fullscreenBtn').addEventListener('click', function() {
+  const container = document.getElementById('gameContainer');
   if (container.requestFullscreen) container.requestFullscreen();
   else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
-  else if (container.msRequestFullscreen) container.msRequestFullscreen();
 });
 
 // ==================== FAVORITAR ====================
-favBtn.addEventListener('click', function() {
-  if (this.textContent.indexOf('☆') !== -1) {
+document.getElementById('favBtn').addEventListener('click', function() {
+  const title = document.getElementById('gameTitle').textContent;
+  if (this.textContent.includes('☆')) {
     this.textContent = '★ Favoritado';
-    this.classList.add('fav');
-    alert('⭐ "' + currentGameName + '" favoritado!');
+    this.style.color = '#ffd700';
+    alert('⭐ "' + title + '" favoritado!');
   } else {
     this.textContent = '☆ Favoritar';
-    this.classList.remove('fav');
-    alert('⭐ "' + currentGameName + '" removido dos favoritos!');
+    this.style.color = '#c45cff';
+    alert('⭐ "' + title + '" removido!');
   }
 });
 
-// ==================== ABRIR MODAL ====================
-accountBtn.addEventListener('click', function() {
-  console.log('🔑 Abrindo modal');
-  accountModal.classList.add('active');
-  document.getElementById('accountStatus').textContent = '';
+// ==================== ESC FECHA ====================
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('gameOverlay').classList.remove('active');
+    document.getElementById('gameFrame').src = '';
+  }
 });
 
-// ==================== FECHAR MODAL ====================
-function closeAccountModal() {
-  accountModal.classList.remove('active');
-}
+// ==================== PESQUISA ====================
+document.getElementById('searchInput').addEventListener('input', function() {
+  const term = this.value.toLowerCase();
+  document.querySelectorAll('.game-card').forEach(function(card) {
+    const name = card.dataset.name.toLowerCase();
+    card.style.display = name.includes(term) ? '' : 'none';
+  });
+});
 
-accountClose.addEventListener('click', closeAccountModal);
-accountLoggedClose.addEventListener('click', closeAccountModal);
+// ==================== BOTÃO COMENTÁRIOS ====================
+document.getElementById('commentsTab').addEventListener('click', function() {
+  document.getElementById('commentsSection').scrollIntoView({ behavior: 'smooth' });
+});
+
+// ==================== MODAL CONTA ====================
+const accountBtn = document.getElementById('accountBtn');
+const accountModal = document.getElementById('accountModal');
+const accountClose = document.getElementById('accountClose');
+const accountLoggedClose = document.getElementById('accountLoggedClose');
+
+accountBtn.addEventListener('click', function() {
+  accountModal.classList.add('active');
+});
+
+accountClose.addEventListener('click', function() {
+  accountModal.classList.remove('active');
+});
+
+accountLoggedClose.addEventListener('click', function() {
+  accountModal.classList.remove('active');
+});
 
 accountModal.addEventListener('click', function(e) {
-  if (e.target === this) closeAccountModal();
+  if (e.target === this) accountModal.classList.remove('active');
 });
 
 // ==================== LOGIN ====================
 document.getElementById('accountForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  var email = document.getElementById('accountEmail').value;
-  var password = document.getElementById('accountPassword').value;
-  var status = document.getElementById('accountStatus');
+  const email = document.getElementById('accountEmail').value;
+  const password = document.getElementById('accountPassword').value;
+  const status = document.getElementById('accountStatus');
   
   if (email && password.length >= 6) {
     status.textContent = '✅ Login realizado!';
     status.style.color = '#00ff88';
-    document.querySelector('.account-form').style.display = 'none';
-    document.querySelector('.account-subtitle').style.display = 'none';
     document.getElementById('accountLogged').style.display = 'block';
     document.getElementById('accountEmailLabel').textContent = email;
+    document.querySelector('.account-form').style.display = 'none';
     document.getElementById('accountTitle').textContent = '✅ Conectado';
     accountBtn.textContent = email.split('@')[0];
     accountBtn.style.color = '#00ff88';
@@ -333,35 +290,22 @@ document.getElementById('accountForm').addEventListener('submit', function(e) {
 
 // ==================== CRIAR CONTA ====================
 document.getElementById('accountToggle').addEventListener('click', function() {
-  var status = document.getElementById('accountStatus');
-  var submitBtn = document.getElementById('accountSubmit');
-  var title = document.getElementById('accountTitle');
-  
+  const submit = document.getElementById('accountSubmit');
+  const title = document.getElementById('accountTitle');
   if (this.textContent === 'CRIAR CONTA') {
-    this.textContent = 'VOLTAR PARA ENTRAR';
-    submitBtn.textContent = 'CRIAR CONTA';
+    this.textContent = 'VOLTAR';
+    submit.textContent = 'CRIAR CONTA';
     title.textContent = 'Criar Conta';
-    status.textContent = 'Preencha os dados para criar sua conta.';
-    status.style.color = 'var(--muted)';
   } else {
     this.textContent = 'CRIAR CONTA';
-    submitBtn.textContent = 'ENTRAR';
+    submit.textContent = 'ENTRAR';
     title.textContent = 'Entrar';
-    status.textContent = '';
   }
-});
-
-// ==================== ESQUECI SENHA ====================
-document.getElementById('accountReset').addEventListener('click', function() {
-  var status = document.getElementById('accountStatus');
-  status.textContent = '📧 Link de recuperação enviado!';
-  status.style.color = '#ffd700';
 });
 
 // ==================== SAIR ====================
 document.getElementById('logoutBtn').addEventListener('click', function() {
   document.querySelector('.account-form').style.display = 'grid';
-  document.querySelector('.account-subtitle').style.display = 'block';
   document.getElementById('accountLogged').style.display = 'none';
   document.getElementById('accountTitle').textContent = 'Entrar';
   document.getElementById('accountSubmit').textContent = 'ENTRAR';
@@ -369,22 +313,19 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
   document.getElementById('accountEmail').value = '';
   document.getElementById('accountPassword').value = '';
   document.getElementById('accountStatus').textContent = '👋 Desconectado!';
-  document.getElementById('accountStatus').style.color = '#ffd700';
   accountBtn.textContent = 'ENTRAR';
-  accountBtn.style.color = 'var(--primary-light)';
-  setTimeout(function() { closeAccountModal(); }, 1500);
+  accountBtn.style.color = '#c45cff';
+  setTimeout(function() { accountModal.classList.remove('active'); }, 1500);
 });
 
-// ==================== PESQUISA ====================
-document.getElementById('searchInput').addEventListener('input', function() {
-  var term = this.value.toLowerCase();
-  document.querySelectorAll('.game-card').forEach(function(card) {
-    var name = card.dataset.name.toLowerCase();
-    card.classList.toggle('hidden', name.indexOf(term) === -1);
-  });
+// ==================== ESQUECI SENHA ====================
+document.getElementById('accountReset').addEventListener('click', function() {
+  document.getElementById('accountStatus').textContent = '📧 Link de recuperação enviado!';
+  document.getElementById('accountStatus').style.color = '#ffd700';
 });
 
-console.log('✅ Site pronto! Clique em "JOGAR" para abrir.');
+console.log('✅ Tudo pronto! Clique em "JOGAR" para abrir.');
 </script>
+
 </body>
 </html>
