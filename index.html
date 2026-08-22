@@ -24,6 +24,8 @@ header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:
 .search-icon{position:absolute;left:11px;color:var(--primary-light);pointer-events:none;font-size:18px}
 #searchInput{width:220px;height:38px;padding:0 12px 0 34px;border:1px solid var(--border);border-radius:8px;outline:0;background:rgba(16,11,28,.9);color:#fff;font-family:Inter,sans-serif}
 #searchInput:focus{border-color:var(--primary-light);box-shadow:0 0 12px rgba(160,32,240,.15)}
+.home-button{height:38px;padding:0 14px;border:1px solid var(--border);border-radius:8px;background:rgba(16,11,28,.9);color:var(--primary-light);cursor:pointer;font-family:Inter,sans-serif;font-size:13px;display:flex;align-items:center;gap:6px;transition:all .2s}
+.home-button:hover{background:var(--primary);color:#fff;border-color:var(--primary-light)}
 
 main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;position:relative;z-index:2}
 .page-title{margin:0 0 20px;font-family:Orbitron,sans-serif;font-size:28px}
@@ -43,6 +45,10 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 .play-button{margin-top:12px;padding:9px;text-align:center;border-radius:6px;background:rgba(160,32,240,.15);border:1px solid rgba(160,32,240,.4);color:var(--primary-light);font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}
 .game-card:hover .play-button{background:var(--primary);color:#fff}
 .no-results{display:none;margin-top:20px;padding:18px;color:var(--muted);text-align:center;border:1px solid var(--border);border-radius:8px;background:rgba(16,11,28,.7)}
+
+.top-games-section{margin-top:0;margin-bottom:40px}
+.top-games-section .section-title{font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;color:var(--primary-light);display:flex;align-items:center;gap:10px}
+.top-games-section .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
 
 .credits,.comments-section{margin-top:55px;padding-top:28px;border-top:1px solid rgba(160,32,240,.2)}
 .credits-title,.comments-title{margin:0 0 18px;font-family:Orbitron,sans-serif;font-size:20px}
@@ -129,6 +135,7 @@ main{padding-top:88px}
 <span class="search-icon">⌕</span>
 <input id="searchInput" type="search" placeholder="Pesquisar jogos..." autocomplete="off">
 </div>
+<button id="homeButton" class="home-button" title="Início">🏠 Início</button>
 <button id="accountButton" class="account-button" type="button">ENTRAR</button>
 </div>
 </header>
@@ -138,6 +145,12 @@ main{padding-top:88px}
 <h1 class="page-title">Jogos</h1>
 
 <a class="comments-tab" href="#commentsSection">Aba de comentarios</a>
+
+<!-- Seção Mais Jogados -->
+<section class="top-games-section">
+    <h2 class="section-title">🔥 Mais Jogados</h2>
+    <div class="games-grid" id="topGamesGrid"></div>
+</section>
 
 <section class="games-grid" id="gamesGrid"></section>
 
@@ -284,6 +297,8 @@ const games = [
   ['Counter Craft Sniper','https://rocketfortress.com/counter-craft-sniper.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDvUh5mqMrRlofmGUsCKD3MPW6Yu4UDS91Vc8zILZvg&s','Complete desafios de precisão em mapas inspirados em blocos.'],
   ['Aliens Hunter','https://rocketfortress.com/aliens-hunter.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXHt4Ycd6tt3-BRRUyTK7wu4rN7daKl9-8SYnV05vJVIaOwb6Ello3jtYB&s=10','Explore fases de ficção científica e enfrente desafios alienígenas.'],
 
+  // ==================== NOVOS JOGOS ADICIONADOS ====================
+
   ['Eagle Craft', 'https://db.duckmath.org/html/minecraft/index.html', 'https://cdn.jsdelivr.net/gh/mathlesson/mathlesson.github.io/img/eagle-craft.jpg', 'Jogo sandbox inspirado no Minecraft. Explore, mine e construa em um mundo 3D de blocos. Modos sobrevivência e criativo.'],
   
   ['Brawl Simulator 3D', 'https://playgama.com/export/game/brawl-simulator-3d?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://playgama.com/cdn-cgi/imagedelivery/LN2S-4p3-GgZvEx3IPaKUA/53453023-daf0-4f00-2938-5ac7867e6400/thumb', 'Simulador 3D de Brawl Stars no navegador. Lute em batalhas 3D, abra caixas e desbloqueie brawlers, skins e avatares.'],
@@ -309,22 +324,60 @@ const games = [
   ['Stalker 2033: The Path of the Survivor', 'https://playgama.com/export/game/stalker-2033-the-path-of-the-survivor?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://lemonarcade.com/img/pg/stalker-2033-the-path-of-the-survivor.webp', 'Atirador 3D em um mundo pós-apocalíptico. Enfrente os mortos-vivos, explore locais vastos, descubra segredos sombrios e lute para sobreviver.']
 ];
 
-const grid=document.getElementById('gamesGrid');
+// Lista de jogos para a seção "Mais Jogados" (nomes EXATOS)
+const topGameNames = [
+  'Eagle Craft',
+  'Brawl Simulator 3D',
+  'Ragdoll Soccer',
+  'Undead Corridor',
+  'Rooftop Snipers',
+  'Rooftop Snipers 2',
+  'Rocket Pult',
+  'Punch Boxing Championship'
+];
 
-games.forEach(g=>{
+// Função para renderizar uma grade
+function renderGames(gridId, gameList) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.innerHTML = '';
+  gameList.forEach(g => {
+    const c = document.createElement('div');
+    c.className = 'game-card';
+    c.dataset.name = g[0];
+    c.dataset.url = g[1];
+    c.innerHTML = `<div class="game-cover"><img src="${g[2]}" alt="${g[0]}"></div><div class="game-info"><h2 class="game-name">${g[0]}</h2><p class="game-description">${g[3]}</p><div class="play-button">JOGAR</div></div>`;
+    grid.appendChild(c);
+  });
+}
 
-const c=document.createElement('div');
+// Renderizar grade principal com todos os jogos
+renderGames('gamesGrid', games);
 
-c.className='game-card';
+// Filtrar e renderizar a grade "Mais Jogados" (apenas os 8)
+const topGames = games.filter(g => topGameNames.includes(g[0]));
+renderGames('topGamesGrid', topGames);
 
-c.dataset.name=g[0];
+// Adicionar eventos de clique para ambas as grades
+document.querySelectorAll('.game-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const name = this.dataset.name;
+    const url = this.dataset.url;
+    document.getElementById('gameTitle').textContent = name;
+    document.getElementById('gameFrame').src = url;
+    document.getElementById('gameOverlay').classList.add('active');
+    const favBtn = document.getElementById('favoriteButton');
+    if (currentUser && currentUserFavorites.has(name)) {
+      favBtn.textContent = '★ Favoritado';
+    } else {
+      favBtn.textContent = '☆ Favoritar';
+    }
+  });
+});
 
-c.dataset.url=g[1];
-
-c.innerHTML=`<div class="game-cover"><img src="${g[2]}" alt="${g[0]}"></div><div class="game-info"><h2 class="game-name">${g[0]}</h2><p class="game-description">${g[3]}</p><div class="play-button">JOGAR</div></div>`;
-
-grid.appendChild(c)
-
+// Botão Início - rola suavemente para o topo
+document.getElementById('homeButton').addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 </script>
@@ -522,23 +575,6 @@ document.getElementById('favoriteButton').addEventListener('click', async functi
   await saveUserFavorites(currentUser.uid);
 });
 
-// Abrir jogo
-document.querySelectorAll('.game-card').forEach(card => {
-  card.addEventListener('click', function() {
-    const name = this.dataset.name;
-    const url = this.dataset.url;
-    document.getElementById('gameTitle').textContent = name;
-    document.getElementById('gameFrame').src = url;
-    document.getElementById('gameOverlay').classList.add('active');
-    const favBtn = document.getElementById('favoriteButton');
-    if (currentUser && currentUserFavorites.has(name)) {
-      favBtn.textContent = '★ Favoritado';
-    } else {
-      favBtn.textContent = '☆ Favoritar';
-    }
-  });
-});
-
 // Fechar jogo
 document.getElementById('closeGameButton').addEventListener('click', function() {
   document.getElementById('gameOverlay').classList.remove('active');
@@ -561,10 +597,10 @@ document.getElementById('fullscreenButton').addEventListener('click', function()
   }
 });
 
-// Pesquisa
+// Pesquisa (afeta apenas a grade principal)
 document.getElementById('searchInput').addEventListener('input', function() {
   const term = this.value.toLowerCase();
-  document.querySelectorAll('.game-card').forEach(card => {
+  document.querySelectorAll('#gamesGrid .game-card').forEach(card => {
     const name = card.dataset.name.toLowerCase();
     card.classList.toggle('hidden', !name.includes(term));
   });
