@@ -84,6 +84,16 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 #gameFrame{width:100%;height:100%;display:block;border:0;background:#000}
 #gameFrame:fullscreen{width:100vw;height:100vh;background:#000}
 
+#guestOverlay{display:none;position:fixed;inset:0;z-index:1000001;background:#fff;flex-direction:column}
+#guestOverlay.active{display:flex}
+#guestTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:#f1f1f1;border-bottom:1px solid #ccc;color:#333;flex-shrink:0}
+#guestTitle{font-family:Inter,sans-serif;font-size:15px;font-weight:600;color:#333}
+#guestButtons{display:flex;gap:8px;flex-shrink:0}
+#guestButtons button{border:1px solid #ccc;border-radius:6px;padding:8px 12px;background:#fff;color:#333;cursor:pointer;font-family:Inter,sans-serif;font-size:13px;transition:all .2s}
+#guestButtons button:hover{background:#e0e0e0}
+#guestContainer{flex:1;background:#fff;position:relative}
+#guestFrame{width:100%;height:100%;border:0;background:#fff}
+
 @media(max-width:1100px){
 .games-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
@@ -107,6 +117,8 @@ main{padding-top:88px}
 #gameTopbar{flex-wrap:wrap}
 #gameButtons{width:100%;justify-content:flex-end}
 #searchInput{width:min(160px,45vw)}
+#guestTopbar{flex-wrap:wrap}
+#guestButtons{width:100%;justify-content:flex-end}
 }
 
 .account-button{height:38px;padding:0 13px;border:1px solid rgba(160,32,240,.6);border-radius:8px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;white-space:nowrap}
@@ -150,13 +162,11 @@ main{padding-top:88px}
 
 <a class="comments-tab" href="#commentsSection">Aba de comentarios</a>
 
-<!-- Seção Mais Jogados -->
 <section class="top-games-section">
     <h2 class="section-title">🔥 Mais Jogados</h2>
     <div class="games-grid" id="topGamesGrid"></div>
 </section>
 
-<!-- Catálogo de Jogos -->
 <section class="catalogo-section">
     <h2 class="catalogo-title">📚 Catálogo de Jogos</h2>
     <div class="games-grid" id="gamesGrid"></div>
@@ -276,10 +286,23 @@ allowfullscreen>
 
 </div>
 
+<!-- Overlay do Modo Visitante (Easter Egg: 7x F) -->
+<div id="guestOverlay">
+    <div id="guestTopbar">
+        <span id="guestTitle">🌐 Modo Visitante</span>
+        <div id="guestButtons">
+            <button id="guestFullscreenBtn">⛶ Tela cheia</button>
+            <button id="guestCloseBtn">✕ Fechar</button>
+        </div>
+    </div>
+    <div id="guestContainer">
+        <iframe id="guestFrame" src="https://www.google.com/webhp?igu=1" allowfullscreen></iframe>
+    </div>
+</div>
+
 <script>
 
 const games = [
-  // Jogos existentes
   ['Rooftop Snipers 2','https://ducky443747.github.io/rooftopsnipers2/','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/895b299e7e49558ca383b23648314860/rooftop-snipers-2-logo.png','Tente vencer o seu oponete com precisão.'],
   ['Rooftop Snipers','https://unblokedgames.github.io/projects/rooftop-snipers/index.html','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/c127771edb0e821e4109b7058ae3f094/rooftop-snipers-logo.jpeg','Tente vencer o seu oponete com precisão.'],
   ['Escape Road','https://azgames.io/escape-road.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4y1J2irNq60gr5ct0PXqHTwalaL5LtOOKbfJZ_h9LpA&s','Fuja pela cidade, desvie dos obstáculos e tente chegar o mais longe possível.'],
@@ -305,34 +328,21 @@ const games = [
   ['Counter Craft Sniper','https://rocketfortress.com/counter-craft-sniper.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDvUh5mqMrRlofmGUsCKD3MPW6Yu4UDS91Vc8zILZvg&s','Complete desafios de precisão em mapas inspirados em blocos.'],
   ['Aliens Hunter','https://rocketfortress.com/aliens-hunter.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXHt4Ycd6tt3-BRRUyTK7wu4rN7daKl9-8SYnV05vJVIaOwb6Ello3jtYB&s=10','Explore fases de ficção científica e enfrente desafios alienígenas.'],
 
-  // ==================== NOVOS JOGOS ADICIONADOS ====================
-
+  // NOVOS JOGOS
   ['Eagle Craft', 'https://db.duckmath.org/html/minecraft/index.html', 'https://cdn.jsdelivr.net/gh/mathlesson/mathlesson.github.io/img/eagle-craft.jpg', 'Jogo sandbox inspirado no Minecraft. Explore, mine e construa em um mundo 3D de blocos. Modos sobrevivência e criativo.'],
-  
   ['Brawl Simulator 3D', 'https://playgama.com/export/game/brawl-simulator-3d?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://playgama.com/cdn-cgi/imagedelivery/LN2S-4p3-GgZvEx3IPaKUA/53453023-daf0-4f00-2938-5ac7867e6400/thumb', 'Simulador 3D de Brawl Stars no navegador. Lute em batalhas 3D, abra caixas e desbloqueie brawlers, skins e avatares.'],
-  
   ['Level Devil', 'https://leveldevilfull.com/play/level-devil/', 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3242750/header.jpg?t=1782835940', 'Plataforma enganador com 200 níveis desafiadores. Navegue por obstáculos e armadilhas escondidas. Modo local para 2 jogadores.'],
-  
   ['Chess Online', 'https://playgama.com/export/game/chess-online-playing?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://playgama.com/cdn-cgi/imagedelivery/LN2S-4p3-GgZvEx3IPaKUA/8e33f23a-163a-4b62-353e-ba64f4fe2b00/thumb', 'Jogo de xadrez clássico no navegador. Jogue contra a IA ou multiplayer em tempo real. Múltiplos níveis de dificuldade.'],
-  
   ['GTA Vice City', 'https://quenq.com/apps/vice-city-online/', 'https://quenq.com/apps/vc-web/preview.jpg', 'Vice City Online traz a lendária experiência de mundo aberto de 1986 Miami diretamente para o navegador. Controle Tommy Vercetti enquanto constrói seu império criminoso.'],
-  
   ['Penalty Kicks', 'https://lemonarcade.com/gp/pgcdn/HTML5/PenaltyKicks/', 'https://www.primarygames.com/arcade/sports/penaltykicks/logo200.png', 'O jogo de futebol está empatado e depende de você vencer a grande partida. Você tem 15 tentativas para marcar o maior número de gols possível.'],
-  
   ['Ragdoll Soccer', 'https://playgama.com/export/game/ragdoll-soccer?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://lemonarcade.com/img/pg/ragdoll-soccer.webp', 'Comande um jogador de futebol stick figure em partidas emocionantes. Inclui modo single player, multiplayer local, campeonato e disputas de pênaltis.'],
-  
   ['Punch Boxing Championship', 'https://y8.com/embed/punch_boxing_championship', 'https://img.y8.com/cloud/v2-y8-thumbs-big-thumbnails-001/97091/big.gif', 'Torne-se o campeão universal de boxe! Derrote todos os pesos pesados em três modos: Luta Rápida, Torneio e Carreira.'],
-  
   ['Red and Blue Snipers', 'https://playgama.com/export/game/red-and-blue-snipers?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://lemonarcade.com/img/pg/red-and-blue-snipers.webp', 'Torne-se um verdadeiro sniper em vários mapas táticos. Inspire-se nos jogos de e-sports e aprimore sua precisão e compostura.'],
-  
   ['EdgeFire 2', 'https://playgama.com/export/game/edgefire-2-667e-1?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://lemonarcade.com/img/pg/edgefire-2.webp', 'FPS de grande escala inspirado em Counter-Strike. Batalhas intensas em um universo tático com gráficos 3D e jogabilidade refinada.'],
-  
   ['Real COD Strike', 'https://playgama.com/export/game/real-cod-strike?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://lemonarcade.com/img/pg/real-cod-strike.webp', 'Shooter de guerra moderna com combate intenso, missões explosivas e ação baseada em esquadrões. Precisão e reflexos são essenciais.'],
-  
   ['Stalker 2033: The Path of the Survivor', 'https://playgama.com/export/game/stalker-2033-the-path-of-the-survivor?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://lemonarcade.com/img/pg/stalker-2033-the-path-of-the-survivor.webp', 'Atirador 3D em um mundo pós-apocalíptico. Enfrente os mortos-vivos, explore locais vastos, descubra segredos sombrios e lute para sobreviver.']
 ];
 
-// Lista de jogos para a seção "Mais Jogados" (nomes EXATOS)
 const topGameNames = [
   'Eagle Craft',
   'Brawl Simulator 3D',
@@ -344,7 +354,6 @@ const topGameNames = [
   'Punch Boxing Championship'
 ];
 
-// Função para renderizar uma grade
 function renderGames(gridId, gameList) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
@@ -359,14 +368,10 @@ function renderGames(gridId, gameList) {
   });
 }
 
-// Renderizar grade principal com todos os jogos
 renderGames('gamesGrid', games);
-
-// Filtrar e renderizar a grade "Mais Jogados" (apenas os 8)
 const topGames = games.filter(g => topGameNames.includes(g[0]));
 renderGames('topGamesGrid', topGames);
 
-// Adicionar eventos de clique para ambas as grades
 document.querySelectorAll('.game-card').forEach(card => {
   card.addEventListener('click', function() {
     const name = this.dataset.name;
@@ -383,9 +388,43 @@ document.querySelectorAll('.game-card').forEach(card => {
   });
 });
 
-// Botão Início - rola suavemente para o topo
 document.getElementById('homeButton').addEventListener('click', function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// EASTER EGG: 7x F
+let fKeyCount = 0;
+let fKeyTimer = null;
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        fKeyCount++;
+        clearTimeout(fKeyTimer);
+        fKeyTimer = setTimeout(function() {
+            fKeyCount = 0;
+        }, 2000);
+        if (fKeyCount >= 7) {
+            fKeyCount = 0;
+            clearTimeout(fKeyTimer);
+            document.getElementById('guestOverlay').classList.add('active');
+            document.getElementById('guestFrame').src = 'https://www.google.com/webhp?igu=1';
+        }
+    }
+});
+
+document.getElementById('guestCloseBtn').addEventListener('click', function() {
+    document.getElementById('guestOverlay').classList.remove('active');
+    document.getElementById('guestFrame').src = 'https://www.google.com/webhp?igu=1';
+});
+
+document.getElementById('guestFullscreenBtn').addEventListener('click', function() {
+    const container = document.getElementById('guestContainer');
+    if (container.requestFullscreen) {
+        container.requestFullscreen();
+    } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+    }
 });
 
 </script>
@@ -393,9 +432,7 @@ document.getElementById('homeButton').addEventListener('click', function() {
 <script type="module">
 
 import{initializeApp}from'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
-
-import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,signOut,onAuthStateChanged,signInAnonymously}from'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
-
+import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
 import{getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,doc,setDoc,getDoc}from'https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js';
 
 const firebaseConfig={
@@ -441,7 +478,6 @@ async function saveUserFavorites(uid) {
   }
 }
 
-// Verifica autenticação
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     currentUser = user;
@@ -466,14 +502,12 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// Login
 document.getElementById('accountForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const email = document.getElementById('accountEmail').value;
   const password = document.getElementById('accountPassword').value;
   const status = document.getElementById('accountStatus');
   const isCreating = document.getElementById('accountToggle').textContent === 'VOLTAR';
-  
   try {
     if (isCreating) {
       await createUserWithEmailAndPassword(auth, email, password);
@@ -493,7 +527,6 @@ document.getElementById('accountForm').addEventListener('submit', async function
   }
 });
 
-// Logout
 document.getElementById('logoutButton').addEventListener('click', async function() {
   try {
     await signOut(auth);
@@ -507,7 +540,6 @@ document.getElementById('logoutButton').addEventListener('click', async function
   }
 });
 
-// Alternar entre "ENTRAR" e "CRIAR CONTA"
 document.getElementById('accountToggle').addEventListener('click', function() {
   const submit = document.getElementById('accountSubmit');
   const title = document.getElementById('accountTitle');
@@ -526,7 +558,6 @@ document.getElementById('accountToggle').addEventListener('click', function() {
   }
 });
 
-// Recuperar senha
 document.getElementById('accountReset').addEventListener('click', function() {
   const email = document.getElementById('accountEmail').value;
   const status = document.getElementById('accountStatus');
@@ -546,7 +577,6 @@ document.getElementById('accountReset').addEventListener('click', function() {
     });
 });
 
-// Fechar modal
 document.getElementById('accountClose').addEventListener('click', function() {
   document.getElementById('accountModal').classList.remove('active');
 });
@@ -559,12 +589,10 @@ document.getElementById('accountModal').addEventListener('click', function(e) {
   }
 });
 
-// Abrir modal
 document.getElementById('accountButton').addEventListener('click', function() {
   document.getElementById('accountModal').classList.add('active');
 });
 
-// Favoritar
 document.getElementById('favoriteButton').addEventListener('click', async function() {
   const gameName = document.getElementById('gameTitle').textContent;
   if (!currentUser) {
@@ -583,7 +611,6 @@ document.getElementById('favoriteButton').addEventListener('click', async functi
   await saveUserFavorites(currentUser.uid);
 });
 
-// Fechar jogo
 document.getElementById('closeGameButton').addEventListener('click', function() {
   document.getElementById('gameOverlay').classList.remove('active');
   document.getElementById('gameFrame').src = '';
@@ -595,7 +622,6 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// Tela cheia
 document.getElementById('fullscreenButton').addEventListener('click', function() {
   const container = document.getElementById('gameContainer');
   if (container.requestFullscreen) {
@@ -605,7 +631,6 @@ document.getElementById('fullscreenButton').addEventListener('click', function()
   }
 });
 
-// Pesquisa (afeta apenas a grade principal)
 document.getElementById('searchInput').addEventListener('input', function() {
   const term = this.value.toLowerCase();
   document.querySelectorAll('#gamesGrid .game-card').forEach(card => {
@@ -614,25 +639,21 @@ document.getElementById('searchInput').addEventListener('input', function() {
   });
 });
 
-// Aba de comentários
 document.querySelector('.comments-tab').addEventListener('click', function(e) {
   e.preventDefault();
   document.getElementById('commentsSection').scrollIntoView({ behavior: 'smooth' });
 });
 
-// Comentários
 document.getElementById('commentsForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const name = document.getElementById('commentName').value.trim();
   const text = document.getElementById('commentText').value.trim();
   const status = document.getElementById('commentsStatus');
-  
   if (!name || !text) {
     status.textContent = '❌ Preencha todos os campos!';
     status.style.color = '#ff4444';
     return;
   }
-  
   try {
     await addDoc(collection(db, 'comments'), {
       name: name,
@@ -650,7 +671,6 @@ document.getElementById('commentsForm').addEventListener('submit', async functio
   }
 });
 
-// Carregar comentários
 onSnapshot(query(collection(db, 'comments'), orderBy('timestamp', 'desc')), (snapshot) => {
   const list = document.getElementById('commentsList');
   if (snapshot.empty) {
