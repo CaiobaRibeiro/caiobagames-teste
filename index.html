@@ -50,6 +50,10 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 .top-games-section .section-title{font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;color:var(--primary-light);display:flex;align-items:center;gap:10px}
 .top-games-section .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
 
+.catalogo-section{margin-top:40px}
+.catalogo-section .catalogo-title{font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;color:var(--foreground);display:flex;align-items:center;gap:10px}
+.catalogo-section .catalogo-title::after{content:"";flex:1;height:1px;background:var(--border)}
+
 .credits,.comments-section{margin-top:55px;padding-top:28px;border-top:1px solid rgba(160,32,240,.2)}
 .credits-title,.comments-title{margin:0 0 18px;font-family:Orbitron,sans-serif;font-size:20px}
 .credits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
@@ -152,7 +156,11 @@ main{padding-top:88px}
     <div class="games-grid" id="topGamesGrid"></div>
 </section>
 
-<section class="games-grid" id="gamesGrid"></section>
+<!-- Catálogo de Jogos -->
+<section class="catalogo-section">
+    <h2 class="catalogo-title">📚 Catálogo de Jogos</h2>
+    <div class="games-grid" id="gamesGrid"></div>
+</section>
 
 <div id="noResults" class="no-results">Nenhum jogo encontrado.</div>
 
