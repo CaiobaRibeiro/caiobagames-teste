@@ -11,12 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* (mesmo CSS que já estava, não vou repetir para não alongar, mas está no código completo) */
 :root{--background:#050506;--card:#100b1c;--foreground:#f4f0f7;--muted:#aaa0b3;--primary:#a020f0;--primary-light:#c45cff;--border:rgba(160,32,240,.25)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -20%,rgba(160,32,240,.16),transparent 45%),var(--background);color:var(--foreground);font-family:Inter,sans-serif}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:50px 50px}
-
 header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 32px;background:rgba(5,5,8,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(160,32,240,.2);z-index:100}
 .logo{color:var(--primary-light);font-family:Orbitron,sans-serif;font-size:20px;font-weight:700;letter-spacing:.12em;text-shadow:0 0 5px var(--primary),0 0 10px var(--primary),0 0 20px var(--primary-light);white-space:nowrap}
 .header-actions{display:flex;align-items:center;gap:10px}
@@ -26,12 +26,10 @@ header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:
 #searchInput:focus{border-color:var(--primary-light);box-shadow:0 0 12px rgba(160,32,240,.15)}
 .home-button{height:38px;padding:0 14px;border:1px solid var(--border);border-radius:8px;background:rgba(16,11,28,.9);color:var(--primary-light);cursor:pointer;font-family:Inter,sans-serif;font-size:13px;display:flex;align-items:center;gap:6px;transition:all .2s}
 .home-button:hover{background:var(--primary);color:#fff;border-color:var(--primary-light)}
-
 main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;position:relative;z-index:2}
 .page-title{margin:0 0 20px;font-family:Orbitron,sans-serif;font-size:28px}
 .comments-tab{display:inline-flex;align-items:center;gap:8px;margin:0 0 24px;padding:10px 16px;width:fit-content;text-decoration:none;color:var(--primary-light);background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px;font-family:Orbitron,sans-serif;font-size:12px;font-weight:700}
 .comments-tab:hover{border-color:rgba(196,92,255,.7);background:rgba(160,32,240,.15)}
-
 .games-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;align-items:stretch}
 .game-card{cursor:pointer;display:flex;flex-direction:column;width:100%;min-width:0;height:100%;overflow:hidden;color:var(--foreground);text-decoration:none;background:rgba(16,11,28,.9);border:1px solid var(--border);border-radius:10px;transition:transform .2s,border-color .2s,box-shadow .2s}
 .game-card:hover{transform:translateY(-4px);border-color:rgba(196,92,255,.7);box-shadow:0 0 20px rgba(160,32,240,.18)}
@@ -45,22 +43,18 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 .play-button{margin-top:12px;padding:9px;text-align:center;border-radius:6px;background:rgba(160,32,240,.15);border:1px solid rgba(160,32,240,.4);color:var(--primary-light);font-family:Orbitron,sans-serif;font-size:11px;font-weight:700}
 .game-card:hover .play-button{background:var(--primary);color:#fff}
 .no-results{display:none;margin-top:20px;padding:18px;color:var(--muted);text-align:center;border:1px solid var(--border);border-radius:8px;background:rgba(16,11,28,.7)}
-
 .top-games-section{margin-top:0;margin-bottom:40px}
 .top-games-section .section-title{font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;color:var(--primary-light);display:flex;align-items:center;gap:10px}
 .top-games-section .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
-
 .catalogo-section{margin-top:40px}
 .catalogo-section .catalogo-title{font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;color:var(--foreground);display:flex;align-items:center;gap:10px}
 .catalogo-section .catalogo-title::after{content:"";flex:1;height:1px;background:var(--border)}
-
 .credits,.comments-section{margin-top:55px;padding-top:28px;border-top:1px solid rgba(160,32,240,.2)}
 .credits-title,.comments-title{margin:0 0 18px;font-family:Orbitron,sans-serif;font-size:20px}
 .credits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .credit{padding:14px;background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px}
 .credit-game{margin:0 0 5px;font-weight:600}
 .credit-author{margin:0;color:var(--muted);font-size:13px}
-
 .comments-form{display:grid;gap:10px;margin-bottom:24px}
 .comments-form input,.comments-form textarea{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:7px;outline:0;background:rgba(16,11,28,.9);color:#fff;font-family:Inter,sans-serif}
 .comments-form textarea{min-height:100px;resize:vertical}
@@ -72,7 +66,6 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 .comment{padding:14px;background:rgba(16,11,28,.7);border:1px solid var(--border);border-radius:8px}
 .comment-name{margin:0 0 6px;font-weight:700;color:#fff}
 .comment-text{margin:0;color:var(--muted);font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-
 #gameOverlay{display:none;position:fixed;inset:0;z-index:999999;background:#000}
 #gameOverlay.active{display:flex;flex-direction:column}
 #gameTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:rgba(5,5,8,.98);border-bottom:1px solid rgba(160,32,240,.5);color:#fff;flex-shrink:0}
@@ -83,7 +76,6 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 #gameContainer{position:relative;flex:1;min-height:0;background:#000}
 #gameFrame{width:100%;height:100%;display:block;border:0;background:#000}
 #gameFrame:fullscreen{width:100vw;height:100vh;background:#000}
-
 #guestOverlay{display:none;position:fixed;inset:0;z-index:1000001;background:#fff;flex-direction:column}
 #guestOverlay.active{display:flex}
 #guestTopbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:#f1f1f1;border-bottom:1px solid #ccc;color:#333;flex-shrink:0}
@@ -98,8 +90,6 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 #guestSearchBtn{padding:12px 24px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer;transition:background .2s}
 #guestSearchBtn:hover{background:var(--primary-light)}
 #guestHint{color:#666;font-size:14px;text-align:center}
-
-/* Modal de conflito de progresso */
 #progressConflictModal{display:none;position:fixed;inset:0;z-index:1000002;background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:20px}
 #progressConflictModal.active{display:flex}
 #progressConflictModal .modal-box{background:#0d0912;border:1px solid rgba(160,32,240,.45);border-radius:12px;padding:24px;max-width:450px;width:100%}
@@ -115,36 +105,10 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 #progressConflictModal .actions .local-btn:hover{background:var(--primary);color:#fff}
 #progressConflictModal .actions .cloud-btn{border:1px solid #00ff88;background:rgba(0,255,136,.1);color:#00ff88}
 #progressConflictModal .actions .cloud-btn:hover{background:#00ff88;color:#000}
-
-@media(max-width:1100px){
-.games-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
-@media(max-width:850px){
-.games-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-#searchInput{width:170px}
-}
-@media(max-width:700px){
-header{padding:0 16px}
-.games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.game-cover{height:160px}
-main{width:calc(100% - 20px)}
-.logo{font-size:16px}
-#searchInput{width:150px}
-}
-@media(max-width:500px){
-main{padding-top:88px}
-.game-cover{height:145px}
-.game-name{font-size:13px}
-.game-description{font-size:11px}
-#gameTopbar{flex-wrap:wrap}
-#gameButtons{width:100%;justify-content:flex-end}
-#searchInput{width:min(160px,45vw)}
-#guestTopbar{flex-wrap:wrap}
-#guestButtons{width:100%;justify-content:flex-end}
-#guestSearchForm{flex-direction:column}
-#guestSearchBtn{width:100%}
-}
-
+@media(max-width:1100px){.games-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:850px){.games-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#searchInput{width:170px}}
+@media(max-width:700px){header{padding:0 16px}.games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.game-cover{height:160px}main{width:calc(100% - 20px)}.logo{font-size:16px}#searchInput{width:150px}}
+@media(max-width:500px){main{padding-top:88px}.game-cover{height:145px}.game-name{font-size:13px}.game-description{font-size:11px}#gameTopbar{flex-wrap:wrap}#gameButtons{width:100%;justify-content:flex-end}#searchInput{width:min(160px,45vw)}#guestTopbar{flex-wrap:wrap}#guestButtons{width:100%;justify-content:flex-end}#guestSearchForm{flex-direction:column}#guestSearchBtn{width:100%}}
 .account-button{height:38px;padding:0 13px;border:1px solid rgba(160,32,240,.6);border-radius:8px;background:rgba(160,32,240,.15);color:var(--primary-light);cursor:pointer;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;white-space:nowrap}
 .account-button:hover{background:var(--primary);color:#fff}
 .account-modal{display:none;position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.78);align-items:center;justify-content:center;padding:20px}
@@ -165,7 +129,6 @@ main{padding-top:88px}
 .progress-note{margin-top:14px;padding:10px;border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:11px;line-height:1.45}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -183,11 +146,10 @@ main{padding-top:88px}
 <main>
 
 <h1 class="page-title">Jogos</h1>
-
 <a class="comments-tab" href="#commentsSection">Aba de comentarios</a>
 
 <section class="top-games-section">
-    <h2 class="section-title">🔥 Mais Jogados por furrys</h2>
+    <h2 class="section-title">🔥 Mais Jogados</h2>
     <div class="games-grid" id="topGamesGrid"></div>
 </section>
 
@@ -201,14 +163,8 @@ main{padding-top:88px}
 <section class="credits">
 <h2 class="credits-title">Créditos</h2>
 <div class="credits-grid">
-<div class="credit">
-<p class="credit-game">Jogos</p>
-<p class="credit-author">CaiobaGames</p>
-</div>
-<div class="credit">
-<p class="credit-game">Jogos incorporados</p>
-<p class="credit-author">Serviços e desenvolvedores originais</p>
-</div>
+<div class="credit"><p class="credit-game">Jogos</p><p class="credit-author">CaiobaGames</p></div>
+<div class="credit"><p class="credit-game">Jogos incorporados</p><p class="credit-author">Serviços e desenvolvedores originais</p></div>
 </div>
 </section>
 
@@ -227,90 +183,45 @@ main{padding-top:88px}
 
 <div id="accountModal" class="account-modal">
 <div class="account-box">
-
 <h2 id="accountTitle">Entrar</h2>
-
-<p class="account-subtitle">
-Entre ou crie sua conta para salvar seu progresso na nuvem.
-</p>
-
+<p class="account-subtitle">Entre ou crie sua conta para salvar seu progresso na nuvem.</p>
 <form id="accountForm" class="account-form">
-
 <input id="accountEmail" type="email" autocomplete="email" placeholder="E-mail" required>
-
 <input id="accountPassword" type="password" autocomplete="current-password" placeholder="Senha (mínimo de 6 caracteres)" minlength="6" required>
-
 <div class="account-actions">
-
 <button type="submit" id="accountSubmit">ENTRAR</button>
-
 <button type="button" id="accountToggle">CRIAR CONTA</button>
-
 <button type="button" id="accountReset">ESQUECI A SENHA</button>
-
 <button type="button" id="accountClose" class="account-close">FECHAR</button>
-
 </div>
-
 <div id="accountStatus" class="account-status"></div>
-
 </form>
-
 <div id="accountLogged" style="display:none">
-
-<p class="account-subtitle">
-Conectado como <strong id="accountEmailLabel"></strong>
-</p>
-
+<p class="account-subtitle">Conectado como <strong id="accountEmailLabel"></strong></p>
 <div class="account-actions">
-
 <button type="button" id="logoutButton">SAIR</button>
-
 <button type="button" id="accountLoggedClose">FECHAR</button>
-
 </div>
-
-<div class="progress-note">
-A conta já está preparada para identificar o usuário pelo UID e salvar progresso no Firestore. O progresso dos jogos em si será ligado na próxima etapa.
+<div class="progress-note">A conta já está preparada para identificar o usuário pelo UID e salvar progresso no Firestore. O progresso dos jogos em si será ligado na próxima etapa.</div>
 </div>
-
-</div>
-
 </div>
 </div>
 
 <div id="gameOverlay">
-
 <div id="gameTopbar">
-
 <div id="gameTitle">Jogo</div>
-
 <div id="gameButtons">
-
 <button type="button" id="favoriteButton">☆ Favoritar</button>
-
 <button type="button" id="fullscreenButton">⛶ Tela cheia</button>
-
 <button type="button" id="closeGameButton">✕ Fechar</button>
-
 </div>
-
 </div>
-
 <div id="gameContainer">
-
-<iframe
-id="gameFrame"
-title="Jogo"
-allow="fullscreen; autoplay; gamepad; pointer-lock"
-allowfullscreen>
-</iframe>
-
+<iframe id="gameFrame" title="Jogo" allow="fullscreen; autoplay; gamepad; pointer-lock" allowfullscreen></iframe>
+</div>
 </div>
 
-</div>
-
-<!-- Modo Visitante (Easter Egg: 7x F) -->
+<!-- Modo Visitante -->
 <div id="guestOverlay">
     <div id="guestTopbar">
         <span id="guestTitle">🔍 Modo Visitante</span>
@@ -327,7 +238,7 @@ allowfullscreen>
     </div>
 </div>
 
-<!-- Modal de conflito de progresso -->
+<!-- Modal de conflito -->
 <div id="progressConflictModal">
     <div class="modal-box">
         <h2>⚡ Conflito de Progresso</h2>
@@ -350,7 +261,7 @@ allowfullscreen>
 </div>
 
 <script>
-
+// ==================== JOGOS ====================
 const games = [
   ['Rooftop Snipers 2','https://ducky443747.github.io/rooftopsnipers2/','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/895b299e7e49558ca383b23648314860/rooftop-snipers-2-logo.png','Tente vencer o seu oponete com precisão.'],
   ['Rooftop Snipers','https://unblokedgames.github.io/projects/rooftop-snipers/index.html','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/c127771edb0e821e4109b7058ae3f094/rooftop-snipers-logo.jpeg','Tente vencer o seu oponete com precisão.'],
@@ -376,7 +287,6 @@ const games = [
   ['Zombie Strike','https://rocketfortress.com/zombie-strike.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0R_77nnbuwM4pPGar4DY31_r2TavY3J-JaFyP1KRhg&s','Enfrente desafios em um cenário de ação com zumbis.'],
   ['Counter Craft Sniper','https://rocketfortress.com/counter-craft-sniper.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDvUh5mqMrRlofmGUsCKD3MPW6Yu4UDS91Vc8zILZvg&s','Complete desafios de precisão em mapas inspirados em blocos.'],
   ['Aliens Hunter','https://rocketfortress.com/aliens-hunter.embed','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXHt4Ycd6tt3-BRRUyTK7wu4rN7daKl9-8SYnV05vJVIaOwb6Ello3jtYB&s=10','Explore fases de ficção científica e enfrente desafios alienígenas.'],
-
   ['Eagle Craft', 'https://db.duckmath.org/html/minecraft/index.html', 'https://cdn.jsdelivr.net/gh/mathlesson/mathlesson.github.io/img/eagle-craft.jpg', 'Jogo sandbox inspirado no Minecraft. Explore, mine e construa em um mundo 3D de blocos. Modos sobrevivência e criativo.'],
   ['Brawl Simulator 3D', 'https://playgama.com/export/game/brawl-simulator-3d?clid=p_660d5cb9-be70-4477-a140-595c21377514', 'https://playgama.com/cdn-cgi/imagedelivery/LN2S-4p3-GgZvEx3IPaKUA/53453023-daf0-4f00-2938-5ac7867e6400/thumb', 'Simulador 3D de Brawl Stars no navegador. Lute em batalhas 3D, abra caixas e desbloqueie brawlers, skins e avatares.'],
   ['Level Devil', 'https://leveldevilfull.com/play/level-devil/', 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3242750/header.jpg?t=1782835940', 'Plataforma enganador com 200 níveis desafiadores. Navegue por obstáculos e armadilhas escondidas. Modo local para 2 jogadores.'],
@@ -392,14 +302,8 @@ const games = [
 ];
 
 const topGameNames = [
-  'Eagle Craft',
-  'Brawl Simulator 3D',
-  'Ragdoll Soccer',
-  'Undead Corridor',
-  'Rooftop Snipers',
-  'Rooftop Snipers 2',
-  'Rocket Pult',
-  'Punch Boxing Championship'
+  'Eagle Craft', 'Brawl Simulator 3D', 'Ragdoll Soccer', 'Undead Corridor',
+  'Rooftop Snipers', 'Rooftop Snipers 2', 'Rocket Pult', 'Punch Boxing Championship'
 ];
 
 function renderGames(gridId, gameList) {
@@ -420,42 +324,27 @@ renderGames('gamesGrid', games);
 const topGames = games.filter(g => topGameNames.includes(g[0]));
 renderGames('topGamesGrid', topGames);
 
-// ==================== SISTEMA DE PROGRESSO COM SINCRONIZAÇÃO ====================
-
-// Função para salvar progresso local
+// ==================== SISTEMA DE PROGRESSO ====================
 function saveProgressLocal(gameName, data) {
     try {
         localStorage.setItem('progress_' + gameName, JSON.stringify(data));
         console.log('💾 Progresso salvo localmente:', gameName, data);
-    } catch(e) {
-        console.error('Erro ao salvar local:', e);
-    }
+    } catch(e) { console.error(e); }
 }
 
-// Função para carregar progresso local
 function loadProgressLocal(gameName) {
     try {
         const raw = localStorage.getItem('progress_' + gameName);
-        if (raw) {
-            const data = JSON.parse(raw);
-            console.log('📂 Progresso local carregado:', gameName, data);
-            return data;
-        }
-    } catch(e) {
-        console.error('Erro ao carregar local:', e);
-    }
+        if (raw) return JSON.parse(raw);
+    } catch(e) { console.error(e); }
     return null;
 }
 
-// Função para salvar progresso no Firestore
 async function saveProgressCloud(uid, gameName, data) {
     if (!uid || !window.db) return;
     try {
         const ref = doc(window.db, 'users', uid, 'progress', gameName);
-        await setDoc(ref, {
-            ...data,
-            updatedAt: data.updatedAt || new Date().toISOString()
-        }, { merge: true });
+        await setDoc(ref, { ...data, updatedAt: data.updatedAt || new Date().toISOString() }, { merge: true });
         console.log('☁️ Progresso salvo na nuvem:', gameName, data);
         return true;
     } catch(e) {
@@ -464,87 +353,52 @@ async function saveProgressCloud(uid, gameName, data) {
     }
 }
 
-// Função para carregar progresso do Firestore
 async function loadProgressCloud(uid, gameName) {
     if (!uid || !window.db) return null;
     try {
         const ref = doc(window.db, 'users', uid, 'progress', gameName);
         const snap = await getDoc(ref);
-        if (snap.exists()) {
-            const data = snap.data();
-            console.log('☁️ Progresso da nuvem carregado:', gameName, data);
-            return data;
-        }
-    } catch(e) {
-        console.error('Erro ao carregar nuvem:', e);
-    }
+        if (snap.exists()) return snap.data();
+    } catch(e) { console.error(e); }
     return null;
 }
 
-// Função para resolver conflito
 function resolveProgressConflict(gameName, localData, cloudData) {
     return new Promise((resolve) => {
         const modal = document.getElementById('progressConflictModal');
-        const localInfo = document.getElementById('localProgressDetails');
-        const cloudInfo = document.getElementById('cloudProgressDetails');
-        const localTs = document.getElementById('localTimestamp');
-        const cloudTs = document.getElementById('cloudTimestamp');
-
-        localInfo.textContent = `Pontuação: ${localData?.score || 0} | Recorde: ${localData?.highScore || 0} | Jogadas: ${localData?.totalPlays || 0}`;
-        cloudInfo.textContent = `Pontuação: ${cloudData?.score || 0} | Recorde: ${cloudData?.highScore || 0} | Jogadas: ${cloudData?.totalPlays || 0}`;
-        localTs.textContent = localData?.updatedAt ? `Última atualização: ${new Date(localData.updatedAt).toLocaleString()}` : 'Sem dados';
-        cloudTs.textContent = cloudData?.updatedAt ? `Última atualização: ${new Date(cloudData.updatedAt).toLocaleString()}` : 'Sem dados';
-
+        document.getElementById('localProgressDetails').textContent = `Pontuação: ${localData?.score || 0} | Recorde: ${localData?.highScore || 0} | Jogadas: ${localData?.totalPlays || 0}`;
+        document.getElementById('cloudProgressDetails').textContent = `Pontuação: ${cloudData?.score || 0} | Recorde: ${cloudData?.highScore || 0} | Jogadas: ${cloudData?.totalPlays || 0}`;
+        document.getElementById('localTimestamp').textContent = localData?.updatedAt ? `Última atualização: ${new Date(localData.updatedAt).toLocaleString()}` : 'Sem dados';
+        document.getElementById('cloudTimestamp').textContent = cloudData?.updatedAt ? `Última atualização: ${new Date(cloudData.updatedAt).toLocaleString()}` : 'Sem dados';
         modal.classList.add('active');
 
         const useLocal = document.getElementById('useLocalBtn');
         const useCloud = document.getElementById('useCloudBtn');
-        // Remove listeners antigos
         const newLocal = useLocal.cloneNode(true);
         const newCloud = useCloud.cloneNode(true);
         useLocal.parentNode.replaceChild(newLocal, useLocal);
         useCloud.parentNode.replaceChild(newCloud, useCloud);
 
-        newLocal.addEventListener('click', () => {
-            modal.classList.remove('active');
-            resolve({ choice: 'local' });
-        });
-        newCloud.addEventListener('click', () => {
-            modal.classList.remove('active');
-            resolve({ choice: 'cloud' });
-        });
+        newLocal.addEventListener('click', () => { modal.classList.remove('active'); resolve({ choice: 'local' }); });
+        newCloud.addEventListener('click', () => { modal.classList.remove('active'); resolve({ choice: 'cloud' }); });
     });
 }
 
-// Função principal para carregar progresso com resolução de conflito
 async function loadProgressWithConflict(gameName) {
     const localData = loadProgressLocal(gameName);
     let cloudData = null;
     if (window.currentUser) {
         cloudData = await loadProgressCloud(window.currentUser.uid, gameName);
     }
-
     if (!localData && !cloudData) return null;
     if (localData && !cloudData) return localData;
     if (!localData && cloudData) return cloudData;
-
-    // Ambos existem: verificar se são iguais (ignorar timestamp)
-    const localCopy = { ...localData };
-    const cloudCopy = { ...cloudData };
-    delete localCopy.updatedAt;
-    delete cloudCopy.updatedAt;
-    const areEqual = JSON.stringify(localCopy) === JSON.stringify(cloudCopy);
-    if (areEqual) return localData;
-
-    // Conflito
+    const localCopy = { ...localData }; delete localCopy.updatedAt;
+    const cloudCopy = { ...cloudData }; delete cloudCopy.updatedAt;
+    if (JSON.stringify(localCopy) === JSON.stringify(cloudCopy)) return localData;
     const result = await resolveProgressConflict(gameName, localData, cloudData);
     if (result.choice === 'local') {
-        if (window.currentUser) {
-            await saveProgressCloud(window.currentUser.uid, gameName, {
-                ...localData,
-                updatedAt: new Date().toISOString()
-            });
-        }
+        if (window.currentUser) await saveProgressCloud(window.currentUser.uid, gameName, { ...localData, updatedAt: new Date().toISOString() });
         return localData;
     } else {
         saveProgressLocal(gameName, cloudData);
@@ -552,8 +406,8 @@ async function loadProgressWithConflict(gameName) {
     }
 }
 
-// ==================== EVENTOS ====================
-
+// ==================== EVENTOS DO OVERLAY ====================
+// ABRIR JOGO
 document.querySelectorAll('.game-card').forEach(card => {
     card.addEventListener('click', async function() {
         const name = this.dataset.name;
@@ -562,15 +416,12 @@ document.querySelectorAll('.game-card').forEach(card => {
         document.getElementById('gameTitle').textContent = name;
         document.getElementById('gameFrame').src = url;
         document.getElementById('gameOverlay').classList.add('active');
-
         const favBtn = document.getElementById('favoriteButton');
         if (window.currentUser && window.currentUserFavorites?.has(name)) {
             favBtn.textContent = '★ Favoritado';
         } else {
             favBtn.textContent = '☆ Favoritar';
         }
-
-        // Carregar progresso com conflito
         const progress = await loadProgressWithConflict(name);
         if (progress) {
             document.getElementById('currentScore').textContent = progress.score || 0;
@@ -584,14 +435,101 @@ document.querySelectorAll('.game-card').forEach(card => {
     });
 });
 
+// FECHAR JOGO (com log para debug)
+document.getElementById('closeGameButton').addEventListener('click', function() {
+    console.log('🔚 Fechando jogo');
+    document.getElementById('gameOverlay').classList.remove('active');
+    document.getElementById('gameFrame').src = '';
+});
+
+// TELA CHEIA (com log)
+document.getElementById('fullscreenButton').addEventListener('click', function() {
+    console.log('⛶ Ativando tela cheia');
+    const container = document.getElementById('gameContainer');
+    if (container.requestFullscreen) {
+        container.requestFullscreen();
+    } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+    } else {
+        alert('Seu navegador não suporta tela cheia.');
+    }
+});
+
+// FAVORITAR (com log)
+document.getElementById('favoriteButton').addEventListener('click', async function() {
+    const gameName = document.getElementById('gameTitle').textContent;
+    console.log('⭐ Favoritar clicado para:', gameName);
+    if (!window.currentUser) {
+        alert('Faça login para favoritar jogos!');
+        return;
+    }
+    if (!window.currentUserFavorites) window.currentUserFavorites = new Set();
+    if (window.currentUserFavorites.has(gameName)) {
+        window.currentUserFavorites.delete(gameName);
+        this.textContent = '☆ Favoritar';
+        alert('⭐ "' + gameName + '" removido dos favoritos!');
+    } else {
+        window.currentUserFavorites.add(gameName);
+        this.textContent = '★ Favoritado';
+        alert('⭐ "' + gameName + '" favoritado!');
+    }
+    try {
+        await setDoc(doc(window.db, 'users', window.currentUser.uid), {
+            favorites: Array.from(window.currentUserFavorites),
+            updatedAt: serverTimestamp()
+        }, { merge: true });
+        console.log('✅ Favoritos salvos na nuvem');
+    } catch(e) {
+        console.error('Erro ao salvar favoritos:', e);
+    }
+});
+
+// SALVAR PROGRESSO
+document.getElementById('saveProgressBtn').addEventListener('click', async function() {
+    const gameName = window.currentGameName;
+    if (!gameName) {
+        alert('Nenhum jogo aberto.');
+        return;
+    }
+    const currentScoreEl = document.getElementById('currentScore');
+    const highScoreEl = document.getElementById('highScore');
+    const totalPlaysEl = document.getElementById('totalPlays');
+    let currentScore = parseInt(currentScoreEl.textContent) || 0;
+    if (currentScore === 0) {
+        currentScore = Math.floor(Math.random() * 500) + 50;
+        currentScoreEl.textContent = currentScore;
+    }
+    const highScore = parseInt(highScoreEl.textContent) || 0;
+    const totalPlays = parseInt(totalPlaysEl.textContent) || 0;
+    const newHighScore = Math.max(currentScore, highScore);
+    const data = {
+        score: currentScore,
+        highScore: newHighScore,
+        totalPlays: totalPlays + 1,
+        updatedAt: new Date().toISOString()
+    };
+    saveProgressLocal(gameName, data);
+    highScoreEl.textContent = newHighScore;
+    totalPlaysEl.textContent = totalPlays + 1;
+    if (window.currentUser) {
+        const saved = await saveProgressCloud(window.currentUser.uid, gameName, data);
+        if (saved) {
+            alert(currentScore > highScore ? '🏆 NOVO RECORDE! Salvo na nuvem ✅' : '💾 Progresso salvo na nuvem ✅');
+        } else {
+            alert('💾 Progresso salvo localmente (erro na nuvem).');
+        }
+    } else {
+        alert('💾 Progresso salvo localmente (faça login para sincronizar).');
+    }
+});
+
+// HOME
 document.getElementById('homeButton').addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ==================== EASTER EGG: 7x F ====================
-let fKeyCount = 0;
-let fKeyTimer = null;
-
+// EASTER EGG
+let fKeyCount = 0, fKeyTimer = null;
 document.addEventListener('keydown', function(e) {
     if (e.key === 'f' || e.key === 'F') {
         e.preventDefault();
@@ -625,98 +563,7 @@ document.getElementById('guestSearchForm').addEventListener('submit', function(e
     document.getElementById('guestOverlay').classList.remove('active');
 });
 
-// ==================== SALVAR PROGRESSO ====================
-document.getElementById('saveProgressBtn').addEventListener('click', async function() {
-    const gameName = window.currentGameName;
-    if (!gameName) {
-        alert('Nenhum jogo aberto.');
-        return;
-    }
-
-    const currentScoreEl = document.getElementById('currentScore');
-    const highScoreEl = document.getElementById('highScore');
-    const totalPlaysEl = document.getElementById('totalPlays');
-
-    let currentScore = parseInt(currentScoreEl.textContent) || 0;
-    if (currentScore === 0) {
-        currentScore = Math.floor(Math.random() * 500) + 50;
-        currentScoreEl.textContent = currentScore;
-    }
-
-    const highScore = parseInt(highScoreEl.textContent) || 0;
-    const totalPlays = parseInt(totalPlaysEl.textContent) || 0;
-
-    const newHighScore = Math.max(currentScore, highScore);
-    const data = {
-        score: currentScore,
-        highScore: newHighScore,
-        totalPlays: totalPlays + 1,
-        updatedAt: new Date().toISOString()
-    };
-
-    saveProgressLocal(gameName, data);
-    highScoreEl.textContent = newHighScore;
-    totalPlaysEl.textContent = totalPlays + 1;
-
-    if (window.currentUser) {
-        const saved = await saveProgressCloud(window.currentUser.uid, gameName, data);
-        if (saved) {
-            alert(currentScore > highScore ? '🏆 NOVO RECORDE! Salvo na nuvem ✅' : '💾 Progresso salvo na nuvem ✅');
-        } else {
-            alert('💾 Progresso salvo localmente (erro na nuvem).');
-        }
-    } else {
-        alert('💾 Progresso salvo localmente (faça login para sincronizar).');
-    }
-});
-
-// Fechar jogo e outros eventos (já existentes)
-document.getElementById('closeGameButton').addEventListener('click', function() {
-    document.getElementById('gameOverlay').classList.remove('active');
-    document.getElementById('gameFrame').src = '';
-});
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        document.getElementById('gameOverlay').classList.remove('active');
-        document.getElementById('gameFrame').src = '';
-    }
-});
-
-document.getElementById('fullscreenButton').addEventListener('click', function() {
-    const container = document.getElementById('gameContainer');
-    if (container.requestFullscreen) container.requestFullscreen();
-    else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
-});
-
-// Favoritar (precisa de acesso ao currentUser e currentUserFavorites)
-document.getElementById('favoriteButton').addEventListener('click', async function() {
-    const gameName = document.getElementById('gameTitle').textContent;
-    if (!window.currentUser) {
-        alert('Faça login para favoritar jogos!');
-        return;
-    }
-    if (!window.currentUserFavorites) window.currentUserFavorites = new Set();
-    if (window.currentUserFavorites.has(gameName)) {
-        window.currentUserFavorites.delete(gameName);
-        this.textContent = '☆ Favoritar';
-        alert('⭐ "' + gameName + '" removido dos favoritos!');
-    } else {
-        window.currentUserFavorites.add(gameName);
-        this.textContent = '★ Favoritado';
-        alert('⭐ "' + gameName + '" favoritado!');
-    }
-    // Salvar favoritos no Firestore
-    try {
-        await setDoc(doc(window.db, 'users', window.currentUser.uid), {
-            favorites: Array.from(window.currentUserFavorites),
-            updatedAt: serverTimestamp()
-        }, { merge: true });
-    } catch(e) {
-        console.error('Erro ao salvar favoritos:', e);
-    }
-});
-
-// Pesquisa
+// PESQUISA
 document.getElementById('searchInput').addEventListener('input', function() {
     const term = this.value.toLowerCase();
     document.querySelectorAll('#gamesGrid .game-card').forEach(card => {
@@ -725,12 +572,21 @@ document.getElementById('searchInput').addEventListener('input', function() {
     });
 });
 
-// Aba de comentários
+// COMENTÁRIOS
 document.querySelector('.comments-tab').addEventListener('click', function(e) {
     e.preventDefault();
     document.getElementById('commentsSection').scrollIntoView({ behavior: 'smooth' });
 });
 
+// TECLA ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        document.getElementById('gameOverlay').classList.remove('active');
+        document.getElementById('gameFrame').src = '';
+    }
+});
+
+console.log('✅ Todos os eventos do overlay foram carregados.');
 </script>
 
 <script type="module">
@@ -752,25 +608,19 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Expor para o escopo global
 window.db = db;
 window.auth = auth;
 window.currentUser = null;
 window.currentUserFavorites = new Set();
 
-// Carregar favoritos do Firestore
 async function loadFavorites(uid) {
     try {
         const docSnap = await getDoc(doc(db, 'users', uid));
         if (docSnap.exists()) {
             const data = docSnap.data();
-            if (data.favorites) {
-                window.currentUserFavorites = new Set(data.favorites);
-            }
+            if (data.favorites) window.currentUserFavorites = new Set(data.favorites);
         }
-    } catch(e) {
-        console.error('Erro ao carregar favoritos:', e);
-    }
+    } catch(e) { console.error('Erro ao carregar favoritos:', e); }
 }
 
 onAuthStateChanged(auth, async (user) => {
@@ -797,7 +647,7 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-// Login / Criar conta
+// LOGIN / CADASTRO
 document.getElementById('accountForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('accountEmail').value;
@@ -814,9 +664,7 @@ document.getElementById('accountForm').addEventListener('submit', async function
             status.textContent = '✅ Login realizado!';
             status.style.color = '#00ff88';
         }
-        setTimeout(() => {
-            document.getElementById('accountModal').classList.remove('active');
-        }, 1500);
+        setTimeout(() => { document.getElementById('accountModal').classList.remove('active'); }, 1500);
     } catch(error) {
         status.textContent = '❌ ' + error.message;
         status.style.color = '#ff4444';
@@ -828,9 +676,7 @@ document.getElementById('logoutButton').addEventListener('click', async function
         await signOut(auth);
         document.getElementById('accountStatus').textContent = '👋 Desconectado!';
         document.getElementById('accountStatus').style.color = '#ffd700';
-        setTimeout(() => {
-            document.getElementById('accountModal').classList.remove('active');
-        }, 1000);
+        setTimeout(() => { document.getElementById('accountModal').classList.remove('active'); }, 1000);
     } catch(error) {
         alert('Erro ao sair: ' + error.message);
     }
@@ -880,16 +726,13 @@ document.getElementById('accountLoggedClose').addEventListener('click', function
     document.getElementById('accountModal').classList.remove('active');
 });
 document.getElementById('accountModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        this.classList.remove('active');
-    }
+    if (e.target === this) this.classList.remove('active');
 });
-
 document.getElementById('accountButton').addEventListener('click', function() {
     document.getElementById('accountModal').classList.add('active');
 });
 
-// Comentários
+// COMENTÁRIOS
 document.getElementById('commentsForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('commentName').value.trim();
@@ -901,11 +744,7 @@ document.getElementById('commentsForm').addEventListener('submit', async functio
         return;
     }
     try {
-        await addDoc(collection(db, 'comments'), {
-            name: name,
-            comment: text,
-            timestamp: serverTimestamp()
-        });
+        await addDoc(collection(db, 'comments'), { name, comment: text, timestamp: serverTimestamp() });
         document.getElementById('commentName').value = '';
         document.getElementById('commentText').value = '';
         status.textContent = '✅ Comentário enviado!';
@@ -928,15 +767,10 @@ onSnapshot(query(collection(db, 'comments'), orderBy('timestamp', 'desc')), (sna
         const data = doc.data();
         const div = document.createElement('div');
         div.className = 'comment';
-        div.innerHTML = `
-            <p class="comment-name">${data.name || 'Anônimo'}</p>
-            <p class="comment-text">${data.comment || ''}</p>
-        `;
+        div.innerHTML = `<p class="comment-name">${data.name || 'Anônimo'}</p><p class="comment-text">${data.comment || ''}</p>`;
         list.appendChild(div);
     });
-}, (error) => {
-    console.error('Erro ao carregar comentários:', error);
-});
+}, (error) => { console.error('Erro ao carregar comentários:', error); });
 
 console.log('✅ Firebase conectado e sincronização de progresso ativa!');
 </script>
