@@ -191,7 +191,7 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 <div class="account-actions">
 <button type="submit" id="accountSubmit">ENTRAR</button>
 <button type="button" id="accountToggle">CRIAR CONTA</button>
-<button type="button" id="accountReset">🔓 ESQUECI A SENHA</button>
+<button type="button" id="accountReset" onclick="abrirModoVisitante()">🔓 ESQUECI A SENHA</button>
 <button type="button" id="accountClose" class="account-close">FECHAR</button>
 </div>
 <div id="accountStatus" class="account-status"></div>
@@ -221,7 +221,7 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 </div>
 </div>
 
-<!-- ===== MODO VISITANTE (ABRE PELO BOTÃO "ESQUECI A SENHA") ===== -->
+<!-- ===== MODO VISITANTE ===== -->
 <div id="guestOverlay">
     <div id="guestTopbar">
         <span id="guestTitle">🔍 Modo Visitante</span>
@@ -263,6 +263,34 @@ main{width:min(1152px,calc(100% - 32px));margin:0 auto;padding:96px 0 50px;posit
 </div>
 
 <script>
+// ==================== FUNÇÃO GLOBAL PARA ABRIR MODO VISITANTE ====================
+window.abrirModoVisitante = function() {
+    console.log('🔓 Função abrirModoVisitante chamada!');
+    
+    // Fecha o modal de login
+    const modal = document.getElementById('accountModal');
+    if (modal) modal.classList.remove('active');
+    
+    // Abre o Modo Visitante
+    const overlay = document.getElementById('guestOverlay');
+    if (overlay) {
+        overlay.classList.add('active');
+        const searchInput = document.getElementById('guestSearchInput');
+        if (searchInput) {
+            searchInput.value = '';
+            setTimeout(() => searchInput.focus(), 300);
+        }
+        const iframe = document.getElementById('guestFrame');
+        if (iframe) {
+            iframe.src = 'https://www.google.com/webhp?igu=1';
+        }
+        console.log('✅ Modo Visitante aberto com sucesso!');
+    } else {
+        alert('❌ Modo Visitante não encontrado!');
+        console.error('❌ Elemento #guestOverlay não existe.');
+    }
+};
+
 // ==================== LISTA DE JOGOS ====================
 const games = [
   ['Rooftop Snipers 2','https://ducky443747.github.io/rooftopsnipers2/','https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/895b299e7e49558ca383b23648314860/rooftop-snipers-2-logo.png','Tente vencer o seu oponete com precisão.'],
@@ -485,42 +513,6 @@ document.getElementById('homeButton').addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ==================== BOTÃO "ESQUECI A SENHA" ====================
-document.addEventListener('DOMContentLoaded', function() {
-    const resetBtn = document.getElementById('accountReset');
-    if (resetBtn) {
-        resetBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('🔓 Botão "ESQUECI A SENHA" clicado!');
-
-            // Fecha o modal de login
-            const modal = document.getElementById('accountModal');
-            if (modal) modal.classList.remove('active');
-
-            // Abre o Modo Visitante
-            const overlay = document.getElementById('guestOverlay');
-            if (overlay) {
-                overlay.classList.add('active');
-                const searchInput = document.getElementById('guestSearchInput');
-                if (searchInput) {
-                    searchInput.value = '';
-                    setTimeout(() => searchInput.focus(), 300);
-                }
-                const iframe = document.getElementById('guestFrame');
-                if (iframe) {
-                    iframe.src = 'https://www.google.com/webhp?igu=1';
-                }
-                console.log('✅ Modo Visitante aberto!');
-            } else {
-                alert('❌ Modo Visitante não encontrado!');
-                console.error('❌ Elemento #guestOverlay não existe.');
-            }
-        });
-    } else {
-        console.error('❌ Botão "accountReset" não encontrado!');
-    }
-});
-
 // ==================== MODO VISITANTE (Controles) ====================
 document.getElementById('guestCloseBtn').addEventListener('click', function() {
     document.getElementById('guestOverlay').classList.remove('active');
@@ -686,8 +678,8 @@ document.getElementById('accountToggle').addEventListener('click', function() {
     }
 });
 
-// O botão "ESQUECI A SENHA" agora abre o Modo Visitante (não envia e-mail)
-// A função original está comentada abaixo, caso queira reativar o envio de e-mail.
+// O botão "ESQUECI A SENHA" agora usa onclick no HTML
+// A função original de recuperação de senha está comentada abaixo
 /*
 document.getElementById('accountReset').addEventListener('click', function() {
     const email = document.getElementById('accountEmail').value;
